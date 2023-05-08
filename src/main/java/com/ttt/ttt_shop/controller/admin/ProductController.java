@@ -32,14 +32,6 @@ public class ProductController {
     private ProducerService producerService;
     @Autowired
     FileStorageService filesStorageService;
-
-
-//    @GetMapping
-//    public String listProducts(Model model) {
-//        List<ProductDTO> products = productService.getAllProducts();
-//        model.addAttribute("products", products);
-//        return "admin/products/list";
-//    }
     @GetMapping
     public String getAll(Model model,
                          @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {

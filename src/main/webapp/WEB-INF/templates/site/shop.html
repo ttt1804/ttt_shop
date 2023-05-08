@@ -130,8 +130,8 @@
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
           <div class="navbar-nav mr-auto py-0">
-            <a href="/site" class="nav-item nav-link active">Trang chủ</a>
-            <a href="/site/products" class="nav-item nav-link">Shop</a>
+            <a href="/site" class="nav-item nav-link">Trang chủ</a>
+            <a href="/site/products" class="nav-item nav-link active">Shop</a>
           </div>
           <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
             <a href="" class="btn px-0">
@@ -161,9 +161,9 @@
   <div class="row px-xl-5">
     <div class="col-12">
       <nav class="breadcrumb bg-light mb-30">
-        <a class="breadcrumb-item text-dark" href="#">Home</a>
+        <a class="breadcrumb-item text-dark" href="#">Trang chủ</a>
         <a class="breadcrumb-item text-dark" href="#">Shop</a>
-        <span class="breadcrumb-item active">Shop List</span>
+        <span class="breadcrumb-item active">Danh sách sản phẩm</span>
       </nav>
     </div>
   </div>
@@ -339,13 +339,34 @@
         </div>
 
         <div class="col-12">
-          <nav>
+          <div th:unless="${products.size() > 0}">
+            <span>No tutorials found!</span>
+          </div>
+
+          <nav aria-label="Pagination" th:if="${totalPages > 0}">
             <ul class="pagination justify-content-center">
-              <li class="page-item disabled"><a class="page-link" href="#">Previous</span></a></li>
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+              <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+                <a th:replace="site/fragments/paging :: paging(1, 'Đầu', 'First Page')"></a>
+              </li>
+              <li class="page-item font-weight-bold" th:classappend="${currentPage == 1} ? 'disabled'">
+                <a th:replace="site/fragments/paging :: paging(${currentPage - 1}, 'Trước', 'Previous Page')"></a>
+              </li>
+              <li class="page-item disabled" th:if="${currentPage - 2 > 1}">
+                <a class="page-link" href="#">...</a>
+              </li>
+              <li class="page-item" th:classappend="${page == currentPage} ? 'active'"
+                  th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
+                <a th:replace="site/fragments/paging :: paging(${page}, ${page}, 'Page ' + ${page})"></a>
+              </li>
+              <li class="page-item disabled" th:if="${currentPage + 2 < totalPages}">
+                <a class="page-link" href="#">...</a>
+              </li>
+              <li class="page-item font-weight-bold" th:classappend="${currentPage == totalPages} ? 'disabled'">
+                <a th:replace="site/fragments/paging :: paging(${currentPage + 1},'Sau', 'Next Page')"></a>
+              </li>
+              <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+                <a th:replace="site/fragments/paging :: paging(${totalPages}, 'Cuối', 'Last Page')"></a>
+              </li>
             </ul>
           </nav>
         </div>
@@ -372,11 +393,7 @@
           <h5 class="text-secondary text-uppercase mb-4">Truy cập nhanh</h5>
           <div class="d-flex flex-column justify-content-start">
             <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop</a>
           </div>
         </div>
         <div class="col-md-4 mb-5">

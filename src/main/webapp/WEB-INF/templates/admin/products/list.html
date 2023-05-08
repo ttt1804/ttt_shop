@@ -87,6 +87,29 @@
 <!-- Navbar End -->
 <div class="container">
     <a th:href="@{/admin/products/add}" style="border-radius: 10px" class="btn btn-outline-success text-success mb-4">Thêm sản phẩm</a>
+    <div class="my-3">
+        <form th:action="@{/admin/products}" id="searchForm">
+            <div class="row d-flex">
+                <div class="col-md-6 mt-2">
+                    <div class="search">
+                        <i class="fa fa-search"></i>
+                        <input id="keyword" type="search" name="keyword" th:value="${keyword}" required class="form-control"
+                               placeholder="Nhập từ khóa">
+                        <button type="submit" class="btn btn-secondary">Tìm kiếm</button>
+                    </div>
+                </div>
+                <div class="col-md-3 input-group mt-2">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="pageSize">Sản phẩm mỗi trang:</label>
+                    </div>
+                    <select form="searchForm" name="size" th:value="${pageSize}" onchange="changePageSize()" class="size-select"
+                            id="pageSize">
+                        <option th:each="s : ${ {5, 10, 15, 20} }" th:value="${s}" th:text="${s}" th:selected="${s == pageSize}"></option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
     <table class="table-sm table-striped table-bordered">
         <thead class="thead-inverse">
         <tr>
@@ -228,6 +251,11 @@
 
 <!-- Template Javascript -->
 <script th:src="@{/js/main.js}"></script>
+<script type="text/javascript">
+    function changePageSize() {
+        $("#searchForm").submit();
+    }
+</script>
 </body>
 
 </html>
