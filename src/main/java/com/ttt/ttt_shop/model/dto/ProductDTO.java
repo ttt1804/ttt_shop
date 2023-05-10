@@ -6,7 +6,6 @@ public class ProductDTO {
     private Long id;
     private String name;
     private Double price;
-
     private Integer quantity;
     private String description;
     private String image;
@@ -60,28 +59,16 @@ public class ProductDTO {
         this.image = image;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+
     public Long getCategoryId() {
         return categoryId;
     }
 
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
     }
 
     public Long getProducerId() {
@@ -92,6 +79,14 @@ public class ProductDTO {
         this.producerId = producerId;
     }
 
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
     public String getProducerName() {
         return producerName;
     }
@@ -99,4 +94,12 @@ public class ProductDTO {
     public void setProducerName(String producerName) {
         this.producerName = producerName;
     }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+
+
+
 }

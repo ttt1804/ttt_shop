@@ -45,7 +45,7 @@ public class ProductController {
         model.addAttribute("totalItems", pageProducts.getTotalElements());
         model.addAttribute("totalPages", pageProducts.getTotalPages());
         model.addAttribute("pageSize", size);
-        return "admin/products/list";
+        return "admin/products/product-list";
     }
 
     @GetMapping("/add")
@@ -53,7 +53,7 @@ public class ProductController {
         model.addAttribute("product", new ProductDTO());
         model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("producers", producerService.getAll());
-        return "admin/products/add";
+        return "admin/products/product-add";
     }
 
     @PostMapping("/add")
@@ -73,7 +73,8 @@ public class ProductController {
         ProductDTO product = productService.getProductById(id);
         model.addAttribute("product", product);
         model.addAttribute("categories", categoryService.getAllCategories());
-        return "admin/products/edit";
+        model.addAttribute("producers", producerService.getAll());
+        return "admin/products/product-edit";
     }
 
     @PostMapping("/edit")

@@ -25,10 +25,8 @@ public class Producer {
     public Producer() {
     }
 
-    public Producer(Long id, String name, List<Product> products) {
-        this.id = id;
-        this.name = name;
-        this.products = products;
+    public Producer(String name) {
+        this.name = name;;
     }
 
     public Long getId() {

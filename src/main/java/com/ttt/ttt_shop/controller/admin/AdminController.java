@@ -15,12 +15,12 @@ public class AdminController {
     public String login() {
         return "admin/login";
     }
-    @PostMapping("/processLogin")
-    public String doLogin() {
-        return "admin/home";
-    }
-    @GetMapping("/admin/home")
+//    @PostMapping("/processLogin")
+//    public String doLogin() {
+//        return "admin/home";
+//    }
+    @GetMapping("/admin/index")
     public String home(Model model) {
-        return "admin/home";
+        return "admin/index";
     }
 }

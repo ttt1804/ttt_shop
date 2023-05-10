@@ -74,7 +74,7 @@ public class SpringSecurityConfig{
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/admin/home", true)
+                .defaultSuccessUrl("/admin/index", true)
                 .and()
                 .logout()
                 .logoutUrl("/logout")
