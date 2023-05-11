@@ -21,13 +21,13 @@ public class CategoryController {
     public String listCategories(Model model) {
         List<CategoryDTO> categories = categoryService.getAllCategories();
         model.addAttribute("categories", categories);
-        return "admin/categories/list";
+        return "admin/categories/category-list";
     }
 
     @GetMapping("/add")
     public String addCategoryForm(Model model) {
         model.addAttribute("category", new CategoryDTO());
-        return "admin/categories/add";
+        return "admin/categories/category-add";
     }
 
     @PostMapping("/add")
@@ -35,12 +35,18 @@ public class CategoryController {
         categoryService.addCategory(category);
         return "redirect:/admin/categories";
     }
+    @PostMapping("/addForProduct")
+    public String addCategoryForProduct(@ModelAttribute("category") CategoryDTO category) {
+        categoryService.addCategory(category);
+//        return "redirect:/admin/categories";
+        return "redirect:/admin/products/add";
+    }
 
     @GetMapping("/edit/{id}")
     public String editCategoryForm(@PathVariable("id") Long id, Model model) {
         CategoryDTO category = categoryService.getCategoryById(id);
         model.addAttribute("category", category);
-        return "admin/categories/edit";
+        return "admin/categories/category-edit";
     }
 
     @PostMapping("/edit")

@@ -2,7 +2,6 @@ package com.ttt.ttt_shop.controller.admin;
 
 import com.ttt.ttt_shop.model.dto.ProductDTO;
 import com.ttt.ttt_shop.model.entity.Product;
-import com.ttt.ttt_shop.repository.ProductRepository;
 import com.ttt.ttt_shop.service.CategoryService;
 import com.ttt.ttt_shop.service.FileStorageService;
 import com.ttt.ttt_shop.service.ProducerService;
@@ -19,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.List;
 
-//http://localhost:8080/admin/products
+//http://localhost:8081/admin/products
 @Controller
 @RequestMapping("/admin/products")
 public class ProductController {
