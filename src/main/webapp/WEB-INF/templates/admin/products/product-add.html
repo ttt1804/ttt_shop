@@ -50,10 +50,12 @@
     </div>
     <hr>
     <ul class="app-menu">
+      <li><a class="app-menu__item active" href="/admin/index"><i class='app-menu__icon bx bx-tachometer'></i><span
+              class="app-menu__label">Bảng điều khiển</span></a></li>
       <li><a class="app-menu__item" href="/admin/categories"><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span
               class="app-menu__label">Quản lý thể loại</span></a>
       </li>
-      <li><a class="app-menu__item" href="/admin/products"><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span
+      <li><a class="app-menu__item" href="/admin/producers"><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span
               class="app-menu__label">Quản lý nhà cung cấp</span></a>
       </li>
       <li><a class="app-menu__item" href="/admin/products"><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span
@@ -80,7 +82,7 @@
                         class="fas fa-folder-plus"></i> Thêm thể loại</a>
               </div>
               <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#exampleModalCenter"><i
+                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#addNhaCungCap"><i
                     class="fas fa-folder-plus"></i> Thêm nhà cung cấp</a>
               </div>
             </div>
@@ -170,6 +172,41 @@ MODAL thể loại
   <!--
 MODAL
 -->
+  <!--
+MODAL nhà cung cấp
+-->
+  <div class="modal fade" id="addNhaCungCap" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+       data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+
+        <div class="modal-body">
+          <div class="row">
+            <div class="form-group  col-md-12">
+              <span class="thong-tin-thanh-toan">
+                <h5>Thêm mới nhà cung cấp </h5>
+              </span>
+            </div>
+            <div class="form-group col-md-12">
+              <form id="addProducer" method="post" th:action="@{/admin/producers/addForProduct}">
+                <label class="control-label">Nhập tên nhà cung cấp</label>
+                <input class="form-control" name="name" type="text" required>
+              </form>
+            </div>
+          </div>
+          <BR>
+          <button id="submitAddProducer" class="btn btn-save" type="button">Lưu lại</button>
+          <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+          <BR>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--
+MODAL
+-->
   <script th:src="@{/js/bootstrap.min.js}"></script>
   <script>
     const form = document.getElementById("myForm");
@@ -184,6 +221,12 @@ MODAL
 
     submitAddCategory.addEventListener("click", function () {
       formCategory.submit();
+    })
+
+    const formProducer = document.getElementById("addProducer");
+    const submitAddProducer = document.getElementById("submitAddProducer");
+    submitAddProducer.addEventListener("click", function () {
+      formProducer.submit();
     })
   </script>
 </body>

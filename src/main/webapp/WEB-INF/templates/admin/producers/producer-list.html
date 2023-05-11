@@ -66,7 +66,7 @@
 <main class="app-content">
   <div class="app-title">
     <ul class="app-breadcrumb breadcrumb side">
-      <li class="breadcrumb-item active"><a href="#"><b>Danh sách thể loại</b></a></li>
+      <li class="breadcrumb-item active"><a href="#"><b>Danh sách nhà cung cấp</b></a></li>
     </ul>
     <div id="clock"></div>
   </div>
@@ -77,9 +77,9 @@
           <div class="row element-button">
             <div class="col-sm-2">
 
-              <a class="btn btn-add btn-sm"  th:href="@{/admin/categories/add}"
+              <a class="btn btn-add btn-sm"  th:href="@{/admin/producers/add}"
                  title="Thêm"><i class="fas fa-plus"></i>
-                Tạo mới thể loại</a>
+                Tạo mới nhà cung cấp</a>
             </div>
           </div>
           <div id="sampleTable_wrapper"
@@ -105,20 +105,20 @@
               <div class="col-sm-12">
                 <table class="table table-hover table-bordered dataTable no-footer">
                   <th class="sorting_asc"><input type="checkbox" id="all"></th>
-                  <th class="sorting">Mã thể loại</th>
-                  <th class="sorting">Tên tên thể loại</th>
+                  <th class="sorting">Mã nhà cung cấp</th>
+                  <th class="sorting">Tên tên nhà cung cấp</th>
                   <th class="sorting">Chức năng</th>
                   <tbody>
-                  <tr role="row" class="odd" th:each="category : ${categories}">
+                  <tr role="row" class="odd" th:each="producer : ${producers}">
                     <td width="10" class="sorting_1"><input type="checkbox" name="check1"
                                                             value="1"></td>
-                    <td th:text="${category.id}"></td>
-                    <td th:text="${category.name}"></td>
-                    <td><button th:attr="onclick=|confirmDelete('${category.id}')|" class="btn btn-primary btn-sm trash" type="button"
+                    <td th:text="${producer.id}"></td>
+                    <td th:text="${producer.name}"></td>
+                    <td><button th:attr="onclick=|confirmDelete('${producer.id}')|" class="btn btn-primary btn-sm trash" type="button"
                                 title="Xóa" ><i
                             class="fas fa-trash-alt"></i>
                     </button>
-                      <button th:attr="onclick=|confirmEdit('${category.id}')|" class="btn btn-primary btn-sm edit" type="button"
+                      <button th:attr="onclick=|confirmEdit('${producer.id}')|" class="btn btn-primary btn-sm edit" type="button"
                               title="Sửa" id="show-emp" data-toggle="modal"
                               data-target="#ModalUP"><i class="fas fa-edit"></i></button>
 
@@ -128,7 +128,7 @@
                 </table>
               </div>
             </div>
-            <div th:unless="${categories.size() > 0}">
+            <div th:unless="${producers.size() > 0}">
               <span>No tutorials found!</span>
             </div>
             <nav aria-label="Pagination" th:if="${totalPages > 0}">
@@ -216,24 +216,24 @@
   function confirmDelete(productId) {
     swal({
       title: "Cảnh báo",
-      text: "Bạn có chắc chắn là muốn xóa thể loại này?",
+      text: "Bạn có chắc chắn là muốn xóa nhà cung cấp này?",
       buttons: ["Hủy bỏ", "Đồng ý"],
     })
             .then((willDelete) => {
               if (willDelete) {
-                window.location.href = '/admin/categories/delete/' + productId;
+                window.location.href = '/admin/producers/delete/' + productId;
               }
             });
   }
   function  confirmEdit(productId) {
     swal({
       title: "Thông báo",
-      text: "Bạn có muốn sửa thể loại này?",
+      text: "Bạn có muốn sửa nhà cung cấp này?",
       buttons: ["Hủy bỏ", "Đồng ý"],
     })
             .then((willEdit) => {
               if (willEdit) {
-                window.location.href = '/admin/categories/edit/' + productId;
+                window.location.href = '/admin/producers/edit/' + productId;
               }
             });
   }

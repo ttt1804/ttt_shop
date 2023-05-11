@@ -49,10 +49,12 @@
         </div>
         <hr>
         <ul class="app-menu">
+            <li><a class="app-menu__item active" href="/admin/index"><i class='app-menu__icon bx bx-tachometer'></i><span
+                    class="app-menu__label">Bảng điều khiển</span></a></li>
             <li><a class="app-menu__item" href="/admin/categories"><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span
                     class="app-menu__label">Quản lý thể loại</span></a>
             </li>
-            <li><a class="app-menu__item" href="/admin/products"><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span
+            <li><a class="app-menu__item" href="/admin/producers"><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span
                     class="app-menu__label">Quản lý nhà cung cấp</span></a>
             </li>
             <li><a class="app-menu__item" href="/admin/products"><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span
@@ -131,10 +133,10 @@
                                         <th class="sorting_asc"><input type="checkbox" id="all"></th>
                                         <th class="sorting">Mã sản phẩm</th>
                                         <th class="sorting">Tên sản phẩm</th>
+                                        <th class="sorting">Hình ảnh</th>
                                         <th class="sorting">Giá</th>
                                         <th class="sorting">Số lượng</th>
                                         <th class="sorting">Miêu tả</th>
-                                        <th class="sorting">Hình ảnh</th>
                                         <th class="sorting">Thể loại</th>
                                         <th class="sorting">Nhà cung cấp</th>
                                         <th class="sorting">Chức năng</th>
@@ -144,13 +146,13 @@
                                                         value="1"></td>
                                                 <td th:text="${product.id}"></td>
                                                 <td th:text="${product.name}"></td>
+                                                <td>
+                                                    <img th:src="@{'/img/products/' + ${product.image}}" alt=""
+                                                         width="100px;">
+                                                </td>
                                                 <td th:text="${product.price}"></td>
                                                 <td th:text="${product.quantity}"></td>
                                                 <td th:text="${product.description}"></td>
-                                                <td>
-                                                    <img th:src="@{'/img/products/' + ${product.image}}" alt=""
-                                                        width="100px;">
-                                                </td>
                                                 <td th:text="${product.category.name}"></td>
                                                 <td th:text="${product.producer.name}"></td>
                                                 <td><button th:attr="onclick=|confirmDelete('${product.id}')|" class="btn btn-primary btn-sm trash" type="button"
