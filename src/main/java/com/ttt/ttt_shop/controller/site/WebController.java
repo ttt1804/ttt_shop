@@ -1,6 +1,6 @@
 package com.ttt.ttt_shop.controller.site;
 
-
+import com.ttt.ttt_shop.model.dto.ProducerDTO;
 import com.ttt.ttt_shop.model.dto.ProductDTO;
 import com.ttt.ttt_shop.model.entity.Product;
 import com.ttt.ttt_shop.service.ProductService;
@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -19,7 +20,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = {"/site"})
-// http://localhost:8080/site
+// http://localhost:8081/site
 public class WebController {
 
     @Autowired
@@ -28,10 +29,10 @@ public class WebController {
 
     @GetMapping("")
     public String home(Model model){
-        List<ProductDTO> productsPhone = productService.getProductsByCategoryId(4L);
-        List<ProductDTO> productsLaptop = productService.getProductsByCategoryId(7L);
-        List<ProductDTO> productsTablet = productService.getProductsByCategoryId(14L);
-        List<ProductDTO> productsWatch = productService.getProductsByCategoryId(8L);
+        List<Product> productsPhone = productService.getTop8ProductsByCategoryId(4L);
+        List<Product> productsLaptop = productService.getTop8ProductsByCategoryId(7L);
+        List<Product> productsTablet = productService.getTop8ProductsByCategoryId(14L);
+        List<Product> productsWatch = productService.getTop8ProductsByCategoryId(8L);
         model.addAttribute("productsPhone", productsPhone);
         model.addAttribute("productsLaptop", productsLaptop);
         model.addAttribute("productsTablet", productsTablet);
@@ -52,5 +53,13 @@ public class WebController {
         model.addAttribute("totalPages", pageProducts.getTotalPages());
         model.addAttribute("pageSize", size);
         return "site/shop";
+    }
+    @GetMapping("/products/detail/{id}")
+    public String detailProduct(@PathVariable("id") Long id, Model model){
+        ProductDTO product = productService.getProductById(id);
+        List<Product> products = productService.getTop8ProductsByCategoryId(product.getCategoryId());
+        model.addAttribute("product", product);
+        model.addAttribute("products", products);
+        return "site/detail";
     }
 }

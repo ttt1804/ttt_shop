@@ -10,6 +10,7 @@ import com.ttt.ttt_shop.repository.ProductRepository;
 import com.ttt.ttt_shop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -54,6 +55,13 @@ public class ProductServiceImpl implements ProductService {
         }
         return productDTOs;
     }
+
+    @Override
+    public List<Product> getTop8ProductsByCategoryId(Long categoryId) {
+        Pageable pageable = PageRequest.of(0, 8);
+        return productRepository.getTop8ProductsByCategory_Id(categoryId, pageable);
+    }
+
 
     @Override
     public ProductDTO getProductById(Long id) {

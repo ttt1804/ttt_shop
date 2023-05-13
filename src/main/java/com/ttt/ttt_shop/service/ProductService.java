@@ -12,6 +12,7 @@ public interface ProductService {
     Page<Product> getAll(Pageable pageable);
 
     List<ProductDTO> getAllProducts();
+    List<Product> getTop8ProductsByCategoryId(Long categoryId);
     ProductDTO getProductById(Long id);
     void addProduct(ProductDTO product);
     void updateProduct(ProductDTO product);
