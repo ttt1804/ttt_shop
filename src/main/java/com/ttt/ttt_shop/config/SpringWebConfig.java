@@ -84,5 +84,4 @@ public class SpringWebConfig implements  WebMvcConfigurer, ApplicationContextAwa
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(new MultipartFileToStringConverter());
     }
-
 }

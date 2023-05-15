@@ -47,6 +47,7 @@ public class ProductServiceImpl implements ProductService {
             productDTO.setId(product.getId());
             productDTO.setName(product.getName());
             productDTO.setPrice(product.getPrice());
+            productDTO.setDiscount(product.getDiscount());
             productDTO.setDescription(product.getDescription());
             productDTO.setImage(product.getImage());
             productDTO.setCategoryId(product.getCategory().getId());
@@ -72,6 +73,7 @@ public class ProductServiceImpl implements ProductService {
             productDTO.setName(product.get().getName());
             productDTO.setPrice(product.get().getPrice());
             productDTO.setQuantity(product.get().getQuantity());
+            productDTO.setDiscount(product.get().getDiscount());
             productDTO.setDescription(product.get().getDescription());
             productDTO.setImage(product.get().getImage());
             productDTO.setCategoryId(product.get().getCategory().getId());
@@ -90,6 +92,7 @@ public class ProductServiceImpl implements ProductService {
         product.setName(productDTO.getName());
         product.setPrice(productDTO.getPrice());
         product.setQuantity(productDTO.getQuantity());
+        product.setDiscount(productDTO.getDiscount());
         product.setDescription(productDTO.getDescription());
         product.setImage(productDTO.getImage());
         Category category = categoryRepository.findById(productDTO.getCategoryId()).orElse(null);
@@ -110,11 +113,17 @@ public class ProductServiceImpl implements ProductService {
             Product p = product.get();
             p.setName(productDTO.getName());
             p.setPrice(productDTO.getPrice());
+            p.setQuantity(productDTO.getQuantity());
+            p.setDiscount(productDTO.getDiscount());
             p.setDescription(productDTO.getDescription());
             p.setImage(productDTO.getImage());
             Category category = categoryRepository.findById(productDTO.getCategoryId()).orElse(null);
             if (category != null) {
                 p.setCategory(category);
+            }
+            Producer producer = producerRepository.findById(productDTO.getProducerId()).orElse(null);
+            if(producer != null){
+                p.setProducer(producer);
             }
             productRepository.save(p);
         }
@@ -134,6 +143,7 @@ public class ProductServiceImpl implements ProductService {
             productDTO.setId(product.getId());
             productDTO.setName(product.getName());
             productDTO.setPrice(product.getPrice());
+            productDTO.setDiscount(product.getDiscount());
             productDTO.setDescription(product.getDescription());
             productDTO.setImage(product.getImage());
             productDTO.setCategoryId(product.getCategory().getId());
@@ -161,6 +171,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Page<Product> getProductsSortedByPriceDesc(Pageable pageable) {
         return productRepository.findAllByOrderByPriceDesc(pageable);
+    }
+
+    @Override
+    public long countProductsByCategoryName(String categoryName) {
+        return productRepository.countByCategoryName(categoryName);
     }
 
 }

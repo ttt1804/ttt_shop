@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -34,6 +32,17 @@ public class WebController {
         List<Product> productsLaptop = productService.getTop8ProductsByCategoryId(7L);
         List<Product> productsTablet = productService.getTop8ProductsByCategoryId(14L);
         List<Product> productsWatch = productService.getTop8ProductsByCategoryId(8L);
+
+        Long countPhone = productService.countProductsByCategoryName("Phone");
+        Long countLaptop = productService.countProductsByCategoryName("Laptop");
+        Long countTablet = productService.countProductsByCategoryName("Tablet");
+        Long countWatch = productService.countProductsByCategoryName("Watch");
+
+        model.addAttribute("countPhone", countPhone);
+        model.addAttribute("countLaptop", countLaptop);
+        model.addAttribute("countTablet", countTablet);
+        model.addAttribute("countWatch", countWatch);
+
         model.addAttribute("productsPhone", productsPhone);
         model.addAttribute("productsLaptop", productsLaptop);
         model.addAttribute("productsTablet", productsTablet);

@@ -25,6 +25,8 @@ public interface ProductService {
     Page<Product> getProductsSortedByPriceAsc(Pageable pageable);
     Page<Product> getProductsSortedByPriceDesc(Pageable pageable);
 
+    public long countProductsByCategoryName(String categoryName);
+
 
 
 

@@ -4,6 +4,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,11 +18,12 @@ public class Product {
     private String name;
 
     @Column(nullable = false)
-    private Double price;
+    private Float price;
 
     @Column(nullable = false)
     private Integer quantity;
-
+    @Column(nullable = false)
+    private Integer discount;
     @Column(nullable = false)
     private String description;
 
@@ -45,11 +47,12 @@ public class Product {
 
     public Product() {}
 
-    public Product(Long id, String name, Double price, Integer quantity, String description, String image, Category category, Producer producer) {
+    public Product(Long id, String name, Float price, Integer quantity, Integer discount, String description, String image, Category category, Producer producer) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+        this.discount = discount;
         this.description = description;
         this.image = image;
         this.category = category;
@@ -72,11 +75,11 @@ public class Product {
         this.name = name;
     }
 
-    public Double getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
@@ -118,5 +121,13 @@ public class Product {
 
     public void setProducer(Producer producer) {
         this.producer = producer;
+    }
+
+    public Integer getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
     }
 }

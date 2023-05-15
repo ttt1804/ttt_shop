@@ -1,85 +1,20 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<head>
-  <meta charset="utf-8">
-  <title>MultiShop - Mua hàng trực tuyến</title>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta content="Free HTML Templates" name="keywords">
-  <meta content="Free HTML Templates" name="description">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Favicon -->
-  <link href="img/favicon.ico" rel="icon">
-
-  <!-- Google Web Fonts -->
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
-  <!-- Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
 
-  <!-- Libraries Stylesheet -->
-  <link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
-  <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+<!-- Libraries Stylesheet -->
+<link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
+<link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
 
-  <!-- Customized Bootstrap Stylesheet -->
-  <link th:href="@{/css/style.css}" rel="stylesheet">
+<!-- Customized Bootstrap Stylesheet -->
+<link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
 
 <body>
 <!-- Topbar Start -->
 <div class="container-fluid">
-  <!--  <div class="row bg-secondary py-1 px-xl-5">-->
-  <!--    <div class="col-lg-6 d-none d-lg-block">-->
-  <!--      <div class="d-inline-flex align-items-center h-100">-->
-  <!--        <a class="text-body mr-3" href="">Thông tin</a>-->
-  <!--        <a class="text-body mr-3" href="">Liên hệ</a>-->
-  <!--        <a class="text-body mr-3" href="">Trợ giúp</a>-->
-  <!--        <a class="text-body mr-3" href="">FAQs</a>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--    <div class="col-lg-6 text-center text-lg-right">-->
-  <!--      <div class="d-inline-flex align-items-center">-->
-  <!--        <div class="btn-group">-->
-  <!--          <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Tài khoản</button>-->
-  <!--          <div class="dropdown-menu dropdown-menu-right">-->
-  <!--            <a href="/login" style="text-decoration: none">-->
-  <!--              <button class="dropdown-item" type="button">Đăng nhập</button>-->
-  <!--            </a>-->
-  <!--            </button>-->
-  <!--            <button class="dropdown-item" type="button">Đăng ký</button>-->
-  <!--          </div>-->
-  <!--        </div>-->
-  <!--        <div class="btn-group mx-2">-->
-  <!--          <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">USD</button>-->
-  <!--          <div class="dropdown-menu dropdown-menu-right">-->
-  <!--            <button class="dropdown-item" type="button">EUR</button>-->
-  <!--            <button class="dropdown-item" type="button">GBP</button>-->
-  <!--            <button class="dropdown-item" type="button">CAD</button>-->
-  <!--          </div>-->
-  <!--        </div>-->
-  <!--        <div class="btn-group">-->
-  <!--          <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">EN</button>-->
-  <!--          <div class="dropdown-menu dropdown-menu-right">-->
-  <!--            <button class="dropdown-item" type="button">FR</button>-->
-  <!--            <button class="dropdown-item" type="button">AR</button>-->
-  <!--            <button class="dropdown-item" type="button">RU</button>-->
-  <!--          </div>-->
-  <!--        </div>-->
-  <!--      </div>-->
-  <!--      <div class="d-inline-flex align-items-center d-block d-lg-none">-->
-  <!--        <a href="" class="btn px-0 ml-2">-->
-  <!--          <i class="fas fa-heart text-dark"></i>-->
-  <!--          <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>-->
-  <!--        </a>-->
-  <!--        <a href="" class="btn px-0 ml-2">-->
-  <!--          <i class="fas fa-shopping-cart text-dark"></i>-->
-  <!--          <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>-->
-  <!--        </a>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--  </div>-->
   <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
     <div class="col-lg-4">
       <a href="" class="text-decoration-none">
@@ -92,16 +27,18 @@
         <div class="input-group">
           <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm">
           <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
-                            </span>
+              <span class="input-group-text bg-transparent text-primary">
+                <i class="fa fa-search"></i>
+              </span>
           </div>
         </div>
       </form>
     </div>
     <div class="col-lg-4 col-6 text-right">
       <p class="m-0">Chăm sóc khách hàng</p>
-      <h5 class="m-0">+84 358.950.060</h5>
+      <h5 class="m-0">
+        <i class="fa fa-phone-alt text-primary mr-3">
+        </i>0358.950.060</h5>
     </div>
   </div>
 </div>
@@ -112,34 +49,56 @@
 <div class="container-fluid bg-dark mb-30">
   <div class="row px-xl-5">
     <div class="col-lg-3 d-none d-lg-block">
-      <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
+      <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse"
+         href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
         <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Thể loại</h6>
         <i class="fa fa-angle-down text-dark"></i>
       </a>
-      <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
+      <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
+           id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
         <div class="navbar-nav w-100">
           <div class="nav-item dropdown dropright">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Điện thoại <i class="fa fa-angle-right float-right mt-1"></i></a>
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Điện thoại <i
+                    class="fa fa-angle-right float-right mt-1"></i></a>
             <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
               <a href="" class="dropdown-item">Apple</a>
               <a href="" class="dropdown-item">SamSung</a>
               <a href="" class="dropdown-item">Xiaomi</a>
+              <a href="" class="dropdown-item">OPPO</a>
+              <a href="" class="dropdown-item">Vivo</a>
+              <a href="" class="dropdown-item">Realme</a>
+              <a href="" class="dropdown-item">Nokia</a>
+              <a href="" class="dropdown-item">Asus</a>
             </div>
           </div>
           <div class="nav-item dropdown dropright">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Máy tính <i class="fa fa-angle-right float-right mt-1"></i></a>
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Laptop <i
+                    class="fa fa-angle-right float-right mt-1"></i></a>
             <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-              <a href="" class="dropdown-item">Apple</a>
+              <a href="" class="dropdown-item">Mac</a>
+              <a href="" class="dropdown-item">Hp</a>
               <a href="" class="dropdown-item">Dell</a>
-              <a href="" class="dropdown-item">HP</a>
+              <a href="" class="dropdown-item">Asus</a>
+              <a href="" class="dropdown-item">Lenovo</a>
+              <a href="" class="dropdown-item">Acer</a>
             </div>
           </div>
           <div class="nav-item dropdown dropright">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Đồng hồ <i class="fa fa-angle-right float-right mt-1"></i></a>
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Máy tính bảng <i
+                    class="fa fa-angle-right float-right mt-1"></i></a>
+            <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
+              <a href="" class="dropdown-item">Ipad</a>
+              <a href="" class="dropdown-item">Samsung</a>
+              <a href="" class="dropdown-item">Xiaomi</a>
+            </div>
+          </div>
+          <div class="nav-item dropdown dropright">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Đồng hồ<i
+                    class="fa fa-angle-right float-right mt-1"></i></a>
             <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
               <a href="" class="dropdown-item">Apple</a>
               <a href="" class="dropdown-item">SamSung</a>
-              <a href="" class="dropdown-item">Casio</a>
+              <a href="" class="dropdown-item">Xiaomi</a>
             </div>
           </div>
         </div>
@@ -156,26 +115,19 @@
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
           <div class="navbar-nav mr-auto py-0">
-            <a href="index.html" class="nav-item nav-link active">Home</a>
-            <a href="shop.html" class="nav-item nav-link">Shop</a>
-            <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
-            <div class="nav-item dropdown">
-              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
-              <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                <a href="cart.html" class="dropdown-item">Shopping Cart</a>
-                <a href="checkout.html" class="dropdown-item">Checkout</a>
-              </div>
-            </div>
-            <a href="contact.html" class="nav-item nav-link">Contact</a>
+            <a href="/site" class="nav-item nav-link active">Trang chủ</a>
+            <a href="/site/products" class="nav-item nav-link">Shop</a>
           </div>
           <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
             <a href="" class="btn px-0">
               <i class="fas fa-heart text-primary"></i>
-              <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+              <span class="badge text-secondary border border-secondary rounded-circle"
+                    style="padding-bottom: 2px;">0</span>
             </a>
             <a href="" class="btn px-0 ml-3">
               <i class="fas fa-shopping-cart text-primary"></i>
-              <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+              <span class="badge text-secondary border border-secondary rounded-circle"
+                    style="padding-bottom: 2px;">0</span>
             </a>
             <a href="/login" class="btn px-0 ml-3">
               <i class="fas fa-user text-primary"></i>
@@ -188,28 +140,84 @@
 </div>
 <!-- Navbar End -->
 
+<!-- Insert content here-->
+<!-- Login start-->
+<div class="row">
+  <div class="container-fluid">
+    <div class="row px-xl-5">
+      <div class="col-12">
+        <nav class="breadcrumb bg-light mb-30">
+          <a class="breadcrumb-item text-dark" th:href="@{/site}">Trang chủ</a>
+          <span class="breadcrumb-item active">Đăng nhập</span>
+        </nav>
+      </div>
+    </div>
 
-<!-- Form Login Start-->
-<div class="container">
-  <div class="row">
-    <div class="col-md-4 mx-auto my-5">
-      <form class="form-signin" method="post" th:action="@{/login}">
-        <h2 class="form-signin-heading text-center">Đăng nhập</h2>
-        <p>
-          <label for="username" class="sr-only">Username</label>
-          <input type="text" id="username" name="username" class="form-control" placeholder="Tài khoản" required=""
-                 autofocus="">
-        </p>
-        <p>
-          <label for="password" class="sr-only">Password</label>
-          <input type="password" id="password" name="password" class="form-control" placeholder="Mật khẩu" required="">
-        </p>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Đăng nhập</button>
-      </form>
+    <div class="row">
+      <div class="nav nav-tabs mb-4 col-6 offset-3">
+        <a class="nav-item nav-link text-dark active" data-toggle="tab" >Đăng nhập</a>
+        <a class="nav-item nav-link text-dark" data-toggle="tab" >Đăng ký</a>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+
+    </div>
+    <div class="row justify-content-center">
+
+
+    </div>
+    <div class="row">
+      <div class="tab-content col-md-6 offset-md-3">
+        <div class="tab-pane fade active show" id="tab-pane-1">
+          <div class="row">
+            <div class="col-6">
+              <form method="post" th:action="@{/login}">
+                <div class="card rounded">
+                  <div class="card-body">
+                    <p class="text-center text-truncate">Đăng nhập vào tài khoản</p>
+                    <div class="form-group mb-0">
+                      <input type="text" class="form-control rounded" name="username" id="username" autofocus="" placeholder="Tài khoản"><br>
+                    </div>
+                    <div class="form-group mb-0">
+                      <input type="password" class="form-control rounded" name="password" id="password" placeholder="Mật khẩu"><br>
+                    </div>
+                    <div class="form-inline">
+                      <input type="checkbox" class="form-inline ml-1" name="remember-me" id="rememberMe">
+                      <label class="ml-2" for="rememberMe">Nhớ mật khẩu</label>
+                    </div>
+                    <div class="text-muted d-flex justify-content-center mt-3">
+                      <button class="btn btn-success rounded w-75" type="submit">Đăng nhập</button>
+                    </div>
+                    <a href="" class="text-muted d-block text-center mt-3">Quên mật khẩu</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-6">
+              <div class="card rounded">
+                <div class="card-body">
+                  <p class="text-center">Đăng nhập bằng</p>
+                  <div class="form-group">
+                    <a class="form-control btn btn-outline-success rounded"><i class="fab fa-facebook float-left mt-1"></i>Facebook</a>
+                  </div>
+                  <div class="form-group pt-3">
+                    <a href="" class="form-control btn btn-outline-info rounded"><i class="fab fa-google float-left mt-1"></i>Google</a>
+                  </div>
+                  <div class="form-group pt-3" style="padding-bottom: 48px">
+                    <a class="form-control btn btn-outline-dark rounded"><i class="fab fa-apple float-left mt-1"></i>Apple</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+
+  <!-- Login End -->
 </div>
-<!-- Form Login End-->
 
 
 
@@ -222,37 +230,26 @@
       <h5 class="text-secondary text-uppercase mb-4">Liên hệ</h5>
       <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>175 Tây Sơn, Đống Đa, Hà Nội</p>
       <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>trantan1804@gmail.com</p>
-      <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+84358950060</p>
+      <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>0358.950.060</p>
     </div>
     <div class="col-lg-8 col-md-12">
       <div class="row">
         <div class="col-md-4 mb-5">
-          <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
+          <h5 class="text-secondary text-uppercase mb-4">Truy cập nhanh</h5>
           <div class="d-flex flex-column justify-content-start">
-            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
+            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop</a>
           </div>
         </div>
         <div class="col-md-4 mb-5">
-          <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
+          <h5 class="text-secondary text-uppercase mb-4">Tài khoản</h5>
           <div class="d-flex flex-column justify-content-start">
-            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Đăng nhập</a>
+            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Thông tin</a>
           </div>
         </div>
         <div class="col-md-4 mb-5">
-          <h5 class="text-secondary text-uppercase mb-4">Newsletter</h5>
-          <p>Duo stet tempor ipsum sit amet magna ipsum tempor est</p>
-
-          <h6 class="text-secondary text-uppercase mt-4 mb-3">Follow Us</h6>
+          <h5 class="text-secondary text-uppercase mb-4">Kết nối với TTT Shop</h5>
           <div class="d-flex">
             <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
             <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>

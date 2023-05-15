@@ -207,16 +207,16 @@
         <div class="product-offer mb-30" style="height: 200px;">
           <img class="img-fluid" src="/img/samsung-galaxy-s23-ultra.jpg" alt="">
           <div class="offer-text">
-            <h6 class="text-white text-uppercase">Save 20%</h6>
-            <h3 class="text-white mb-3">Special Offer</h3>
+            <h6 class="text-white text-uppercase">Giảm giá 20%</h6>
+            <h3 class="text-white mb-3">Giảm giá đặc biệt</h3>
             <a href="" class="btn btn-primary">Mua ngay</a>
           </div>
         </div>
         <div class="product-offer mb-30" style="height: 200px;">
           <img class="img-fluid" src="/img/iphone-14-pro-max-denjpg.jpg" alt="">
           <div class="offer-text">
-            <h6 class="text-white text-uppercase">Save 20%</h6>
-            <h3 class="text-white mb-3">Special Offer</h3>
+            <h6 class="text-white text-uppercase">Giảm giá 20%</h6>
+            <h3 class="text-white mb-3">Giảm giá đặc biệt</h3>
             <a href="" class="btn btn-primary">Mua ngay</a>
           </div>
         </div>
@@ -263,105 +263,53 @@
     <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Thể loại</span></h2>
     <div class="row px-xl-5 pb-3">
       <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-        <a class="text-decoration-none" href="">
+        <a class="text-decoration-none" th:href="@{/site/products?keyword=phone}">
           <div class="cat-item d-flex align-items-center mb-4">
             <div class="overflow-hidden" style="width: 100px; height: 100px;">
               <img class="img-fluid" src="/img/asus-rog-phone-6.jpg" alt="">
             </div>
             <div class="flex-fill pl-3">
               <h6>Điện thoại</h6>
-              <small class="text-body">100 Products</small>
+              <small class="text-body" th:text="${countPhone + ' sản phẩm'}"></small>
             </div>
           </div>
         </a>
       </div>
       <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-        <a class="text-decoration-none" href="">
+        <a class="text-decoration-none" th:href="@{/site/products?keyword=laptop}">
           <div class="cat-item img-zoom d-flex align-items-center mb-4">
             <div class="overflow-hidden" style="width: 100px; height: 100px;">
               <img class="img-fluid" src="/img/acer-nitro-5.jpg" alt="">
             </div>
             <div class="flex-fill pl-3">
               <h6>Laptop</h6>
-              <small class="text-body">100 Products</small>
+              <small class="text-body" th:text="${countLaptop + ' sản phẩm'}"></small>
             </div>
           </div>
         </a>
       </div>
       <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-        <a class="text-decoration-none" href="">
-          <div class="cat-item img-zoom d-flex align-items-center mb-4">
-            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-              <img class="img-fluid" src="/img/apple-watch.jpg" alt="">
-            </div>
-            <div class="flex-fill pl-3">
-              <h6>Đồng hồ</h6>
-              <small class="text-body">100 Products</small>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-        <a class="text-decoration-none" href="">
+        <a class="text-decoration-none" th:href="@{/site/products?keyword=tablet}">
           <div class="cat-item img-zoom d-flex align-items-center mb-4">
             <div class="overflow-hidden" style="width: 100px; height: 100px;">
               <img class="img-fluid" src="/img/tablet.jpg" alt="">
             </div>
             <div class="flex-fill pl-3">
               <h6>Máy tính bảng</h6>
-              <small class="text-body">100 Products</small>
+              <small class="text-body" th:text="${countTablet + ' sản phẩm'}"></small>
             </div>
           </div>
         </a>
       </div>
       <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-        <a class="text-decoration-none" href="">
+        <a class="text-decoration-none" th:href="@{/site/products?keyword=watch}">
           <div class="cat-item img-zoom d-flex align-items-center mb-4">
             <div class="overflow-hidden" style="width: 100px; height: 100px;">
-              <img class="img-fluid" src="/img/cat-4.jpg" alt="">
+              <img class="img-fluid" src="/img/apple-watch.jpg" alt="">
             </div>
             <div class="flex-fill pl-3">
-              <h6>Tên thể loại</h6>
-              <small class="text-body">100 Products</small>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-        <a class="text-decoration-none" href="">
-          <div class="cat-item img-zoom d-flex align-items-center mb-4">
-            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-              <img class="img-fluid" src="/img/cat-3.jpg" alt="">
-            </div>
-            <div class="flex-fill pl-3">
-              <h6>Tên thể loại</h6>
-              <small class="text-body">100 Products</small>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-        <a class="text-decoration-none" href="">
-          <div class="cat-item img-zoom d-flex align-items-center mb-4">
-            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-              <img class="img-fluid" src="/img/cat-2.jpg" alt="">
-            </div>
-            <div class="flex-fill pl-3">
-              <h6>Tên thể loại</h6>
-              <small class="text-body">100 Products</small>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-        <a class="text-decoration-none" href="">
-          <div class="cat-item img-zoom d-flex align-items-center mb-4">
-            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-              <img class="img-fluid" src="/img/cat-1.jpg" alt="">
-            </div>
-            <div class="flex-fill pl-3">
-              <h6>Tên thể loại</h6>
-              <small class="text-body">100 Products</small>
+              <h6>Đồng hồ</h6>
+              <small class="text-body" th:text="${countWatch + ' sản phẩm'}"></small>
             </div>
           </div>
         </a>
@@ -401,8 +349,8 @@
           <div class="text-center py-4">
             <a class="h6 text-decoration-none text-truncate" th:href="@{'/site/products/detail/' + ${product.id}}" th:text="${product.name}"></a>
             <div class="d-flex align-items-center justify-content-center mt-2">
-              <h5>$123.00</h5>
-              <h6 class="text-muted ml-2"><del th:text="${product.price}"></del></h6>
+              <h5 class="productPrice" th:text="(${product.price} - (${product.price} * ${product.discount} / 100))"></h5>
+              <h6 class="text-muted ml-2"><del class="productPrice" th:text="${product.price}"></del></h6>
             </div>
             <div class="d-flex align-items-center justify-content-center mb-1">
               <small class="fa fa-star text-primary mr-1"></small>
@@ -449,8 +397,8 @@
           <div class="text-center py-4">
             <a class="h6 text-decoration-none text-truncate" th:href="@{'/site/products/detail/' + ${product.id}}" th:text="${product.name}"></a>
             <div class="d-flex align-items-center justify-content-center mt-2">
-              <h5>$123.00</h5>
-              <h6 class="text-muted ml-2"><del th:text="${product.price}"></del></h6>
+              <h5 class="productPrice" th:text="(${product.price} - (${product.price} * ${product.discount} / 100))"></h5>
+              <h6 class="text-muted ml-2"><del class="productPrice" th:text="${product.price}"></del></h6>
             </div>
             <div class="d-flex align-items-center justify-content-center mb-1">
               <small class="fa fa-star text-primary mr-1"></small>
@@ -497,8 +445,8 @@
           <div class="text-center py-4">
             <a class="h6 text-decoration-none text-truncate" th:href="@{'/site/products/detail/' + ${product.id}}" th:text="${product.name}"></a>
             <div class="d-flex align-items-center justify-content-center mt-2">
-              <h5>$123.00</h5>
-              <h6 class="text-muted ml-2"><del th:text="${product.price}"></del></h6>
+              <h5 class="productPrice" th:text="(${product.price} - (${product.price} * ${product.discount} / 100))"></h5>
+              <h6 class="text-muted ml-2"><del class="productPrice" th:text="${product.price}"></del></h6>
             </div>
             <div class="d-flex align-items-center justify-content-center mb-1">
               <small class="fa fa-star text-primary mr-1"></small>
@@ -545,8 +493,8 @@
           <div class="text-center py-4">
             <a class="h6 text-decoration-none text-truncate" th:href="@{'/site/products/detail/' + ${product.id}}" th:text="${product.name}"></a>
             <div class="d-flex align-items-center justify-content-center mt-2">
-              <h5>$123.00</h5>
-              <h6 class="text-muted ml-2"><del th:text="${product.price}"></del></h6>
+              <h5 class="productPrice" th:text="(${product.price} - (${product.price} * ${product.discount} / 100))"></h5>
+              <h6 class="text-muted ml-2"><del class="productPrice" th:text="${product.price}"></del></h6>
             </div>
             <div class="d-flex align-items-center justify-content-center mb-1">
               <small class="fa fa-star text-primary mr-1"></small>
@@ -633,6 +581,15 @@
 
   <!-- Template Javascript -->
   <script th:src="@{/js/main.js}"></script>
+<script>
+  var priceElements = document.getElementsByClassName('productPrice');
+
+  Array.from(priceElements).forEach(function(element) {
+    var price = parseFloat(element.textContent);
+    var formattedPrice = price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+    element.textContent = formattedPrice;
+  });
+</script>
 </body>
 
 </html>

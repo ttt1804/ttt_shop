@@ -1,12 +1,15 @@
 package com.ttt.ttt_shop.model.dto;
 
 
+import java.math.BigDecimal;
+
 public class ProductDTO {
 
     private Long id;
     private String name;
-    private Double price;
+    private Float price;
     private Integer quantity;
+    private Integer discount;
     private String description;
     private String image;
     private Long categoryId;
@@ -35,11 +38,11 @@ public class ProductDTO {
         this.name = name;
     }
 
-    public Double getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
@@ -99,7 +102,11 @@ public class ProductDTO {
         this.quantity = quantity;
     }
 
+    public Integer getDiscount() {
+        return discount;
+    }
 
-
-
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
+    }
 }
