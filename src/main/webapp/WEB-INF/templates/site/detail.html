@@ -213,7 +213,7 @@
           </div>
           <small class="pt-1">(99 Reviews)</small>
         </div>
-        <h3 class="font-weight-semi-bold mb-4" th:text="${product.price}"></h3>
+        <h3 class="font-weight-semi-bold mb-4 productPrice" th:text="(${product.price} - (${product.price} * ${product.discount} / 100))"></h3>
         <p class="mb-4" th:text="${product.description}"></p>
         <div class="d-flex mb-3">
           <strong class="text-dark mr-3">Sizes:</strong>
@@ -433,7 +433,8 @@
           <div class="text-center py-4">
             <a class="h6 text-decoration-none text-truncate" th:text="${productItem.name}"></a>
             <div class="d-flex align-items-center justify-content-center mt-2">
-              <h5>$123.00</h5><h6 class="text-muted ml-2" th:text="${productItem.price}"><del></del></h6>
+              <h5 class="productPrice" th:text="(${product.price} - (${product.price} * ${product.discount} / 100))"></h5>
+              <h6 class="text-muted ml-2"><del class="productPrice" th:text="${product.price}"></del></h6>
             </div>
             <div class="d-flex align-items-center justify-content-center mb-1">
               <small class="fa fa-star text-primary mr-1"></small>
@@ -521,6 +522,15 @@
 
 <!-- Template Javascript -->
 <script th:src="@{/js/main.js}"></script>
+<script>
+  var priceElements = document.getElementsByClassName('productPrice');
+
+  Array.from(priceElements).forEach(function(element) {
+    var price = parseFloat(element.textContent);
+    var formattedPrice = price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+    element.textContent = formattedPrice;
+  });
+</script>
 </body>
 
 </html>
