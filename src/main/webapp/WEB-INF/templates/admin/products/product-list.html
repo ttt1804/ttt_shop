@@ -112,19 +112,28 @@
                             class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
                             <div class="row">
                                 <div class="col-sm-12 col-md-6">
-                                    <div class="dataTables_length" id="sampleTable_length"><label>Hiện <select
-                                                name="sampleTable_length" aria-controls="sampleTable"
-                                                class="form-control form-control-sm">
-                                                <option value="10">10</option>
-                                                <option value="25">25</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
-                                            </select> danh mục</label></div>
+                                    <form th:action="@{/admin/products}" id="changePageSizeForm">
+                                        <input type="hidden" name="pageSize" th:value="${pageSize}" />
+                                        <div class="dataTables_length" id="sampleTable_length"><label>Hiện
+                                            <select id="pageSize" class="form-control form-control-sm" th:value="${pageSize}" onchange="changePageSize()">
+                                                <option th:each="s : ${ {5, 10, 15, 20} }" th:value="${s}" th:text="${s}" th:selected="${s == pageSize}"></option>
+                                        </select> danh mục</label>
+                                        </div>
+                                    </form>
                                 </div>
                                 <div class="col-sm-12 col-md-6">
-                                    <div id="sampleTable_filter" class="dataTables_filter"><label>Tìm kiếm:<input
-                                                type="search" class="form-control form-control-sm" placeholder=""
-                                                aria-controls="sampleTable"></label></div>
+                                    <div id="sampleTable_filter" class="dataTables_filter">
+                                            <form th:action="@{/admin/products}" id="searchForm">
+                                                <label>Tìm kiếm:
+                                                <input type="search" name="keyword" th:value="${keyword}" class="form-control form-control-sm" placeholder=""
+                                                       aria-controls="sampleTable">
+                                                    <button type="submit" class="btn btn-secondary">
+                                                        <i class="fa fa-search" style="margin-bottom: 0;" aria-hidden="true"></i>
+                                                    </button>
+                                                </label>
+                                            </form>
+
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -170,7 +179,7 @@
                                 </div>
                             </div>
                             <div th:unless="${products.size() > 0}">
-                                <span>No tutorials found!</span>
+                                <span>Không có sản phẩm!</span>
                             </div>
                             <nav aria-label="Pagination" th:if="${totalPages > 0}">
                                 <ul class="pagination justify-content-center">
@@ -292,6 +301,16 @@
                     }
                 });
         }
+        function searchForm() {
+            $("#searchForm").submit();
+        }
+        function changePageSize() {
+            var size = document.getElementById("pageSize").value;
+            var url = new URL(window.location.href);
+            url.searchParams.set("size", size);
+            window.location.href = url.href;
+        }
+
     </script>
 
 </body>

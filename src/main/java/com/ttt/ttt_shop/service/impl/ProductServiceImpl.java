@@ -143,4 +143,24 @@ public class ProductServiceImpl implements ProductService {
         return productDTOs;
     }
 
+    @Override
+    public Page<Product> getAllByName(String keyword, Pageable pageable) {
+        return productRepository.findByNameContainingIgnoreCase(keyword, pageable);
+    }
+
+    @Override
+    public Page<Product> getProductsWithCategoryName(String categoryName, Pageable pageable) {
+        return productRepository.findByCategory_Name(categoryName, pageable);
+    }
+
+    @Override
+    public Page<Product> getProductsSortedByPriceAsc(Pageable pageable) {
+        return productRepository.findAllByOrderByPriceAsc(pageable);
+    }
+
+    @Override
+    public Page<Product> getProductsSortedByPriceDesc(Pageable pageable) {
+        return productRepository.findAllByOrderByPriceDesc(pageable);
+    }
+
 }

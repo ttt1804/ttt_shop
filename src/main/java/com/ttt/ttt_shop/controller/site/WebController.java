@@ -1,6 +1,5 @@
 package com.ttt.ttt_shop.controller.site;
 
-import com.ttt.ttt_shop.model.dto.ProducerDTO;
 import com.ttt.ttt_shop.model.dto.ProductDTO;
 import com.ttt.ttt_shop.model.entity.Product;
 import com.ttt.ttt_shop.service.ProductService;
@@ -16,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -40,12 +41,19 @@ public class WebController {
         return "site/index";
     }
     @GetMapping("/products")
-    public String getAll(Model model,
+    public String getAll(Model model,@RequestParam(required = false) String keyword,
                          @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "9") int size) {
         List<Product> products = new ArrayList<Product>();
         Pageable paging = PageRequest.of(page - 1, size);
         Page<Product> pageProducts;
-        pageProducts = productService.getAll(paging);
+
+        if(keyword == null){
+            pageProducts = productService.getAll(paging);
+        }else{
+            pageProducts = productService.getProductsWithCategoryName(keyword, paging);
+            model.addAttribute("keyword", keyword);
+        }
+
         products = pageProducts.getContent();
         model.addAttribute("products", products);
         model.addAttribute("currentPage", pageProducts.getNumber() + 1);
@@ -54,6 +62,7 @@ public class WebController {
         model.addAttribute("pageSize", size);
         return "site/shop";
     }
+
     @GetMapping("/products/detail/{id}")
     public String detailProduct(@PathVariable("id") Long id, Model model){
         ProductDTO product = productService.getProductById(id);
@@ -62,4 +71,32 @@ public class WebController {
         model.addAttribute("products", products);
         return "site/detail";
     }
+    @GetMapping("/products/sort")
+    public String getProductsSortedByPrice(Model model,
+                                           @RequestParam(required = false) String keyword,
+                                           @RequestParam(defaultValue = "1") int page,
+                                           @RequestParam(defaultValue = "9") int size,
+                                           @RequestParam String sortType) {
+
+        List<Product> products = new ArrayList<Product>();
+        Pageable paging = PageRequest.of(page - 1, size);
+        Page<Product> pageProducts;
+
+        if (sortType.equals("asc")) {
+            pageProducts = productService.getProductsSortedByPriceAsc(paging);
+            model.addAttribute("sortType", sortType);
+        } else {
+            pageProducts = productService.getProductsSortedByPriceDesc(paging);
+            model.addAttribute("sortType", sortType);
+        }
+
+        products = pageProducts.getContent();
+        model.addAttribute("products", products);
+        model.addAttribute("currentPage", pageProducts.getNumber() + 1);
+        model.addAttribute("totalItems", pageProducts.getTotalElements());
+        model.addAttribute("totalPages", pageProducts.getTotalPages());
+        model.addAttribute("pageSize", size);
+        return "site/shop";
+    }
+
 }

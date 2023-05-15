@@ -18,4 +18,16 @@ public interface ProductService {
     void updateProduct(ProductDTO product);
     void deleteProductById(Long id);
     List<ProductDTO> getProductsByCategoryId(Long category_Id);
+
+    Page<Product> getAllByName(String keyword,Pageable pageable);
+    Page<Product> getProductsWithCategoryName(String categoryName,Pageable pageable);
+
+    Page<Product> getProductsSortedByPriceAsc(Pageable pageable);
+    Page<Product> getProductsSortedByPriceDesc(Pageable pageable);
+
+
+
+
+
+
 }

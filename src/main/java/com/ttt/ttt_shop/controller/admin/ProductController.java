@@ -32,12 +32,19 @@ public class ProductController {
     @Autowired
     FileStorageService filesStorageService;
     @GetMapping
-    public String getAll(Model model,
+    public String getAll(Model model, @RequestParam(required = false) String keyword,
                          @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
-        List<Product> products = new ArrayList<Product>();
+        List<Product> products = new ArrayList<>();
         Pageable paging = PageRequest.of(page - 1, size);
         Page<Product> pageProducts;
-        pageProducts = productService.getAll(paging);
+
+        if(keyword == null){
+            pageProducts = productService.getAll(paging);
+        }else{
+            pageProducts = productService.getAllByName(keyword, paging);
+            model.addAttribute("keyword", keyword);
+        }
+
         products = pageProducts.getContent();
         model.addAttribute("products", products);
         model.addAttribute("currentPage", pageProducts.getNumber() + 1);
