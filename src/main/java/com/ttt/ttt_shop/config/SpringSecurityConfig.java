@@ -9,6 +9,8 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -69,16 +71,25 @@ public class SpringSecurityConfig{
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/user/**").hasRole("USER")
+                .antMatchers("/customer/**").hasRole("CUSTOMER")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/admin/index", true)
+                .successHandler((request, response, authentication) -> {
+                    GrantedAuthority adm = new SimpleGrantedAuthority("ROLE_ADMIN");
+                    GrantedAuthority cus = new SimpleGrantedAuthority("ROLE_CUSTOMER");
+                    if(authentication.getAuthorities().contains(adm))
+                        response.sendRedirect("/admin/index");
+                    else if(authentication.getAuthorities().contains(cus))
+                        response.sendRedirect("/site/customer");
+                    else
+                        response.sendRedirect("/site");
+                })
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/site");
+                .logoutSuccessUrl("/login");
         return http.build();
     }
 

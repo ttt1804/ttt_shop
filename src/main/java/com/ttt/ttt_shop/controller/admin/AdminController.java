@@ -23,4 +23,9 @@ public class AdminController {
     public String home(Model model) {
         return "admin/index";
     }
+
+    @GetMapping("/site/customer")
+    public String homeUser(Model model) {
+        return "site/customer/index";
+    }
 }

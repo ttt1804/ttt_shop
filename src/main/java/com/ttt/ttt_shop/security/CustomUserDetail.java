@@ -1,5 +1,6 @@
 package com.ttt.ttt_shop.security;
 
+import com.ttt.ttt_shop.model.entity.Authority;
 import com.ttt.ttt_shop.model.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,17 +12,29 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CustomUserDetail implements UserDetails {
     private User user;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
-        grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        return  grantedAuthorityList;
+        Set<Authority> authorities = user.getAuthorities();
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+
+        for (Authority authority : authorities) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getAuthorityName()));
+            if (authority.getAuthorityName().equals("ROLE_ADMIN")) {
+                grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            } else if (authority.getAuthorityName().equals("ROLE_CUSTOMER")) {
+                grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_CUSTOMER"));
+            }
+        }
+
+        return grantedAuthorities;
     }
 
     @Override

@@ -33,8 +33,9 @@ public class TttShopApplication {
 //	@Override
 //	public void run(String... args) throws Exception {
 //		User user = new User();
-//		user.setUsername("username1");
+//		user.setUsername("customer");
 //		user.setPassword(passwordEncoder.encode("12345"));
+//		user.setEmail("trantan1804@gmail.com");
 //		userRepository.save(user);
 //	}
 //}
