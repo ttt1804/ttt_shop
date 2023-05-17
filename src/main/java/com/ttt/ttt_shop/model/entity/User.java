@@ -28,6 +28,10 @@ public class User {
     )
     private Set<Authority> authorities = new HashSet<>();
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_details_id")
+    private CustomerDetail customerDetail;
+
     public User() {
     }
 
@@ -77,5 +81,13 @@ public class User {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public CustomerDetail getCustomerDetail() {
+        return customerDetail;
+    }
+
+    public void setCustomerDetail(CustomerDetail customerDetail) {
+        this.customerDetail = customerDetail;
     }
 }

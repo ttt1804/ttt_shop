@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.List;
 
-//http://localhost:8081/admin/products
 @Controller
 @RequestMapping("/admin/products")
 public class ProductController {

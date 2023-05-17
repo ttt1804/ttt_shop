@@ -82,7 +82,7 @@ public class SpringSecurityConfig{
                     if(authentication.getAuthorities().contains(adm))
                         response.sendRedirect("/admin/index");
                     else if(authentication.getAuthorities().contains(cus))
-                        response.sendRedirect("/site/customer");
+                        response.sendRedirect("/customer");
                     else
                         response.sendRedirect("/site");
                 })

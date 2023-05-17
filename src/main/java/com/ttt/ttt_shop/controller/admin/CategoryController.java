@@ -11,7 +11,6 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/categories")
-//http://localhost:8080/admin/categories
 public class CategoryController {
 
     @Autowired
