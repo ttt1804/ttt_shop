@@ -32,6 +32,7 @@ public class User {
     @JoinColumn(name = "customer_details_id")
     private CustomerDetail customerDetail;
 
+
     public User() {
     }
 

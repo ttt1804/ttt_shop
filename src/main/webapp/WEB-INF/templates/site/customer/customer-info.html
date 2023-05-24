@@ -1,15 +1,31 @@
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-<!-- Font Awesome -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+<head>
+    <meta charset="utf-8">
+    <title>MultiShop - Mua hàng trực tuyến</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
 
-<!-- Libraries Stylesheet -->
-<link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
-<link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
+    <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
 
-<!-- Customized Bootstrap Stylesheet -->
-<link th:href="@{/css/style.css}" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
 
 <body>
@@ -116,9 +132,9 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="/site" class="nav-item nav-link active">Trang chủ</a>
+                            <a href="/site" class="nav-item nav-link">Trang chủ</a>
                             <a href="/site/products" class="nav-item nav-link">Shop</a>
-                            <a href="/customer" class="nav-item nav-link">Cá nhân</a>
+                            <a href="/customer" class="nav-item nav-link active">Cá nhân</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <a href="" class="btn px-0">
@@ -126,13 +142,13 @@
                                 <span class="badge text-secondary border border-secondary rounded-circle"
                                     style="padding-bottom: 2px;">0</span>
                             </a>
-                            <a href="" class="btn px-0 ml-3">
+                            <a href="/customer/cart" class="btn px-0 ml-3">
                                 <i class="fas fa-shopping-cart text-primary"></i>
                                 <span class="badge text-secondary border border-secondary rounded-circle"
                                     style="padding-bottom: 2px;">0</span>
                             </a>
-                            <a href="/login" class="btn px-0 ml-3">
-                                <i class="fas fa-user text-primary"></i>
+                            <a href="/logout" class="btn px-0 ml-3">
+                                <i class="fas fa-sign-out-alt text-primary"></i>
                             </a>
                         </div>
                     </div>
