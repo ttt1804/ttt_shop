@@ -27,9 +27,6 @@ public interface ProductService {
 
     public long countProductsByCategoryName(String categoryName);
 
-
-
-
-
+    public long getTotalProducts();
 
 }

@@ -6,10 +6,10 @@ import com.ttt.ttt_shop.repository.OrderItemsRepository;
 import com.ttt.ttt_shop.repository.OrderRepository;
 import com.ttt.ttt_shop.repository.UserRepository;
 import com.ttt.ttt_shop.service.OrderService;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 
 @Service
@@ -45,4 +45,20 @@ public class OrderServiceImpl implements OrderService {
     public Order findByUserIdAndStatus(Long userId, boolean status) {
        return orderRepository.findByUser_IdAndStatus(userId, status);
     }
+
+    @Override
+    public List<Order> findById(Long userId) {
+        return orderRepository.findByUser_Id(userId);
+    }
+
+    @Override
+    public long getTotalOrders() {
+        return orderRepository.count();
+    }
+
+    @Override
+    public List<Order> getAll() {
+        return orderRepository.findAll();
+    }
+
 }

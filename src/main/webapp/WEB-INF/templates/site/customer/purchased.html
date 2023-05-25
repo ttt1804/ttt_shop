@@ -135,7 +135,7 @@
                         <a href="/site" class="nav-item nav-link">Trang chủ</a>
                         <a href="/site/products" class="nav-item nav-link">Shop</a>
                         <a href="/customer" class="nav-item nav-link">Cá nhân</a>
-                        <a href="/customer/purchased" class="nav-item nav-link">Đơn mua</a>
+                        <a href="/customer/purchased" class="nav-item nav-link active">Đơn mua</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                         <a href="" class="btn px-0">
@@ -178,65 +178,44 @@
 <!-- Cart Start -->
 <div class="container-fluid">
     <div class="row px-xl-5">
-        <div class="col-lg-8 table-responsive mb-5">
-            <table class="table table-light table-borderless table-hover text-center mb-0">
+        <div class="col-lg-12">
+            <table class="table table-bordered table-hover">
                 <thead class="thead-dark">
                 <tr>
-                    <th>Sản phẩm</th>
-                    <th>Tên</th>
-                    <th>Số lượng</th>
-                    <th>Giá tiền</th>
-                    <th>Xóa</th>
+                    <th>Ngày đặt</th>
+                    <th>Tổng tiền</th>
+                    <th class="product-column">Sản phẩm</th>
                 </tr>
                 </thead>
-                <tbody class="align-middle">
-                <tr th:each="cart : ${carts}">
-                    <td class="align-middle"><img th:src="@{'/img/products/' + ${cart.product.image}}" alt="" style="width: 50px;"></td>
-                    <td class="align-middle" th:text="${cart.product.name}"></td>
-                    <td class="align-middle">
-                        <div class="input-group quantity mx-auto" style="width: 100px;">
-                            <div class="input-group-btn">
-                                <button class="btn btn-sm btn-primary btn-minus" >
-                                    <i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                            <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" th:value="${cart.quantity}">
-                            <div class="input-group-btn">
-                                <button class="btn btn-sm btn-primary btn-plus">
-                                    <i class="fa fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
+                <tbody>
+                <tr th:each="order : ${orders}">
+                    <td class="align-middle orderDate" th:text="${order.orderDate}"></td>
+                    <td class="align-middle productPrice" th:text="${order.totalPrice}"></td>
+                    <td>
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr class="table-primary">
+                                <th>Sản phẩm</th>
+                                <th>Tên</th>
+                                <th>Số lượng</th>
+                                <th>Giá</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="orderItem : ${order.orderItems}">
+                                <td><img th:src="@{'/img/products/' + ${orderItem.product.image}}" alt="" style="width: 50px;"></td>
+                                <td th:text="${orderItem.product.name}"></td>
+                                <td th:text="${orderItem.quantity}"></td>
+                                <td class="productPrice" th:text="${orderItem.price}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </td>
-                    <td class="align-middle productPrice" th:text="${cart.product.price}"></td>
-                    <td class="align-middle"><button class="btn btn-sm btn-danger" th:attr="onclick=|deleteCartItem('${cart.id}')|"><i class="fa fa-times"></i></button></td>
                 </tr>
                 </tbody>
             </table>
-            <div  class="text-center" th:unless="${carts.size() > 0}">
-                <h4>Giỏ hàng trống!</h4>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart Summary</span></h5>
-            <div class="bg-light p-30 mb-5">
-                <div class="border-bottom pb-2">
-                    <div class="d-flex justify-content-between mb-3">
-                        <h6>Tổng tiền</h6>
-                        <h6 class="productPrice" th:text="${totalPrice}"></h6>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <h6 class="font-weight-medium">Phí vận chuyển</h6>
-                        <h6 class="font-weight-medium productPrice" th:text="${shippingPrice}"></h6>
-                    </div>
-                </div>
-                <div class="pt-2">
-                    <div class="d-flex justify-content-between mt-2">
-                        <h5>Thành tiền</h5>
-                        <h5 class="productPrice" th:text="${totalPrice}"></h5>
-                    </div>
-                    <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" onclick="checkOut()">Thanh toán</button>
-                </div>
+            <div class="text-center" th:unless="${orders.size() > 0}">
+                <h4>Không có đơn hàng nào đã mua!</h4>
             </div>
         </div>
     </div>
@@ -322,13 +301,23 @@
         element.textContent = formattedPrice;
     });
 
-    function deleteCartItem(cartId) {
-        window.location.href = '/customer/cart/delete/' + cartId;
+
+    var orderDateElements = document.getElementsByClassName("orderDate");
+
+    for (var i = 0; i < orderDateElements.length; i++) {
+        var orderDateElement = orderDateElements[i];
+        var orderDateValue = orderDateElement.innerText;
+        var date = new Date(orderDateValue);
+
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+
+        var formattedDate = day + '/' + month + '/' + year;
+
+        orderDateElement.innerText = formattedDate;
     }
 
-    function checkOut() {
-        window.location.href = '/customer/checkout';
-    }
 
 </script>
 </body>

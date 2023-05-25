@@ -135,6 +135,7 @@
                             <a href="/site" class="nav-item nav-link">Trang chủ</a>
                             <a href="/site/products" class="nav-item nav-link">Shop</a>
                             <a href="/customer" class="nav-item nav-link active">Cá nhân</a>
+                            <a href="/customer/purchased" class="nav-item nav-link">Đơn mua</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <a href="" class="btn px-0">
@@ -183,7 +184,7 @@
                             enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <label>Account</label>
+                                    <label>Tài khoản</label>
                                     <input class="form-control rounded border-success" th:value="${user.username}" type="text" readonly="true">
                                     <input type="number" hidden="" value="1" id="cusId" name="cusId">
                                 </div>

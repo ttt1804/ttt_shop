@@ -69,7 +69,7 @@
 <main class="app-content">
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item active"><a href="#"><b>Danh sách khách hàng</b></a></li>
+            <li class="breadcrumb-item active"><a href="#"><b>Danh sách đơn hàng</b></a></li>
         </ul>
         <div id="clock"></div>
     </div>
@@ -78,12 +78,6 @@
             <div class="tile">
                 <div class="tile-body">
                     <div class="row element-button">
-                        <div class="col-sm-2">
-
-                            <a class="btn btn-add btn-sm"  th:href="@{/admin/customers/add}"
-                               title="Thêm"><i class="fas fa-plus"></i>
-                                Tạo mới nhà cung cấp</a>
-                        </div>
                     </div>
                     <div id="sampleTable_wrapper"
                          class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
@@ -107,29 +101,46 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <table class="table table-hover table-bordered dataTable no-footer">
-                                    <th class="sorting_asc"><input type="checkbox" id="all"></th>
-                                    <th class="sorting">Mã nhà khách hàng</th>
+                                    <th class=" sorting_asc"><input type="checkbox" id="all"></th>
+                                    <th class="sorting">Mã đơn hàng</th>
                                     <th class="sorting">Tên khách hàng</th>
-                                    <th class="sorting">Địa chỉ</th>
-                                    <th class="sorting">Số điện thoại</th>
-                                    <th class="sorting">Ngày sinh</th>
-                                    <th class="sorting">Hình ảnh</th>
+                                    <th class="align-middle text-center sorting">Sản phẩm mua</th>
+                                    <th class="sorting">Tổng tiền (VND)</th>
+                                    <th class="sorting">Ngày đặt</th>
                                     <th class="sorting">Chức năng</th>
                                     <tbody>
-                                    <tr role="row" class="odd" th:each="customer : ${customerDetails}">
+                                    <tr role="row" class="odd" th:each="order : ${orders}">
                                         <td width="10" class="sorting_1"><input type="checkbox" name="check1"
                                                                                 value="1"></td>
-                                        <td th:text="${customer.id}"></td>
-                                        <td th:text="${customer.fullName}"></td>
-                                        <td th:text="${customer.address}"></td>
-                                        <td th:text="${customer.phoneNumber}"></td>
-                                        <td  th:text="${#dates.format(customer.birthday, 'dd/MM/yyyy')}" ></td>
-                                        <td th:text="${customer.avatar}"></td>
-                                        <td><button th:attr="onclick=|confirmDelete('${customer.id}')|" class="btn btn-primary btn-sm trash" type="button"
+                                        <td class="align-middle" th:text="${order.id}"></td>
+                                        <td class="align-middle" th:text="${order.user.customerDetail.fullName}"></td>
+                                        <td>
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                <tr class="">
+                                                    <th>Hình ảnh</th>
+                                                    <th>Tên</th>
+                                                    <th>Số lượng</th>
+                                                    <th>Giá</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr th:each="orderItem : ${order.orderItems}">
+                                                    <td><img th:src="@{'/img/products/' + ${orderItem.product.image}}" alt="" style="width: 50px;"></td>
+                                                    <td th:text="${orderItem.product.name}"></td>
+                                                    <td th:text="${orderItem.quantity}"></td>
+                                                    <td class="productPrice" th:text="${orderItem.price}"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                        <td class="productPrice align-middle" th:text="${order.totalPrice}"></td>
+                                        <td class="orderDate align-middle" th:text="${order.orderDate}"></td>
+                                        <td class="align-middle"><button class="btn btn-primary btn-sm trash" type="button"
                                                     title="Xóa" ><i
                                                 class="fas fa-trash-alt"></i>
                                         </button>
-                                            <button th:attr="onclick=|confirmEdit('${customer.id}')|" class="btn btn-primary btn-sm edit" type="button"
+                                            <button  class="btn btn-primary btn-sm edit" type="button"
                                                     title="Sửa" id="show-emp" data-toggle="modal"
                                                     data-target="#ModalUP"><i class="fas fa-edit"></i></button>
 
@@ -139,7 +150,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div th:unless="${customerDetails.size() > 0}">
+                        <div th:unless="${orders.size() > 0}">
                             <span>No tutorials found!</span>
                         </div>
                         <nav aria-label="Pagination" th:if="${totalPages > 0}">
@@ -222,34 +233,34 @@
             return i;
         }
     }
-</script>
-<script th:inline="javascript">
-    function confirmDelete(productId) {
-        swal({
-            title: "Cảnh báo",
-            text: "Bạn có chắc chắn là muốn xóa này?",
-            buttons: ["Hủy bỏ", "Đồng ý"],
-        })
-            .then((willDelete) => {
-                if (willDelete) {
-                    window.location.href = '/admin/users/delete/' + productId;
-                }
-            });
-    }
-    function  confirmEdit(productId) {
-        swal({
-            title: "Thông báo",
-            text: "Bạn có muốn sửa?",
-            buttons: ["Hủy bỏ", "Đồng ý"],
-        })
-            .then((willEdit) => {
-                if (willEdit) {
-                    window.location.href = '/admin/users/edit/' + productId;
-                }
-            });
-    }
 
 </script>
+<script>
+    var priceElements = document.getElementsByClassName('productPrice');
+
+    Array.from(priceElements).forEach(function(element) {
+        var price = parseFloat(element.textContent);
+        var formattedPrice = price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+        element.textContent = formattedPrice;
+    });
+
+    var orderDateElements = document.getElementsByClassName("orderDate");
+
+    for (var i = 0; i < orderDateElements.length; i++) {
+        var orderDateElement = orderDateElements[i];
+        var orderDateValue = orderDateElement.innerText;
+        var date = new Date(orderDateValue);
+
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+
+        var formattedDate = day + '/' + month + '/' + year;
+
+        orderDateElement.innerText = formattedDate;
+    }
+</script>
+
 
 </body>
 

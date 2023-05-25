@@ -2,7 +2,6 @@ package com.ttt.ttt_shop.controller.site;
 
 import com.ttt.ttt_shop.model.entity.Cart;
 import com.ttt.ttt_shop.model.entity.Order;
-import com.ttt.ttt_shop.model.entity.OrderItem;
 import com.ttt.ttt_shop.model.entity.Product;
 import com.ttt.ttt_shop.security.CustomUserDetail;
 import com.ttt.ttt_shop.service.CartService;
@@ -61,25 +60,31 @@ public class CustomerController {
     public String checkOut(@AuthenticationPrincipal CustomUserDetail userDetails){
         Long userId = userDetails.getUser().getId();
         List<Cart> carts = cartService.getByUserId(userId);
-        float totalPrice = 0;
-        for(Cart cart : carts){
-            totalPrice += cart.getProduct().getPrice();
-        }
-        orderService.add(userId, totalPrice);
-
-        Order orderJustAdd = orderService.findByUserIdAndStatus(userId, false);
-        if(orderJustAdd != null){
+        if(carts.size() != 0){
+            float totalPrice = 0;
             for(Cart cart : carts){
-                Product product = cart.getProduct();
-                orderItemsService.add(orderJustAdd.getId(), product.getId(), cart.getQuantity());
-                cartService.deleteById(cart.getId());
+                totalPrice += cart.getProduct().getPrice() * cart.getQuantity();
             }
-            orderService.updateStatus(orderJustAdd.getId());
+            orderService.add(userId, totalPrice);
+
+            Order orderJustAdd = orderService.findByUserIdAndStatus(userId, false);
+            if(orderJustAdd != null){
+                for(Cart cart : carts){
+                    Product product = cart.getProduct();
+                    orderItemsService.add(orderJustAdd.getId(), product.getId(), cart.getQuantity());
+                    cartService.deleteById(cart.getId());
+                }
+                orderService.updateStatus(orderJustAdd.getId());
+            }
         }
         return "redirect:/customer/cart";
     }
-
-
-
+    
+    @GetMapping("/purchased")
+    public String purchased(Model model, @AuthenticationPrincipal CustomUserDetail userDetails){
+        List<Order> orders = orderService.findById(userDetails.getUser().getId());
+        model.addAttribute("orders", orders);
+        return "/site/customer/purchased";
+    }
 
 }

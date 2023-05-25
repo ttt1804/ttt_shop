@@ -63,7 +63,7 @@
             <li><a class="app-menu__item" href="/admin/products"><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span
                     class="app-menu__label">Quản lý sản phẩm</span></a>
             </li>
-            <li><a class="app-menu__item" href=""><i class='app-menu__icon bx bx-task'></i><span
+            <li><a class="app-menu__item" href="/admin/orders"><i class='app-menu__icon bx bx-task'></i><span
                     class="app-menu__label">Quản lý đơn hàng</span></a></li>
         </ul>
     </aside>
@@ -129,7 +129,7 @@
                                     <div id="sampleTable_filter" class="dataTables_filter">
                                             <form th:action="@{/admin/products}" id="searchForm">
                                                 <label>Tìm kiếm:
-                                                <input type="search" name="keyword" th:value="${keyword}" class="form-control form-control-sm" placeholder=""
+                                                <input type="search" name="keyword" th:value="${keyword}" class="form-control form-control-sm" placeholder="nhập tên sản phẩm"
                                                        aria-controls="sampleTable">
                                                     <button type="submit" class="btn btn-secondary">
                                                         <i class="fa fa-search" style="margin-bottom: 0;" aria-hidden="true"></i>
@@ -150,7 +150,7 @@
                                         <th class="sorting">Giá (VND)</th>
                                         <th class="sorting">Số lượng</th>
                                         <th class="sorting">Giảm giá (%)</th>
-                                        <th class="sorting">Miêu tả</th>
+                                        <th class="align-middle text-center sorting">Miêu tả</th>
                                         <th class="sorting">Thể loại</th>
                                         <th class="sorting">Nhà cung cấp</th>
                                         <th class="sorting">Chức năng</th>

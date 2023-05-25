@@ -2,7 +2,14 @@ package com.ttt.ttt_shop.controller.admin;
 
 import com.ttt.ttt_shop.model.entity.CustomerDetail;
 import com.ttt.ttt_shop.model.entity.User;
+import com.ttt.ttt_shop.repository.OrderRepository;
+import com.ttt.ttt_shop.repository.ProductRepository;
+import com.ttt.ttt_shop.repository.UserRepository;
 import com.ttt.ttt_shop.security.CustomUserDetail;
+import com.ttt.ttt_shop.service.OrderService;
+import com.ttt.ttt_shop.service.ProductService;
+import com.ttt.ttt_shop.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +20,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 //http://localhost:8081/admin/home
 public class AdminController {
+    @Autowired
+    ProductService productService;
+    @Autowired
+    OrderService orderService;
+    @Autowired
+    UserService userService;
     @GetMapping("/login")
     public String login() {
         return "admin/login";
@@ -20,6 +33,12 @@ public class AdminController {
 
     @GetMapping("/admin/index")
     public String home(Model model) {
+        long totalProducts = productService.getTotalProducts();
+        long totalOrders = orderService.getTotalOrders();
+        long totalUsers = userService.getTotalCustomers();
+        model.addAttribute("totalProducts", totalProducts);
+        model.addAttribute("totalOrders", totalOrders);
+        model.addAttribute("totalUsers", totalUsers);
         return "admin/index";
     }
 

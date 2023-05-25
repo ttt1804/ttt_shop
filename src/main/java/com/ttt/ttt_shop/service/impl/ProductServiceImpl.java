@@ -178,4 +178,9 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.countByCategoryName(categoryName);
     }
 
+    @Override
+    public long getTotalProducts() {
+        return productRepository.count();
+    }
+
 }
