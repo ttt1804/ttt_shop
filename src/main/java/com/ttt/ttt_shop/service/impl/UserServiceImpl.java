@@ -1,20 +1,26 @@
 package com.ttt.ttt_shop.service.impl;
 
 import com.ttt.ttt_shop.model.dto.UserDTO;
+import com.ttt.ttt_shop.model.entity.Authority;
 import com.ttt.ttt_shop.model.entity.User;
+import com.ttt.ttt_shop.repository.AuthorityRepository;
 import com.ttt.ttt_shop.repository.UserRepository;
 import com.ttt.ttt_shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    AuthorityRepository authorityRepository;
     @Autowired
     PasswordEncoder passwordEncoder;
     @Override
@@ -41,6 +47,7 @@ public class UserServiceImpl implements UserService {
         userDTO.setPassword(user.getPassword());
         userDTO.setVerificationCode(user.getVerificationCode());
         userDTO.setStatus(user.getStatus());
+
         return  userDTO;
     }
 
@@ -48,7 +55,12 @@ public class UserServiceImpl implements UserService {
     public void verify(UserDTO userDTO) {
         User user = userRepository.findUserByUsername(userDTO.getUsername());
         user.setStatus(true);
+        Authority customerAuthority = authorityRepository.findByAuthorityName("ROLE_CUSTOMER");
+        Set<Authority> authorities = new HashSet<>();
+        authorities.add(customerAuthority);
+        user.setAuthorities(authorities);
         userRepository.save(user);
     }
+
 
 }
