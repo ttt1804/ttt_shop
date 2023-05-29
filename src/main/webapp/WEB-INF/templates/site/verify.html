@@ -1,31 +1,15 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-<head>
-    <meta charset="utf-8">
-    <title>MultiShop - Mua hàng trực tuyến</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
-
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
 
-    <!-- Libraries Stylesheet -->
-    <link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
-    <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
+<!-- Libraries Stylesheet -->
+<link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
+<link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link th:href="@{/css/style.css}" rel="stylesheet">
+<!-- Customized Bootstrap Stylesheet -->
+<link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
 
 <body>
@@ -43,9 +27,9 @@
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm">
                     <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
-                            </span>
+              <span class="input-group-text bg-transparent text-primary">
+                <i class="fa fa-search"></i>
+              </span>
                     </div>
                 </div>
             </form>
@@ -54,8 +38,7 @@
             <p class="m-0">Chăm sóc khách hàng</p>
             <h5 class="m-0">
                 <i class="fa fa-phone-alt text-primary mr-3">
-                </i>0358.950.060
-            </h5>
+                </i>0358.950.060</h5>
         </div>
     </div>
 </div>
@@ -134,8 +117,6 @@
                     <div class="navbar-nav mr-auto py-0">
                         <a href="/site" class="nav-item nav-link">Trang chủ</a>
                         <a href="/site/products" class="nav-item nav-link">Shop</a>
-                        <a href="/customer" class="nav-item nav-link">Cá nhân</a>
-                        <a href="/customer/purchased" class="nav-item nav-link">Đơn mua</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                         <a href="" class="btn px-0">
@@ -143,13 +124,13 @@
                             <span class="badge text-secondary border border-secondary rounded-circle"
                                   style="padding-bottom: 2px;">0</span>
                         </a>
-                        <a href="/customer/cart" class="btn px-0 ml-3">
+                        <a href="" class="btn px-0 ml-3">
                             <i class="fas fa-shopping-cart text-primary"></i>
                             <span class="badge text-secondary border border-secondary rounded-circle"
                                   style="padding-bottom: 2px;">0</span>
                         </a>
-                        <a href="/logout" class="btn px-0 ml-3">
-                            <i class="fas fa-sign-out-alt text-primary"></i>
+                        <a href="/login" class="btn px-0 ml-3">
+                            <i class="fas fa-user text-primary"></i>
                         </a>
                     </div>
                 </div>
@@ -159,89 +140,83 @@
 </div>
 <!-- Navbar End -->
 
-
-<!-- Breadcrumb Start -->
-<div class="container-fluid">
-    <div class="row px-xl-5">
-        <div class="col-12">
-            <nav class="breadcrumb bg-light mb-30">
-                <a class="breadcrumb-item text-dark" href="#">Trang chủ</a>
-                <a class="breadcrumb-item text-dark" href="#">Mua sắm</a>
-                <span class="breadcrumb-item active">Giỏ hàng</span>
-            </nav>
+<!-- Insert content here-->
+<!-- Register start-->
+<div class="row">
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" th:href="@{/site}">Trang chủ</a>
+                    <span class="breadcrumb-item active">Đăng ký</span>
+                </nav>
+            </div>
         </div>
-    </div>
-</div>
-<!-- Breadcrumb End -->
+
+        <div class="row">
+            <div class="nav nav-tabs mb-4 col-6 offset-3">
+                <a class="nav-item nav-link text-dark active" data-toggle="tab" >Đăng ký</a>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+
+        </div>
+        <div class="row justify-content-center">
 
 
-<!-- Cart Start -->
-<div class="container-fluid">
-    <div class="row px-xl-5">
-        <div class="col-lg-8 table-responsive mb-5">
-            <table class="table table-light table-borderless table-hover text-center mb-0">
-                <thead class="thead-dark">
-                <tr>
-                    <th>Sản phẩm</th>
-                    <th>Tên</th>
-                    <th>Số lượng</th>
-                    <th>Giá tiền</th>
-                    <th>Xóa</th>
-                </tr>
-                </thead>
-                <tbody class="align-middle">
-                <tr th:each="cart : ${carts}">
-                    <td class="align-middle"><img th:src="@{'/img/products/' + ${cart.product.image}}" alt="" style="width: 50px;"></td>
-                    <td class="align-middle" th:text="${cart.product.name}"></td>
-                    <td class="align-middle">
-                        <div class="input-group quantity mx-auto" style="width: 100px;">
-                            <div class="input-group-btn">
-                                <button class="btn btn-sm btn-primary btn-minus"  th:attr="onclick=|reduceCart('${cart.id}')|">
-                                    <i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                            <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" th:value="${cart.quantity}">
-                            <div class="input-group-btn">
-                                <button class="btn btn-sm btn-primary btn-plus"  th:attr="onclick=|addCart('${cart.id}')|">
-                                    <i class="fa fa-plus"></i>
-                                </button>
+        </div>
+        <div class="row">
+            <div class="tab-content col-md-6 offset-md-3">
+                <div class="tab-pane fade active show" id="tab-pane-1">
+                    <div class="row">
+                        <div class="col-6">
+                            <form id="myForm" method="post" action="/site/verify" th:object="${user}">
+                                <div class="card rounded">
+                                    <div class="card-body">
+                                        <p class="text-center text-truncate">Xác minh tài khoản</p>
+                                        <div class="form-group mb-0">
+                                            <input type="text" class="form-control rounded" th:value="${user.username}" th:readonly="true" placeholder="Tài khoản" autofocus="" th:field="*{username}" /><br>
+                                        </div>
+                                        <div class="form-group mb-0">
+                                            <input type="text" class="form-control rounded" placeholder="Mã xác minh" autofocus="" name="verificationCode" /><br>
+                                        </div>
+                                        <div class="text-muted d-flex justify-content-center mt-3">
+                                            <button id="submitBtn" class="btn btn-success rounded w-75" type="submit">Xác minh</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="col-6">
+                            <div class="card rounded">
+                                <div class="card-body">
+                                    <p class="text-center">Đăng nhập bằng</p>
+                                    <div class="form-group">
+                                        <a class="form-control btn btn-outline-success rounded"><i class="fab fa-facebook float-left mt-1"></i>Facebook</a>
+                                    </div>
+                                    <div class="form-group pt-3">
+                                        <a href="" class="form-control btn btn-outline-info rounded"><i class="fab fa-google float-left mt-1"></i>Google</a>
+                                    </div>
+                                    <div class="form-group pt-3" style="padding-bottom: 48px">
+                                        <a class="form-control btn btn-outline-dark rounded"><i class="fab fa-apple float-left mt-1"></i>Apple</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </td>
-                    <td class="align-middle productPrice" th:text="${cart.product.price}"></td>
-                    <td class="align-middle"><button class="btn btn-sm btn-danger" th:attr="onclick=|deleteCartItem('${cart.id}')|"><i class="fa fa-times"></i></button></td>
-                </tr>
-                </tbody>
-            </table>
-            <div  class="text-center" th:unless="${carts.size() > 0}">
-                <h4>Giỏ hàng trống!</h4>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart Summary</span></h5>
-            <div class="bg-light p-30 mb-5">
-                <div class="border-bottom pb-2">
-                    <div class="d-flex justify-content-between mb-3">
-                        <h6>Tổng tiền</h6>
-                        <h6 class="productPrice" th:text="${totalPrice}"></h6>
                     </div>
-                    <div class="d-flex justify-content-between">
-                        <h6 class="font-weight-medium">Phí vận chuyển</h6>
-                        <h6 class="font-weight-medium productPrice" th:text="${shippingPrice}"></h6>
-                    </div>
-                </div>
-                <div class="pt-2">
-                    <div class="d-flex justify-content-between mt-2">
-                        <h5>Thành tiền</h5>
-                        <h5 class="productPrice" th:text="${totalPrice}"></h5>
-                    </div>
-                    <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" onclick="checkOut()">Thanh toán</button>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <!-- Login End -->
 </div>
-<!-- Cart End -->
+<!-- Register End -->
+
+
+
 
 
 <!-- Footer Start -->
@@ -265,7 +240,7 @@
                 <div class="col-md-4 mb-5">
                     <h5 class="text-secondary text-uppercase mb-4">Tài khoản</h5>
                     <div class="d-flex flex-column justify-content-start">
-                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Đăng nhập</a>
+                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Đăng ký</a>
                         <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Thông tin</a>
                     </div>
                 </div>
@@ -314,31 +289,12 @@
 <!-- Template Javascript -->
 <script th:src="@{/js/main.js}"></script>
 <script>
-    var priceElements = document.getElementsByClassName('productPrice');
+    const form = document.getElementById("myForm");
+    const submitBtn = document.getElementById("submitBtn");
 
-    Array.from(priceElements).forEach(function(element) {
-        var price = parseFloat(element.textContent);
-        var formattedPrice = price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-        element.textContent = formattedPrice;
+    submitBtn.addEventListener("click", function() {
+        form.submit();
     });
-
-    function deleteCartItem(cartId) {
-        window.location.href = '/customer/cart/delete/' + cartId;
-    }
-
-    function checkOut() {
-        window.location.href = '/customer/checkout';
-    }
-
-    function addCart(productId) {
-        window.location.href = '/customer/cart/change/' + productId + "?changeType=increase";
-    }
-
-    function reduceCart(productId) {
-        window.location.href = '/customer/cart/change/' + productId + "?changeType=reduce";
-    }
-
-
 </script>
 </body>
 

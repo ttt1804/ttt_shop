@@ -7,8 +7,11 @@ import com.ttt.ttt_shop.service.ProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -18,7 +21,7 @@ public class ProducerController {
     private ProducerService producerService;
 
     @GetMapping()
-    public String listProducers(Model model){
+    public String getAll(Model model){
         List<Producer> producers = producerService.getAll();
         model.addAttribute("producers", producers);
         return "admin/producers/producer-list";
@@ -29,32 +32,54 @@ public class ProducerController {
         return "admin/producers/producer-add";
     }
     @PostMapping("add")
-    public String addProducer(@ModelAttribute("producer") ProducerDTO producerDTO){
-        producerService.addProducer(producerDTO);
+    public String add(@ModelAttribute("producer") @Valid ProducerDTO producerDTO, BindingResult bindingResult, Model model){
+        if (bindingResult.hasErrors()) {
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            model.addAttribute("errors", errors);
+            return "admin/producers/producer-add";
+        }
+        producerService.add(producerDTO);
         return "redirect:/admin/producers";
     }
 
     @PostMapping("addForProduct")
     public String addProducerForProduct(@ModelAttribute("producer") ProducerDTO producerDTO){
-        producerService.addProducer(producerDTO);
+        producerService.add(producerDTO);
         return "redirect:/admin/products/add";
     }
 
     @GetMapping("/edit/{id}")
-    public String editProducerForm(@PathVariable("id") Long id, Model model) {
+    public String edit(@PathVariable("id") Long id, Model model) {
         ProducerDTO producerDTO = producerService.getProducerById(id);
-        model.addAttribute("producer", producerDTO);
+        if(producerDTO == null){
+            String error = "404";
+            model.addAttribute("error", error);
+            return "redirect:/admin/producers";
+        }else{
+            model.addAttribute("producer", producerDTO);
+        }
         return "admin/producers/producer-edit";
     }
     @PostMapping("/edit")
-    public String editProducer(@ModelAttribute("producer") ProducerDTO producerDTO){
-        producerService.updateProducer(producerDTO);
+    public String edit(@ModelAttribute("producer") @Valid ProducerDTO producerDTO, BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()){
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            model.addAttribute("errors", errors);
+            return "admin/producers/producer-edit";
+        }
+        producerService.update(producerDTO);
         return "redirect:/admin/producers";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteProducer(@PathVariable("id") Long id){
-        producerService.deleteProducerById(id);
+    public String delete(@PathVariable("id") Long id, Model model){
+        ProducerDTO producerDTO = producerService.getProducerById(id);
+        if(producerDTO == null){
+            String error = "Nhà cung cấp không tồn tại";
+            model.addAttribute("error", error);
+        }else{
+            producerService.deleteProducerById(id);
+        }
         return "redirect:/admin/producers";
     }
 }

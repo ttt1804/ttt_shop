@@ -18,7 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-//http://localhost:8081/admin/home
+//http://localhost:8080/admin/home
 public class AdminController {
     @Autowired
     ProductService productService;

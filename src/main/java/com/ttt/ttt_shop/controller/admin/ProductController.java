@@ -1,5 +1,6 @@
 package com.ttt.ttt_shop.controller.admin;
 
+import com.ttt.ttt_shop.model.dto.CategoryDTO;
 import com.ttt.ttt_shop.model.dto.ProductDTO;
 import com.ttt.ttt_shop.model.entity.Product;
 import com.ttt.ttt_shop.service.CategoryService;
@@ -12,9 +13,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,36 +58,40 @@ public class ProductController {
     }
 
     @GetMapping("/add")
-    public String addProductForm(Model model) {
+    public String add(Model model) {
         model.addAttribute("product", new ProductDTO());
-        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("categories", categoryService.getAll());
         model.addAttribute("producers", producerService.getAll());
         return "admin/products/product-add";
     }
 
     @PostMapping("/add")
-    public String addProduct(@ModelAttribute("productDTO") ProductDTO productDTO, @RequestParam("image") MultipartFile image) {
-        try {
+    public String add(@ModelAttribute("productDTO") @Valid  ProductDTO productDTO,BindingResult bindingResult, @RequestParam("image") MultipartFile image, Model model) {
+            if(bindingResult.hasErrors()){
+                List<FieldError> errors = bindingResult.getFieldErrors();
+                model.addAttribute("errors", errors);
+                model.addAttribute("product", new ProductDTO());
+                model.addAttribute("categories", categoryService.getAll());
+                model.addAttribute("producers", producerService.getAll());
+                return "admin/products/product-add";
+            }
             String fileName = filesStorageService.save(image);
             productDTO.setImage(fileName);
-            productService.addProduct(productDTO);
-        } catch (Exception e) {
-            return e.getMessage();
-        }
-        return "redirect:/admin/products";
+            productService.add(productDTO);
+            return "redirect:/admin/products";
     }
 
     @GetMapping("/edit/{id}")
     public String editProductForm(@PathVariable("id") Long id, Model model) {
         ProductDTO product = productService.getProductById(id);
         model.addAttribute("product", product);
-        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("categories", categoryService.getAll());
         model.addAttribute("producers", producerService.getAll());
         return "admin/products/product-edit";
     }
 
     @PostMapping("/edit")
-    public String editProduct(@ModelAttribute("product") ProductDTO productDTO, @RequestParam("image") MultipartFile image) {
+    public String edit(@ModelAttribute("product") ProductDTO productDTO, @RequestParam("image") MultipartFile image) {
         try {
             if (!image.isEmpty()) {
                 // Nếu người dùng chọn file ảnh mới
@@ -97,7 +105,7 @@ public class ProductController {
                 ProductDTO oldProduct = productService.getProductById(productDTO.getId());
                 productDTO.setImage(oldProduct.getImage());
             }
-            productService.updateProduct(productDTO);
+            productService.update(productDTO);
         } catch (Exception e) {
             return e.getMessage();
         }
@@ -106,10 +114,10 @@ public class ProductController {
 
 
     @GetMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable("id") Long id) {
+    public String delete(@PathVariable("id") Long id) {
         ProductDTO product = productService.getProductById(id);
         String imageFilename = product.getImage();
-        productService.deleteProductById(id);
+        productService.delete(id);
         filesStorageService.delete(imageFilename);
         return "redirect:/admin/products";
     }

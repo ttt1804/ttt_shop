@@ -1,8 +1,6 @@
 package com.ttt.ttt_shop.service.impl;
 
-import com.ttt.ttt_shop.model.dto.CategoryDTO;
 import com.ttt.ttt_shop.model.dto.ProducerDTO;
-import com.ttt.ttt_shop.model.entity.Category;
 import com.ttt.ttt_shop.model.entity.Producer;
 import com.ttt.ttt_shop.repository.ProducerRepository;
 import com.ttt.ttt_shop.service.ProducerService;
@@ -23,20 +21,22 @@ public class ProducerServiceImpl implements ProducerService {
 
     @Override
     public ProducerDTO getProducerById(Long id) {
-        Producer producer = producerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Producer not found with id " + id));
-        return convertToDTO(producer);
+        Producer producer = producerRepository.findById(id).orElse(null);
+        if(producer == null){
+            return null;
+        }else{
+            return convertToDTO(producer);
+        }
     }
 
     @Override
-    public void addProducer(ProducerDTO producerDTO) {
+    public void add(ProducerDTO producerDTO) {
         producerRepository.save(convertToEntity(producerDTO));
     }
 
     @Override
-    public void updateProducer(ProducerDTO producerDTO) {
-        Producer producer = producerRepository.findById(producerDTO.getId())
-                .orElseThrow(() -> new RuntimeException("Producer not found with id " + producerDTO.getId()));
+    public void update(ProducerDTO producerDTO) {
+        Producer producer = producerRepository.findById(producerDTO.getId()).orElse(null);
         producer.setName(producerDTO.getName());
         producerRepository.save(producer);
     }

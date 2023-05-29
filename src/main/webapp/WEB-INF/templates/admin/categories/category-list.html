@@ -240,6 +240,25 @@
               }
             });
   }
+
+  // Lấy URL hiện tại
+  var currentUrl = window.location.href;
+
+  // Kiểm tra xem URL có chứa biến 'error' không
+  if (currentUrl.indexOf('?error=') !== -1) {
+    // Tách chuỗi để lấy giá trị của biến 'error'
+    var errorParam = currentUrl.split('?error=')[1];
+
+    // Giải mã URL
+    var errorMessage = decodeURIComponent(errorParam);
+
+    // Hiển thị cửa sổ cảnh báo với thông báo lỗi
+    alert(errorMessage);
+  }
+
+
+
+
 </script>
 
 </body>

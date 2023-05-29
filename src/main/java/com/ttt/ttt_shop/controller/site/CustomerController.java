@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,6 +33,11 @@ public class CustomerController {
             cartService.addCart(userDetails.getUser().getId(), productId);
         return "redirect:/customer/cart";
     }
+    @GetMapping("/cart/change/{product_id}")
+    public String changeQuantity(@PathVariable("product_id") Long productId,@RequestParam String changeType){
+        cartService.changeQuantity(productId, changeType);
+        return "redirect:/customer/cart";
+    }
 
     @GetMapping("/cart")
     public String getAll(Model model, @AuthenticationPrincipal CustomUserDetail userDetails){
@@ -42,7 +45,7 @@ public class CustomerController {
         float totalPrice = 0;
         float shippingPrice = 0;
         for(Cart cart : carts){
-            totalPrice += cart.getProduct().getPrice();
+            totalPrice += cart.getProduct().getPrice() * cart.getQuantity();
         }
         model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("shippingPrice", shippingPrice);

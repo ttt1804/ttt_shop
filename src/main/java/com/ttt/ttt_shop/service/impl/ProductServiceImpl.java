@@ -87,7 +87,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void addProduct(ProductDTO productDTO) {
+    public void add(ProductDTO productDTO) {
         Product product = new Product();
         product.setName(productDTO.getName());
         product.setPrice(productDTO.getPrice());
@@ -107,7 +107,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void updateProduct(ProductDTO productDTO) {
+    public void update(ProductDTO productDTO) {
         Optional<Product> product = productRepository.findById(productDTO.getId());
         if (product.isPresent()) {
             Product p = product.get();
@@ -130,7 +130,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProductById(Long id) {
+    public void delete(Long id) {
         productRepository.deleteById(id);
     }
 

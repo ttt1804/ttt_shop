@@ -5,13 +5,13 @@ import com.ttt.ttt_shop.model.dto.CategoryDTO;
 import java.util.List;
 
 public interface CategoryService {
-    List<CategoryDTO> getAllCategories();
+    List<CategoryDTO> getAll();
 
     CategoryDTO getCategoryById(Long id);
 
-    void addCategory(CategoryDTO category);
+    void add(CategoryDTO categoryDTO);
 
-    void updateCategory(CategoryDTO category);
+    void update(CategoryDTO categoryDTO);
 
-    void deleteCategoryById(Long id);
+    void delete(Long id);
 }

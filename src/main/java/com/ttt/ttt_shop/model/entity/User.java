@@ -20,6 +20,12 @@ public class User {
     @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
+    private boolean status;
+
+    @Column(nullable = true)
+    private String verificationCode;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "role",
@@ -36,12 +42,15 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String username, String password, String email, Set<Authority> authorities) {
+    public User(Long id, String username, String password, String email, boolean status, String verificationCode, Set<Authority> authorities, CustomerDetail customerDetail) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.status = status;
+        this.verificationCode = verificationCode;
         this.authorities = authorities;
+        this.customerDetail = customerDetail;
     }
 
     public Long getId() {
@@ -74,6 +83,22 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
     }
 
     public Set<Authority> getAuthorities() {

@@ -57,4 +57,21 @@ public class CartServiceImpl implements CartService {
         cartRepository.deleteById(userId);
     }
 
+    @Override
+    public void changeQuantity(Long productId, String changeType) {
+        Cart cart = cartRepository.findById(productId).orElse(null);
+        if(cart != null){
+            if(changeType.equals("increase")){
+                int newQuantity = cart.getQuantity() + 1;
+                cart.setQuantity(newQuantity);
+            }
+            if(changeType.equals("reduce")){
+                int newQuantity = cart.getQuantity() - 1;
+                cart.setQuantity(newQuantity);
+            }
+        }
+        cartRepository.save(cart);
+
+    }
+
 }

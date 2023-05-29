@@ -1,21 +1,27 @@
 package com.ttt.ttt_shop.controller.site;
 
 import com.ttt.ttt_shop.model.dto.ProductDTO;
+import com.ttt.ttt_shop.model.dto.UserDTO;
 import com.ttt.ttt_shop.model.entity.Product;
+import com.ttt.ttt_shop.model.entity.User;
+import com.ttt.ttt_shop.repository.UserRepository;
 import com.ttt.ttt_shop.service.ProductService;
+import com.ttt.ttt_shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 
 @Controller
 @RequestMapping(value = {"/site"})
@@ -25,6 +31,13 @@ public class WebController {
     @Autowired
     ProductService productService;
 
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    JavaMailSender emailSender;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @GetMapping("")
     public String home(Model model){
@@ -108,4 +121,37 @@ public class WebController {
         return "site/shop";
     }
 
+    @GetMapping("/register")
+    public String register(Model model){
+        model.addAttribute("user", new UserDTO());
+        return "/site/register";
+    }
+    @PostMapping("/register")
+    public String register(@ModelAttribute("user") UserDTO userDTO, Model model) {
+        Random random = new Random();
+        int min = 100000;
+        int max = 999999;
+        int code = random.nextInt(max - min + 1) + min;
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo("trantan1804@gmail.com");
+        message.setSubject("Mã kích hoạt tài khoản");
+        message.setText("" + code);
+        userDTO.setVerificationCode(passwordEncoder.encode(String.valueOf(code)));
+        emailSender.send(message);
+        userService.register(userDTO);
+        model.addAttribute("user", userDTO);
+        return "/site/verify";
+    }
+
+    @PostMapping("/verify")
+    public String verify(@ModelAttribute("user") UserDTO userDTO){
+        UserDTO user = userService.findByUserName(userDTO.getUsername());
+        if(user != null){
+            String verificationCode = userDTO.getVerificationCode();
+            if(passwordEncoder.matches(verificationCode, user.getVerificationCode())){
+                userService.verify(userDTO);
+            }
+        }
+        return "redirect:/login";
+    }
 }

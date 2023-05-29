@@ -1,7 +1,11 @@
 package com.ttt.ttt_shop.model.dto;
 
+import javax.validation.constraints.Pattern;
+
 public class ProducerDTO {
     private Long id;
+
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "Tên chỉ được chứa chữ cái")
     private String name;
 
     public ProducerDTO() {
