@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -44,11 +43,47 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findUserByUsername(username);
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getId());
+        userDTO.setUsername(user.getUsername());
         userDTO.setPassword(user.getPassword());
         userDTO.setVerificationCode(user.getVerificationCode());
         userDTO.setStatus(user.getStatus());
 
         return  userDTO;
+    }
+
+    @Override
+    public Boolean findByEmail(String email) {
+        User user = userRepository.findUserByEmail(email);
+        if(user == null){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    @Override
+    public Boolean findByUserNameDTO(String username) {
+        User user = userRepository.findUserByUsername(username);
+        if(user == null){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    @Override
+    public UserDTO findUserByUsernameAndEmail(String username, String email) {
+        User user = userRepository.findUserByUsernameAndEmail(username, email);
+        if(user != null){
+            UserDTO userDTO = new UserDTO();
+            userDTO.setId(user.getId());
+            userDTO.setUsername(user.getUsername());
+            userDTO.setEmail(user.getEmail());
+            userDTO.setPassword(user.getPassword());
+            return  userDTO;
+        }else{
+            return null;
+        }
     }
 
     @Override
@@ -62,5 +97,21 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
+    public void updateVerificationCode(String username, String email, String verificationCode) {
+        User user = userRepository.findUserByUsernameAndEmail(username, email);
+        if(user != null) {
+            user.setVerificationCode(verificationCode);
+            userRepository.save(user);
+        }
+    }
 
+    @Override
+    public void resetPassword(String username, String password) {
+        User user = userRepository.findUserByUsername(username);
+        if(user != null) {
+            user.setPassword(passwordEncoder.encode(password));
+            userRepository.save(user);
+        }
+    }
 }

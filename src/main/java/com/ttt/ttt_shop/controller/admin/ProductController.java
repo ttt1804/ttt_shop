@@ -1,6 +1,5 @@
 package com.ttt.ttt_shop.controller.admin;
 
-import com.ttt.ttt_shop.model.dto.CategoryDTO;
 import com.ttt.ttt_shop.model.dto.ProductDTO;
 import com.ttt.ttt_shop.model.entity.Product;
 import com.ttt.ttt_shop.service.CategoryService;

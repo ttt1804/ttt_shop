@@ -2,17 +2,12 @@ package com.ttt.ttt_shop.controller.admin;
 
 import com.ttt.ttt_shop.model.entity.CustomerDetail;
 import com.ttt.ttt_shop.model.entity.User;
-import com.ttt.ttt_shop.repository.OrderRepository;
-import com.ttt.ttt_shop.repository.ProductRepository;
-import com.ttt.ttt_shop.repository.UserRepository;
 import com.ttt.ttt_shop.security.CustomUserDetail;
 import com.ttt.ttt_shop.service.OrderService;
 import com.ttt.ttt_shop.service.ProductService;
 import com.ttt.ttt_shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,28 +37,42 @@ public class AdminController {
         return "admin/index";
     }
 
-    @GetMapping("/customer")
-    public String homeUser(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-
-
-            // Lấy đối tượng User nếu bạn đã triển khai CustomUserDetail
-            CustomUserDetail customUserDetail = (CustomUserDetail) userDetails;
-            User user = customUserDetail.getUser();
-
+//    @GetMapping("/customer")
+//    public String homeUser(Model model) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+//            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+//
+//
+//            CustomUserDetail customUserDetail = (CustomUserDetail) userDetails;
+//            User user = customUserDetail.getUser();
+//
+//            CustomerDetail customerDetail = user.getCustomerDetail();
+//
+//
+//            model.addAttribute("user", user);
+//            model.addAttribute("customerDetail", customerDetail);
+//
+//            return "site/customer/customer-info";
+//        } else {
+//            return "redirect:/login";
+//        }
+//    }
+        @GetMapping("/customer")
+    public String homeUser(Model model, @AuthenticationPrincipal CustomUserDetail userDetails) {
+        if(userDetails != null){
+            User user = userDetails.getUser();
             CustomerDetail customerDetail = user.getCustomerDetail();
-
-
-            // Truyền thông tin người dùng vào Model để hiển thị trên giao diện người dùng
+            if(customerDetail == null){
+                CustomerDetail customerDetail1 = new CustomerDetail();
+                model.addAttribute("user", user);
+                model.addAttribute("customerDetail", customerDetail1);
+                return "site/customer/customer-info";
+            }
             model.addAttribute("user", user);
             model.addAttribute("customerDetail", customerDetail);
-            // ... thêm thông tin khác vào Model
-
             return "site/customer/customer-info";
         } else {
-            // Người dùng chưa đăng nhập hoặc không có thông tin người dùng
             return "redirect:/login";
         }
     }
