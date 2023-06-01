@@ -19,30 +19,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig{
-
-    // No database
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-//                .antMatchers("/user/**").hasRole("USER")
-//                .anyRequest().permitAll()
-//                .and()
-//                .formLogin()
-//                .loginProcessingUrl("/admin/home")
-//                .and()
-//                .logout()
-//                .logoutUrl("/logout")
-//                .logoutSuccessUrl("/login");
-//    }
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("admin").password("{noop}password").roles("ADMIN")
-//                .and()
-//                .withUser("user").password("{noop}password").roles("USER");
-//    }
-
     // database
     @Autowired
     CustomerUserDetailServiceImpl customerUserDetailService;

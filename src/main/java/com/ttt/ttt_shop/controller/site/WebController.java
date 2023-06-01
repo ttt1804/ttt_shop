@@ -124,24 +124,24 @@ public class WebController {
     @GetMapping("/register")
     public String register(Model model){
         model.addAttribute("user", new UserDTO());
-        return "/site/register";
+        return "/site/customer/register";
     }
     @PostMapping("/register")
     public String register(@ModelAttribute("user") @Valid UserDTO userDTO, BindingResult bindingResult, Model model) {
         if(userService.findByEmail(userDTO.getEmail())){
             String exitMailError = "Email đã tồn tại";
             model.addAttribute("exitMailError", exitMailError);
-            return "/site/register";
+            return "/site/customer/register";
         }
         if(userService.findByUserNameDTO(userDTO.getUsername())){
             String exitUserNameError = "Username đã tồn tại";
             model.addAttribute("exitUserNameError", exitUserNameError);
-            return "/site/register";
+            return "/site/customer/register";
         }
         if(!userDTO.getRe_password().equals(userDTO.getPassword())){
             String passwordIncorrect = "Mật khẩu không khớp";
             model.addAttribute("passwordIncorrect", passwordIncorrect);
-            return "/site/register";
+            return "/site/customer/register";
         }
         if (bindingResult.hasErrors()) {
             List<FieldError> errors = bindingResult.getFieldErrors();
@@ -150,7 +150,7 @@ public class WebController {
                 String errorMessage = error.getDefaultMessage();
                 model.addAttribute(field + "Error", errorMessage);
             }
-            return "/site/register";
+            return "/site/customer/register";
         }
             Random random = new Random();
             int min = 100000;
@@ -166,7 +166,7 @@ public class WebController {
             String success = "Đăng ký tài khoản thành công, vui lòng nhập mã kích hoạt!";
             model.addAttribute("success", success);
             model.addAttribute("user", userDTO);
-            return "/site/verify";
+            return "/site/customer/verify";
     }
 
     @PostMapping("/verify")
@@ -183,7 +183,7 @@ public class WebController {
                 String error = "Mã xác minh không đúng. Vui lòng kiểm tra lại";
                 model.addAttribute("user", userDTO);
                 model.addAttribute("error", error);
-                return "/site/verify";
+                return "/site/customer/verify";
             }
         }
         String errorVerify = "Kích hoạt tài khoản thất bại!";
@@ -195,14 +195,14 @@ public class WebController {
     public String forgotPassword(Model model){
         UserDTO userDTO  = new UserDTO();
         model.addAttribute("user", userDTO);
-        return "/site/forgot-password";
+        return "/site/customer/forgot-password";
     }
     @PostMapping("/forgot-password")
     public String forgotPassword(@ModelAttribute("user") UserDTO userDTO, Model model) {
         if(userService.findUserByUsernameAndEmail(userDTO.getUsername(), userDTO.getEmail()) == null){
             String error = "Tài khoản không tồn tại";
             model.addAttribute("error", error);
-            return "/site/forgot-password";
+            return "/site/customer/forgot-password";
         }
         Random random = new Random();
         int min = 100000;
@@ -217,14 +217,14 @@ public class WebController {
         String success = "Vui lòng nhập mã xác minh!";
         model.addAttribute("success", success);
         model.addAttribute("user", userDTO);
-        return "/site/reset-password";
+        return "/site/customer/reset-password";
     }
     @PostMapping("/reset-password")
     public String resetPassword(@ModelAttribute("user") UserDTO userDTO, Model model){
         if(!userDTO.getRe_password().equals(userDTO.getPassword())){
             String passwordIncorrect = "Mật khẩu không khớp";
             model.addAttribute("passwordIncorrect", passwordIncorrect);
-            return "/site/reset-password";
+            return "/site/customer/reset-password";
         }
         UserDTO user = userService.findByUserName(userDTO.getUsername());
         if(user != null){
@@ -238,7 +238,7 @@ public class WebController {
                 String error = "Mã xác minh không đúng. Vui lòng kiểm tra lại";
                 model.addAttribute("user", userDTO);
                 model.addAttribute("error", error);
-                return "/site/reset-password";
+                return "/site/customer/reset-password";
             }
         }
         String errorResetPassword = "Đổi mật khẩu thất bại!";
