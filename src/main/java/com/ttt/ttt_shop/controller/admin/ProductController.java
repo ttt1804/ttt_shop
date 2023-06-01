@@ -106,14 +106,12 @@ public class ProductController {
         }
         try {
             if (!image.isEmpty()) {
-                // Nếu người dùng chọn file ảnh mới
                 ProductDTO oldProduct = productService.getProductById(productDTO.getId());
                 String imageFilename = oldProduct.getImage();
                 filesStorageService.delete(imageFilename);
                 String fileName = filesStorageService.save(image);
                 productDTO.setImage(fileName);
             } else {
-                // Nếu người dùng không chọn file ảnh mới
                 ProductDTO oldProduct = productService.getProductById(productDTO.getId());
                 productDTO.setImage(oldProduct.getImage());
             }
