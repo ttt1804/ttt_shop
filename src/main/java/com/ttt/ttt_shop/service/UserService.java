@@ -1,7 +1,12 @@
 package com.ttt.ttt_shop.service;
 
+import com.ttt.ttt_shop.model.dto.CustomerDetailDTO;
 import com.ttt.ttt_shop.model.dto.UserDTO;
+import com.ttt.ttt_shop.model.entity.CustomerDetail;
+import com.ttt.ttt_shop.model.entity.User;
 import org.springframework.stereotype.Service;
+
+import java.text.ParseException;
 
 @Service
 public interface UserService {
@@ -20,6 +25,7 @@ public interface UserService {
 
      void resetPassword(String username, String password);
 
+     User updateInfo(Long id, CustomerDetailDTO customerDetailDTO) throws ParseException;
 
 
 }

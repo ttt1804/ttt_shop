@@ -229,16 +229,7 @@
             });
   }
   function  confirmEdit(productId) {
-    swal({
-      title: "Thông báo",
-      text: "Bạn có muốn sửa nhà cung cấp này?",
-      buttons: ["Hủy bỏ", "Đồng ý"],
-    })
-            .then((willEdit) => {
-              if (willEdit) {
-                window.location.href = '/admin/producers/edit/' + productId;
-              }
-            });
+    window.location.href = '/admin/producers/edit/' + productId;
   }
 
   // Lấy URL hiện tại

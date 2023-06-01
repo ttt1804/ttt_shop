@@ -229,16 +229,7 @@
             });
   }
   function  confirmEdit(productId) {
-    swal({
-      title: "Thông báo",
-      text: "Bạn có muốn sửa thể loại này?",
-      buttons: ["Hủy bỏ", "Đồng ý"],
-    })
-            .then((willEdit) => {
-              if (willEdit) {
-                window.location.href = '/admin/categories/edit/' + productId;
-              }
-            });
+    window.location.href = '/admin/categories/edit/' + productId;
   }
 
   // Lấy URL hiện tại

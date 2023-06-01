@@ -1,7 +1,9 @@
 package com.ttt.ttt_shop.service.impl;
 
+import com.ttt.ttt_shop.model.dto.CustomerDetailDTO;
 import com.ttt.ttt_shop.model.dto.UserDTO;
 import com.ttt.ttt_shop.model.entity.Authority;
+import com.ttt.ttt_shop.model.entity.CustomerDetail;
 import com.ttt.ttt_shop.model.entity.User;
 import com.ttt.ttt_shop.repository.AuthorityRepository;
 import com.ttt.ttt_shop.repository.UserRepository;
@@ -10,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,6 +39,8 @@ public class UserServiceImpl implements UserService {
         user.setEmail(userDTO.getEmail());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user.setStatus(false);
+        CustomerDetail customerDetail = new CustomerDetail();
+        user.setCustomerDetail(customerDetail);
         user.setVerificationCode(userDTO.getVerificationCode());
         userRepository.save(user);
     }
@@ -112,6 +119,26 @@ public class UserServiceImpl implements UserService {
         if(user != null) {
             user.setPassword(passwordEncoder.encode(password));
             userRepository.save(user);
+        }
+    }
+
+    @Override
+    public User updateInfo(Long id, CustomerDetailDTO customerDetailDTO) throws ParseException {
+        User user = userRepository.findById(id).orElse(null);
+        if(user != null){
+            CustomerDetail customerDetail = user.getCustomerDetail();
+            customerDetail.setFullName(customerDetailDTO.getFullName());
+            customerDetail.setAddress(customerDetailDTO.getAddress());
+            customerDetail.setPhoneNumber(customerDetailDTO.getPhoneNumber());
+            String birthdayString = customerDetailDTO.getBirthday();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date birthdayUtil = format.parse(birthdayString);
+            customerDetail.setBirthday(birthdayUtil);
+            user.setCustomerDetail(customerDetail);
+            userRepository.save(user);
+            return user;
+        }else{
+            return null;
         }
     }
 }

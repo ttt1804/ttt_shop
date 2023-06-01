@@ -1,35 +1,29 @@
-package com.ttt.ttt_shop.model.entity;
+package com.ttt.ttt_shop.model.dto;
 
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
-import java.util.Date;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
-@Entity
-@Table(name = "customer_details")
-public class CustomerDetail {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CustomerDetailDTO {
     private Long id;
-
-    @Column(nullable = true)
+    @NotBlank(message = "Họ và tên không được để trống")
     private String fullName;
 
-    @Column(nullable = true)
+    @NotBlank(message = "Địa chỉ không được để trống")
     private String address;
 
-    @Column(nullable = true)
+    @Pattern(regexp="[0-9]+", message="Số điện thoại không hợp lệ")
     private String phoneNumber;
 
-    @DateTimeFormat(pattern ="yyyy-MM-dd")
-    private Date birthday;
-    @Column(nullable = true)
+    @NotBlank(message = "Ngày sinh không được để trống")
+    private String birthday;
+
     private String avatar;
 
-    public CustomerDetail() {
+    public CustomerDetailDTO() {
     }
 
-    public CustomerDetail(Long id, String fullName, String address, String phoneNumber, Date birthday, String avatar) {
+    public CustomerDetailDTO(Long id, String fullName, String address, String phoneNumber, String birthday, String avatar) {
         this.id = id;
         this.fullName = fullName;
         this.address = address;
@@ -70,11 +64,11 @@ public class CustomerDetail {
         this.phoneNumber = phoneNumber;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

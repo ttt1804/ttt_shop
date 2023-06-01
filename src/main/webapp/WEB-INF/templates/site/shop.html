@@ -132,6 +132,8 @@
           <div class="navbar-nav mr-auto py-0">
             <a href="/site" class="nav-item nav-link">Trang chủ</a>
             <a href="/site/products" class="nav-item nav-link active">Shop</a>
+            <a href="/customer" class="nav-item nav-link" th:if="${#request.userPrincipal != null}">Cá nhân</a>
+            <a href="/customer/purchased" class="nav-item nav-link" th:if="${#request.userPrincipal != null}">Đơn mua</a>
           </div>
           <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
             <a href="" class="btn px-0">
@@ -144,8 +146,11 @@
               <span class="badge text-secondary border border-secondary rounded-circle"
                     style="padding-bottom: 2px;">0</span>
             </a>
-            <a href="/login" class="btn px-0 ml-3">
+            <a href="/login" class="btn px-0 ml-3" th:if="${#request.userPrincipal == null}">
               <i class="fas fa-user text-primary"></i>
+            </a>
+            <a href="/logout" class="btn px-0 ml-3" th:if="${#request.userPrincipal != null}">
+              <i class="fas fa-sign-out-alt text-primary"></i>
             </a>
           </div>
         </div>

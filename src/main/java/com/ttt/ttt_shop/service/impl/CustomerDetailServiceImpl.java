@@ -16,4 +16,9 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
     public List<CustomerDetail> getAll() {
         return customerDetailRepository.findCustomerDetailsWithRoleCustomer();
     }
+
+    @Override
+    public void add(CustomerDetail customerDetail) {
+
+    }
 }

@@ -66,14 +66,15 @@ public class ProductController {
 
     @PostMapping("/add")
     public String add(@ModelAttribute("productDTO") @Valid  ProductDTO productDTO,BindingResult bindingResult, @RequestParam("image") MultipartFile image, Model model) {
-            if(bindingResult.hasErrors()){
-                List<FieldError> errors = bindingResult.getFieldErrors();
-                model.addAttribute("errors", errors);
-                model.addAttribute("product", new ProductDTO());
-                model.addAttribute("categories", categoryService.getAll());
-                model.addAttribute("producers", producerService.getAll());
-                return "admin/products/product-add";
+        if(bindingResult.hasErrors()) {
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            for (FieldError error : errors) {
+                String field = error.getField();
+                String errorMessage = error.getDefaultMessage();
+                model.addAttribute(field + "Error", errorMessage);
             }
+            return "admin/products/product-add";
+        }
             String fileName = filesStorageService.save(image);
             productDTO.setImage(fileName);
             productService.add(productDTO);
@@ -90,7 +91,19 @@ public class ProductController {
     }
 
     @PostMapping("/edit")
-    public String edit(@ModelAttribute("product") ProductDTO productDTO, @RequestParam("image") MultipartFile image) {
+    public String edit(@ModelAttribute("product")  @Valid  ProductDTO productDTO,BindingResult bindingResult, @RequestParam("image") MultipartFile image, Model model) {
+        if(bindingResult.hasErrors()) {
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            for (FieldError error : errors) {
+                String field = error.getField();
+                String errorMessage = error.getDefaultMessage();
+                model.addAttribute(field + "Error", errorMessage);
+            }
+            model.addAttribute("product", productDTO);
+            model.addAttribute("categories", categoryService.getAll());
+            model.addAttribute("producers", producerService.getAll());
+            return "admin/products/product-edit";
+        }
         try {
             if (!image.isEmpty()) {
                 // Nếu người dùng chọn file ảnh mới

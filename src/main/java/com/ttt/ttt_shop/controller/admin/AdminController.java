@@ -1,5 +1,6 @@
 package com.ttt.ttt_shop.controller.admin;
 
+import com.ttt.ttt_shop.model.dto.CustomerDetailDTO;
 import com.ttt.ttt_shop.model.entity.CustomerDetail;
 import com.ttt.ttt_shop.model.entity.User;
 import com.ttt.ttt_shop.security.CustomUserDetail;
@@ -37,36 +38,15 @@ public class AdminController {
         return "admin/index";
     }
 
-//    @GetMapping("/customer")
-//    public String homeUser(Model model) {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
-//            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-//
-//
-//            CustomUserDetail customUserDetail = (CustomUserDetail) userDetails;
-//            User user = customUserDetail.getUser();
-//
-//            CustomerDetail customerDetail = user.getCustomerDetail();
-//
-//
-//            model.addAttribute("user", user);
-//            model.addAttribute("customerDetail", customerDetail);
-//
-//            return "site/customer/customer-info";
-//        } else {
-//            return "redirect:/login";
-//        }
-//    }
-        @GetMapping("/customer")
+    @GetMapping("/customer")
     public String homeUser(Model model, @AuthenticationPrincipal CustomUserDetail userDetails) {
         if(userDetails != null){
             User user = userDetails.getUser();
             CustomerDetail customerDetail = user.getCustomerDetail();
             if(customerDetail == null){
-                CustomerDetail customerDetail1 = new CustomerDetail();
+                CustomerDetailDTO customerDetailDTO = new CustomerDetailDTO();
                 model.addAttribute("user", user);
-                model.addAttribute("customerDetail", customerDetail1);
+                model.addAttribute("customerDetail", customerDetailDTO);
                 return "site/customer/customer-info";
             }
             model.addAttribute("user", user);

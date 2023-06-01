@@ -34,9 +34,13 @@ public class CategoryController {
 
     @PostMapping("/add")
     public String add(@ModelAttribute("category") @Valid CategoryDTO categoryDTO, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
+        if(bindingResult.hasErrors()) {
             List<FieldError> errors = bindingResult.getFieldErrors();
-            model.addAttribute("errors", errors);
+            for (FieldError error : errors) {
+                String field = error.getField();
+                String errorMessage = error.getDefaultMessage();
+                model.addAttribute(field + "Error", errorMessage);
+            }
             return "admin/categories/category-add";
         }
         categoryService.add(categoryDTO);
@@ -64,9 +68,13 @@ public class CategoryController {
 
     @PostMapping("/edit")
     public String editCategory(@ModelAttribute("category") @Valid CategoryDTO categoryDTO, BindingResult bindingResult, Model model) {
-        if(bindingResult.hasErrors()){
+        if(bindingResult.hasErrors()) {
             List<FieldError> errors = bindingResult.getFieldErrors();
-            model.addAttribute("errors", errors);
+            for (FieldError error : errors) {
+                String field = error.getField();
+                String errorMessage = error.getDefaultMessage();
+                model.addAttribute(field + "Error", errorMessage);
+            }
             return "admin/categories/category-edit";
         }
         categoryService.update(categoryDTO);

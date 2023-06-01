@@ -93,27 +93,38 @@
               <div class="form-group col-md-3">
                 <label class="control-label">Tên sản phẩm</label>
                 <input class="form-control" name="name" type="text">
-                <!-- Hiển thị lỗi -->
-                <th:block th:if="${errors != null}">
-                  <div class="errors">
-                    <th:block th:each="error : ${errors}">
-                      <li class="" th:text="${error.defaultMessage}"></li>
-                    </th:block>
+                <div th:if="${nameError}">
+                  <div class="errors mt-2">
+                    <span class="text-danger" th:text="${nameError}"></span>
                   </div>
-                </th:block>
-                <!-- End Hiển thị lỗi -->
+                </div>
               </div>
               <div class="form-group  col-md-3">
                 <label class="control-label">Giá</label>
                 <input class="form-control" name="price" type="number" placeholder="Nhập giá (VND)">
+                <div th:if="${priceError}">
+                  <div class="errors mt-2">
+                    <span class="text-danger" th:text="${priceError}"></span>
+                  </div>
+                </div>
               </div>
               <div class="form-group  col-md-3">
                 <label class="control-label">Số lượng</label>
                 <input class="form-control" name="quantity" type="number">
+                <div th:if="${quantityError}">
+                  <div class="errors mt-2">
+                    <span class="text-danger" th:text="${quantityError}"></span>
+                  </div>
+                </div>
               </div>
               <div class="form-group  col-md-3">
                 <label class="control-label">Giảm giá</label>
                 <input class="form-control" name="discount" type="number">
+                <div th:if="${discountError}">
+                  <div class="errors mt-2">
+                    <span class="text-danger" th:text="${discountError}"></span>
+                  </div>
+                </div>
               </div>
               <div class="form-group col-md-3">
                 <label for="category" class="control-label">Thể loại</label>
@@ -122,6 +133,11 @@
                   <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">
                   </option>
                 </select>
+                <div th:if="${categoryIdError}">
+                  <div class="errors mt-2">
+                    <span class="text-danger" th:text="${categoryIdError}"></span>
+                  </div>
+                </div>
               </div>
 
               <div class="form-group col-md-3">
@@ -131,6 +147,11 @@
                   <option th:each="producer : ${producers}" th:value="${producer.id}" th:text="${producer.name}">
                   </option>
                 </select>
+                <div th:if="${producerIdError}">
+                  <div class="errors mt-2">
+                    <span class="text-danger" th:text="${producerIdError}"></span>
+                  </div>
+                </div>
               </div>
               <div class="form-group col-md-12">
                 <label class="control-label">Ảnh sản phẩm</label>

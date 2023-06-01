@@ -33,9 +33,13 @@ public class ProducerController {
     }
     @PostMapping("add")
     public String add(@ModelAttribute("producer") @Valid ProducerDTO producerDTO, BindingResult bindingResult, Model model){
-        if (bindingResult.hasErrors()) {
+        if(bindingResult.hasErrors()) {
             List<FieldError> errors = bindingResult.getFieldErrors();
-            model.addAttribute("errors", errors);
+            for (FieldError error : errors) {
+                String field = error.getField();
+                String errorMessage = error.getDefaultMessage();
+                model.addAttribute(field + "Error", errorMessage);
+            }
             return "admin/producers/producer-add";
         }
         producerService.add(producerDTO);
@@ -62,9 +66,13 @@ public class ProducerController {
     }
     @PostMapping("/edit")
     public String edit(@ModelAttribute("producer") @Valid ProducerDTO producerDTO, BindingResult bindingResult, Model model){
-        if(bindingResult.hasErrors()){
+        if(bindingResult.hasErrors()) {
             List<FieldError> errors = bindingResult.getFieldErrors();
-            model.addAttribute("errors", errors);
+            for (FieldError error : errors) {
+                String field = error.getField();
+                String errorMessage = error.getDefaultMessage();
+                model.addAttribute(field + "Error", errorMessage);
+            }
             return "admin/producers/producer-edit";
         }
         producerService.update(producerDTO);

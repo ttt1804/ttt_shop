@@ -86,30 +86,12 @@
                                     Tạo mới sản phẩm</a>
                             </div>
                             <div class="col-sm-2">
-                                <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập"
-                                    onclick="myFunction(this)"><i class="fas fa-file-upload"></i> Tải từ file</a>
-                            </div>
-
-                            <div class="col-sm-2">
-                                <a class="btn btn-delete btn-sm print-file" type="button" title="In"
-                                    onclick="myApp.printTable()"><i class="fas fa-print"></i> In dữ liệu</a>
-                            </div>
-                            <div class="col-sm-2">
                                 <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button"
-                                    title="Sao chép"><i class="fas fa-copy"></i> Sao chép</a>
+                                    title="Sao chép"><i class="fas fa-copy"></i>Tải từ file</a>
                             </div>
-
                             <div class="col-sm-2">
-                                <a class="btn btn-excel btn-sm" href="http://127.0.0.1:5502/doc/table-data-product.html"
+                                <a class="btn btn-excel btn-sm"
                                     title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
-                            </div>
-                            <div class="col-sm-2">
-                                <a class="btn btn-delete btn-sm pdf-file" type="button" title="In"
-                                    onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
-                            </div>
-                            <div class="col-sm-2">
-                                <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
-                                        class="fas fa-trash-alt"></i> Xóa tất cả </a>
                             </div>
                         </div>
                         <div id="sampleTable_wrapper"
@@ -225,20 +207,6 @@
             </div>
         </div>
     </main>
-    <!-- Essential javascripts for application to work-->
-<!--    <script src="js/jquery-3.2.1.min.js"></script>-->
-<!--    <script src="js/popper.min.js"></script>-->
-<!--    <script src="js/bootstrap.min.js"></script>-->
-<!--    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
-<!--    <script src="src/jquery.table2excel.js"></script>-->
-<!--    <script src="js/main.js"></script>-->
-<!--    &lt;!&ndash; The javascript plugin to display page loading on top&ndash;&gt;-->
-<!--    <script src="js/plugins/pace.min.js"></script>-->
-<!--    &lt;!&ndash; Page specific javascripts&ndash;&gt;-->
-<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>-->
-<!--    &lt;!&ndash; Data table plugin&ndash;&gt;-->
-<!--    <script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>-->
-<!--    <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>-->
     <script type="text/javascript">
         $('#sampleTable').DataTable();
         //Thời Gian
@@ -296,16 +264,7 @@
                 });
         }
         function  confirmEdit(productId) {
-            swal({
-                title: "Thông báo",
-                text: "Bạn có muốn sửa sản phẩm này?",
-                buttons: ["Hủy bỏ", "Đồng ý"],
-            })
-                .then((willEdit) => {
-                    if (willEdit) {
-                        window.location.href = '/admin/products/edit/' + productId;
-                    }
-                });
+            window.location.href = '/admin/products/edit/' + productId;
         }
         function searchForm() {
             $("#searchForm").submit();

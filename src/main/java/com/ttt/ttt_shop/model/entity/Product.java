@@ -24,10 +24,10 @@ public class Product {
     private Integer quantity;
     @Column(nullable = false)
     private Integer discount;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String description;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String image;
     @CreationTimestamp
     @Column(name = "created_at")
