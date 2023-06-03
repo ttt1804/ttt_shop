@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
+  xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <!--head-->
+
 <head th:replace="~{admin/fragments/head :: head}">
 </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
 
-<!-- Navbar-->
-<header th:replace="~{admin/fragments/navbar :: navbar}">
+  <!-- Navbar-->
+  <header th:replace="~{admin/fragments/navbar :: navbar}">
 
-</header>
-<!-- Sidebar menu-->
-<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-<aside th:replace="~{admin/fragments/sidebar :: sidebar}">
-</aside>
+  </header>
+  <!-- Sidebar menu-->
+  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+  <aside th:replace="~{admin/fragments/sidebar :: sidebar}">
+  </aside>
 
-<main class="app-content">
+  <main class="app-content">
     <div class="app-title">
       <ul class="app-breadcrumb breadcrumb">
         <li class="breadcrumb-item">Danh sách sản phẩm</li>
@@ -31,7 +32,7 @@
             <div class="row element-button">
               <div class="col-sm-2">
                 <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i
-                        class="fas fa-folder-plus"></i> Thêm thể loại</a>
+                    class="fas fa-folder-plus"></i> Thêm thể loại</a>
               </div>
               <div class="col-sm-2">
                 <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#addNhaCungCap"><i
@@ -128,7 +129,7 @@
 MODAL thể loại
 -->
   <div class="modal fade" id="adddanhmuc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-       data-backdrop="static" data-keyboard="false">
+    data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
 
@@ -163,7 +164,7 @@ MODAL
 MODAL nhà cung cấp
 -->
   <div class="modal fade" id="addNhaCungCap" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-       data-backdrop="static" data-keyboard="false">
+    data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
 
@@ -202,7 +203,7 @@ MODAL
     const form = document.getElementById("myForm");
     const submitBtn = document.getElementById("submitBtn");
 
-    submitBtn.addEventListener("click", function() {
+    submitBtn.addEventListener("click", function () {
       form.submit();
     });
 

@@ -1,215 +1,243 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <!--head-->
+
 <head th:replace="~{admin/fragments/head :: head}">
 </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
 
-<!-- Navbar-->
-<header th:replace="~{admin/fragments/navbar :: navbar}">
+    <!-- Navbar-->
+    <header th:replace="~{admin/fragments/navbar :: navbar}">
 
-</header>
-<!-- Sidebar menu-->
-<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-<aside th:replace="~{admin/fragments/sidebar :: sidebar}">
-</aside>
+    </header>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside th:replace="~{admin/fragments/sidebar :: sidebar}">
+    </aside>
 
-<main class="app-content">
-    <div class="app-title">
-        <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item active"><a href="#"><b>Danh sách đơn hàng</b></a></li>
-        </ul>
-        <div id="clock"></div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="tile">
-                <div class="tile-body">
-                    <div class="row element-button">
-                    </div>
-                    <div id="sampleTable_wrapper"
-                         class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
-                        <div class="row">
-                            <div class="col-sm-12 col-md-6">
-                                <div class="dataTables_length" id="sampleTable_length"><label>Hiện <select
-                                        name="sampleTable_length" aria-controls="sampleTable"
-                                        class="form-control form-control-sm">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select> danh mục</label></div>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <div id="sampleTable_filter" class="dataTables_filter"><label>Tìm kiếm:<input
-                                        type="search" class="form-control form-control-sm" placeholder=""
-                                        aria-controls="sampleTable"></label></div>
-                            </div>
+    <main class="app-content">
+        <div class="app-title">
+            <ul class="app-breadcrumb breadcrumb side">
+                <li class="breadcrumb-item active"><a href="#"><b>Danh sách đơn hàng</b></a></li>
+            </ul>
+            <div id="clock"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <div class="tile-body">
+                        <div class="row element-button">
                         </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table class="table table-hover table-bordered dataTable no-footer">
-                                    <th class=" sorting_asc"><input type="checkbox" id="all"></th>
-                                    <th class="sorting">Mã đơn hàng</th>
-                                    <th class="sorting">Tên khách hàng</th>
-                                    <th class="align-middle text-center sorting">Sản phẩm mua</th>
-                                    <th class="sorting">Tổng tiền (VND)</th>
-                                    <th class="sorting">Ngày đặt</th>
-                                    <th class="sorting">Chức năng</th>
-                                    <tbody>
-                                    <tr role="row" class="odd" th:each="order : ${orders}">
-                                        <td width="10" class="sorting_1"><input type="checkbox" name="check1"
-                                                                                value="1"></td>
-                                        <td class="align-middle" th:text="${order.id}"></td>
-                                        <td class="align-middle" th:text="${order.user.customerDetail.fullName}"></td>
-                                        <td>
-                                            <table class="table table-bordered table-hover">
-                                                <thead>
-                                                <tr class="">
-                                                    <th>Hình ảnh</th>
-                                                    <th>Tên</th>
-                                                    <th>Số lượng</th>
-                                                    <th>Giá</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr th:each="orderItem : ${order.orderItems}">
-                                                    <td><img th:src="@{'/img/products/' + ${orderItem.product.image}}" alt="" style="width: 50px;"></td>
-                                                    <td th:text="${orderItem.product.name}"></td>
-                                                    <td th:text="${orderItem.quantity}"></td>
-                                                    <td class="productPrice" th:text="${orderItem.price}"></td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                        <td class="productPrice align-middle" th:text="${order.totalPrice}"></td>
-                                        <td class="orderDate align-middle" th:text="${order.orderDate}"></td>
-                                        <td class="align-middle"><button class="btn btn-primary btn-sm trash" type="button"
-                                                    title="Xóa" ><i
-                                                class="fas fa-trash-alt"></i>
-                                        </button>
-                                            <button  class="btn btn-primary btn-sm edit" type="button"
-                                                    title="Sửa" id="show-emp" data-toggle="modal"
-                                                    data-target="#ModalUP"><i class="fas fa-edit"></i></button>
+                        <div id="sampleTable_wrapper"
+                            class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="dataTables_length" id="sampleTable_length"><label>Hiện <select
+                                                name="sampleTable_length" aria-controls="sampleTable"
+                                                class="form-control form-control-sm">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select> danh mục</label></div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div id="sampleTable_filter" class="dataTables_filter"><label>Tìm kiếm:<input
+                                                type="search" class="form-control form-control-sm" placeholder=""
+                                                aria-controls="sampleTable"></label></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-hover table-bordered dataTable no-footer">
+                                        <th class=" sorting_asc"><input type="checkbox" id="all"></th>
+                                        <th class="sorting">Mã đơn hàng</th>
+                                        <th class="sorting">Tên khách hàng</th>
+                                        <th class="align-middle text-center sorting">Sản phẩm mua</th>
+                                        <th class="sorting">Tổng tiền (VND)</th>
+                                        <th class="sorting">Ngày đặt</th>
+                                        <th class="sorting">Trạng thái</th>
+                                        <th class="sorting">Chức năng</th>
+                                        <tbody>
+                                            <tr role="row" class="odd" th:each="order : ${orders}">
+                                                <td width="10" class="sorting_1"><input type="checkbox" name="check1"
+                                                        value="1"></td>
+                                                <td class="align-middle" th:text="${order.id}"></td>
+                                                <td class="align-middle"
+                                                    th:text="${order.user.customerDetail.fullName}"></td>
+                                                <td>
+                                                    <table class="table table-bordered table-hover table-active">
+                                                        <thead>
+                                                            <tr class="">
+                                                                <th>Hình ảnh</th>
+                                                                <th>Tên</th>
+                                                                <th>Số lượng</th>
+                                                                <th>Giá</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr th:each="orderItem : ${order.orderItems}">
+                                                                <td><img th:src="@{'/img/products/' + ${orderItem.product.image}}"
+                                                                        alt="" style="width: 50px;"></td>
+                                                                <td th:text="${orderItem.product.name}"></td>
+                                                                <td th:text="${orderItem.quantity}"></td>
+                                                                <td class="productPrice" th:text="${orderItem.price}">
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                                <td class="productPrice align-middle" th:text="${order.totalPrice}">
+                                                </td>
+                                                <td class="orderDate align-middle" th:text="${order.orderDate}"></td>
+                                                <td class="align-middle">
+                                                    <span th:text="${order.status}"
+                                                          th:class="${order.status == 'Shipping' ? 'badge bg-warning' :
+                                                                        order.status == 'Success' ? 'badge bg-success' :
+                                                                     order.status == 'Cancel' ? 'badge bg-danger' :
+                                                                     order.status == 'Confirm' ? 'badge bg-info' : ''}">
+                                                    </span>
+                                                </td>
 
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                                <td class="align-middle"><button class="btn btn-primary btn-sm trash"
+                                                        type="button" title="Xóa"><i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                    <button class="btn btn-primary btn-sm edit" type="button"
+                                                        title="Sửa" id="show-emp" data-toggle="modal"
+                                                        data-target="#ModalUP"
+                                                            th:attr="onclick=|confirmEdit('${order.id}')|" ><i class="fas fa-edit"></i></button>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
+                            <div th:unless="${orders.size() > 0}">
+                                <span>No orders found!</span>
+                            </div>
+                            <nav aria-label="Pagination" th:if="${totalPages > 0}">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+                                        <a class="page-link"
+                                           th:href="@{'/admin/orders?' + ${keyword!=null && keyword!=''? 'keyword=' + keyword + '&' : ''} + 'page=' + ${1} + '&size=' + ${pageSize}}"
+                                           th:title="${'Trang đầu'}" rel="tooltip">
+                                            [[${'Đầu'}]]</a>
+                                    </li>
+                                    <li class="page-item font-weight-bold" th:classappend="${currentPage == 1} ? 'disabled'">
+                                        <a class="page-link"
+                                           th:href="@{'/admin/orders?' + ${keyword!=null && keyword!=''? 'keyword=' + keyword + '&' : ''} + 'page=' + ${currentPage - 1} + '&size=' + ${pageSize}}"
+                                           th:title="${'Trang trước'}" rel="tooltip">
+                                            [[${'Trước'}]]</a>
+                                    </li>
+                                    <li class="page-item disabled" th:if="${currentPage - 2 > 1}">
+                                        <a class="page-link" href="#">...</a>
+                                    </li>
+                                    <li class="page-item" th:classappend="${page == currentPage} ? 'active'"
+                                        th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
+                                        <a class="page-link"
+                                           th:href="@{'/admin/orders?' + ${keyword!=null && keyword!=''? 'keyword=' + keyword + '&' : ''} + 'page=' + ${page} + '&size=' + ${pageSize}}"
+                                           th:title="'Trang ' + ${page}" rel="tooltip">
+                                            [[${page}]]</a>
+                                    </li>
+                                    <li class="page-item disabled" th:if="${currentPage + 2 < totalPages}">
+                                        <a class="page-link" href="#">...</a>
+                                    </li>
+                                    <li class="page-item font-weight-bold" th:classappend="${currentPage == totalPages} ? 'disabled'">
+                                        <a class="page-link"
+                                           th:href="@{'/admin/orders?' + ${keyword!=null && keyword!=''? 'keyword=' + keyword + '&' : ''} + 'page=' + ${currentPage + 1} + '&size=' + ${pageSize}}"
+                                           th:title="'Trang sau'" rel="tooltip">
+                                            [[${'Sau'}]]</a>
+                                    </li>
+                                    <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+                                        <a class="page-link"
+                                           th:href="@{'/admin/orders?' + ${keyword!=null && keyword!=''? 'keyword=' + keyword + '&' : ''} + 'page=' + ${totalPages} + '&size=' + ${pageSize}}"
+                                           th:title="'Trang cuối'" rel="tooltip">
+                                            [[${'Cuối'}]]</a>
+                                    </li>
+                                </ul>
+                            </nav>
                         </div>
-                        <div th:unless="${orders.size() > 0}">
-                            <span>No tutorials found!</span>
-                        </div>
-                        <nav aria-label="Pagination" th:if="${totalPages > 0}">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
-                                    <a th:replace="admin/fragments/paging :: paging(1, 'Đầu', 'First Page')"></a>
-                                </li>
-                                <li class="page-item font-weight-bold"
-                                    th:classappend="${currentPage == 1} ? 'disabled'">
-                                    <a
-                                            th:replace="admin/fragments/paging :: paging(${currentPage - 1}, 'Trước', 'Previous Page')"></a>
-                                </li>
-                                <li class="page-item disabled" th:if="${currentPage - 2 > 1}">
-                                    <a class="page-link" href="#">...</a>
-                                </li>
-                                <li class="page-item" th:classappend="${page == currentPage} ? 'active'"
-                                    th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
-                                    <a
-                                            th:replace="admin/fragments/paging :: paging(${page}, ${page}, 'Page ' + ${page})"></a>
-                                </li>
-                                <li class="page-item disabled" th:if="${currentPage + 2 < totalPages}">
-                                    <a class="page-link" href="#">...</a>
-                                </li>
-                                <li class="page-item font-weight-bold"
-                                    th:classappend="${currentPage == totalPages} ? 'disabled'">
-                                    <a
-                                            th:replace="admin/fragments/paging :: paging(${currentPage + 1},'Sau', 'Next Page')"></a>
-                                </li>
-                                <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
-                                    <a
-                                            th:replace="admin/fragments/paging :: paging(${totalPages}, 'Cuối', 'Last Page')"></a>
-                                </li>
-                            </ul>
-                        </nav>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</main>
-<script type="text/javascript">
-    $('#sampleTable').DataTable();
-    //Thời Gian
-    function time() {
-        var today = new Date();
-        var weekday = new Array(7);
-        weekday[0] = "Chủ Nhật";
-        weekday[1] = "Thứ Hai";
-        weekday[2] = "Thứ Ba";
-        weekday[3] = "Thứ Tư";
-        weekday[4] = "Thứ Năm";
-        weekday[5] = "Thứ Sáu";
-        weekday[6] = "Thứ Bảy";
-        var day = weekday[today.getDay()];
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1;
-        var yyyy = today.getFullYear();
-        var h = today.getHours();
-        var m = today.getMinutes();
-        var s = today.getSeconds();
-        m = checkTime(m);
-        s = checkTime(s);
-        nowTime = h + " giờ " + m + " phút " + s + " giây";
-        if (dd < 10) {
-            dd = '0' + dd
-        }
-        if (mm < 10) {
-            mm = '0' + mm
-        }
-        today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-        tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-            '</span>';
-        document.getElementById("clock").innerHTML = tmp;
-        clocktime = setTimeout("time()", "1000", "Javascript");
-
-        function checkTime(i) {
-            if (i < 10) {
-                i = "0" + i;
+    </main>
+    <script type="text/javascript">
+        $('#sampleTable').DataTable();
+        //Thời Gian
+        function time() {
+            var today = new Date();
+            var weekday = new Array(7);
+            weekday[0] = "Chủ Nhật";
+            weekday[1] = "Thứ Hai";
+            weekday[2] = "Thứ Ba";
+            weekday[3] = "Thứ Tư";
+            weekday[4] = "Thứ Năm";
+            weekday[5] = "Thứ Sáu";
+            weekday[6] = "Thứ Bảy";
+            var day = weekday[today.getDay()];
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            nowTime = h + " giờ " + m + " phút " + s + " giây";
+            if (dd < 10) {
+                dd = '0' + dd
             }
-            return i;
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+            today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+            tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                '</span>';
+            document.getElementById("clock").innerHTML = tmp;
+            clocktime = setTimeout("time()", "1000", "Javascript");
+
+            function checkTime(i) {
+                if (i < 10) {
+                    i = "0" + i;
+                }
+                return i;
+            }
         }
-    }
 
-</script>
-<script>
-    var priceElements = document.getElementsByClassName('productPrice');
+    </script>
+    <script>
+        var priceElements = document.getElementsByClassName('productPrice');
 
-    Array.from(priceElements).forEach(function(element) {
-        var price = parseFloat(element.textContent);
-        var formattedPrice = price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-        element.textContent = formattedPrice;
-    });
+        Array.from(priceElements).forEach(function (element) {
+            var price = parseFloat(element.textContent);
+            var formattedPrice = price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+            element.textContent = formattedPrice;
+        });
 
-    var orderDateElements = document.getElementsByClassName("orderDate");
+        var orderDateElements = document.getElementsByClassName("orderDate");
 
-    for (var i = 0; i < orderDateElements.length; i++) {
-        var orderDateElement = orderDateElements[i];
-        var orderDateValue = orderDateElement.innerText;
-        var date = new Date(orderDateValue);
+        for (var i = 0; i < orderDateElements.length; i++) {
+            var orderDateElement = orderDateElements[i];
+            var orderDateValue = orderDateElement.innerText;
+            var date = new Date(orderDateValue);
 
-        var day = date.getDate();
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear();
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
 
-        var formattedDate = day + '/' + month + '/' + year;
+            var formattedDate = day + '/' + month + '/' + year;
 
-        orderDateElement.innerText = formattedDate;
-    }
-</script>
+            orderDateElement.innerText = formattedDate;
+        }
+
+        function confirmEdit(id) {
+            window.location.href = '/admin/orders/edit/' + id;
+        }
+    </script>
 
 
 </body>

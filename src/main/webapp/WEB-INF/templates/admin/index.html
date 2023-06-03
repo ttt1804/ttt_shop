@@ -50,20 +50,20 @@
     <hr>
     <ul class="app-menu">
       <li><a class="app-menu__item active" href="/admin/index"><i class='app-menu__icon bx bx-tachometer'></i><span
-              class="app-menu__label">Bảng điều khiển</span></a></li>
+            class="app-menu__label">Bảng điều khiển</span></a></li>
       <li><a class="app-menu__item" href="/admin/users"><i class='app-menu__icon bx bx-user-voice'></i><span
-              class="app-menu__label">Quản lý khách hàng</span></a></li>
+            class="app-menu__label">Quản lý khách hàng</span></a></li>
       <li><a class="app-menu__item" href="/admin/categories"><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span
-              class="app-menu__label">Quản lý thể loại</span></a>
+            class="app-menu__label">Quản lý thể loại</span></a>
       </li>
       <li><a class="app-menu__item" href="/admin/producers"><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span
-              class="app-menu__label">Quản lý nhà cung cấp</span></a>
+            class="app-menu__label">Quản lý nhà cung cấp</span></a>
       </li>
       <li><a class="app-menu__item" href="/admin/products"><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span
             class="app-menu__label">Quản lý sản phẩm</span></a>
       </li>
       <li><a class="app-menu__item" href="/admin/orders"><i class='app-menu__icon bx bx-task'></i><span
-              class="app-menu__label">Quản lý đơn hàng</span></a></li>
+            class="app-menu__label">Quản lý đơn hàng</span></a></li>
     </ul>
   </aside>
   <main class="app-content">
@@ -136,7 +136,21 @@
                     </tr>
                   </thead>
                   <tbody>
-
+                  <tr role="row" class="odd" th:each="order : ${orders}">
+                    <td class="align-middle" th:text="${order.id}"></td>
+                    <td class="align-middle"
+                        th:text="${order.user.customerDetail.fullName}"></td>
+                    <td class="productPrice align-middle" th:text="${order.totalPrice}">
+                    </td>
+                    <td class="align-middle">
+                        <span th:text="${order.status}"
+                              th:class="${order.status == 'Shipping' ? 'badge bg-warning' :
+                                          order.status == 'Success' ? 'badge bg-success' :
+                                         order.status == 'Cancel' ? 'badge bg-danger' :
+                                         order.status == 'Confirm' ? 'badge bg-info' : ''}">
+                        </span>
+                    </td>
+                  </tr>
                   </tbody>
                 </table>
               </div>
@@ -219,6 +233,15 @@
         return i;
       }
     }
+
+    var priceElements = document.getElementsByClassName('productPrice');
+
+    Array.from(priceElements).forEach(function (element) {
+      var price = parseFloat(element.textContent);
+      var formattedPrice = price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+      element.textContent = formattedPrice;
+    });
+
   </script>
 </body>
 

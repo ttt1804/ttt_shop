@@ -3,6 +3,7 @@ package com.ttt.ttt_shop.controller.site;
 import com.ttt.ttt_shop.model.dto.ProductDTO;
 import com.ttt.ttt_shop.model.dto.UserDTO;
 import com.ttt.ttt_shop.model.entity.Product;
+import com.ttt.ttt_shop.service.CartService;
 import com.ttt.ttt_shop.service.ProductService;
 import com.ttt.ttt_shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,9 +94,31 @@ public class WebController {
         model.addAttribute("products", products);
         return "site/detail";
     }
+    @GetMapping("/search")
+    public String searchProduct(Model model, @RequestParam(required = false) String keyword,
+                                @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
+        List<Product> products = new ArrayList<>();
+        Pageable paging = PageRequest.of(page - 1, size);
+        Page<Product> pageProducts;
+
+        if(keyword == null){
+            pageProducts = productService.getAll(paging);
+        }else{
+            pageProducts = productService.getAllByName(keyword, paging);
+            model.addAttribute("keyword", keyword);
+        }
+
+        products = pageProducts.getContent();
+        model.addAttribute("products", products);
+        model.addAttribute("currentPage", pageProducts.getNumber() + 1);
+        model.addAttribute("totalItems", pageProducts.getTotalElements());
+        model.addAttribute("totalPages", pageProducts.getTotalPages());
+        model.addAttribute("pageSize", size);
+        return "site/shop";
+    }
     @GetMapping("/products/sort")
     public String getProductsSortedByPrice(Model model,
-                                           @RequestParam(required = false) String keyword,
+                                           @PathVariable(required = false) String keyword,
                                            @RequestParam(defaultValue = "1") int page,
                                            @RequestParam(defaultValue = "9") int size,
                                            @RequestParam String sortType) {

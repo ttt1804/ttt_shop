@@ -14,6 +14,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.stereotype.Component;
 
 
 @Configuration
@@ -68,6 +69,4 @@ public class SpringSecurityConfig{
                 .logoutSuccessUrl("/login");
         return http.build();
     }
-
-
 }

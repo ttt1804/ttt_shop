@@ -2,6 +2,7 @@ package com.ttt.ttt_shop.model.entity;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -38,11 +39,14 @@ public class User {
     @JoinColumn(name = "customer_details_id")
     private CustomerDetail customerDetail;
 
+    @OneToMany(mappedBy = "user")
+    private List<WishList> wishLists;
+
 
     public User() {
     }
 
-    public User(Long id, String username, String password, String email, boolean status, String verificationCode, Set<Authority> authorities, CustomerDetail customerDetail) {
+    public User(Long id, String username, String password, String email, boolean status, String verificationCode, Set<Authority> authorities, CustomerDetail customerDetail, List<WishList> wishLists) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -51,6 +55,7 @@ public class User {
         this.verificationCode = verificationCode;
         this.authorities = authorities;
         this.customerDetail = customerDetail;
+        this.wishLists = wishLists;
     }
 
     public Long getId() {
@@ -115,5 +120,13 @@ public class User {
 
     public void setCustomerDetail(CustomerDetail customerDetail) {
         this.customerDetail = customerDetail;
+    }
+
+    public List<WishList> getWishLists() {
+        return wishLists;
+    }
+
+    public void setWishLists(List<WishList> wishLists) {
+        this.wishLists = wishLists;
     }
 }

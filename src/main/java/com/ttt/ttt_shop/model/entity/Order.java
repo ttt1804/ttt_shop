@@ -20,8 +20,9 @@ public class Order {
     @Column(nullable = false)
     private float totalPrice;
 
+
     @Column(nullable = false)
-    private boolean status;
+    private String status;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -33,7 +34,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long id, LocalDateTime orderDate, float totalPrice, boolean status, User user, List<OrderItem> orderItems) {
+    public Order(Long id, LocalDateTime orderDate, float totalPrice, String status, User user, List<OrderItem> orderItems) {
         this.id = id;
         this.orderDate = orderDate;
         this.totalPrice = totalPrice;
@@ -82,11 +83,11 @@ public class Order {
         this.orderItems = orderItems;
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }

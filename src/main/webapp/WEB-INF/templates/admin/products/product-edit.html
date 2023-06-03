@@ -1,140 +1,144 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
+  xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <!--head-->
+
 <head th:replace="~{admin/fragments/head :: head}">
 </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
 
-<!-- Navbar-->
-<header th:replace="~{admin/fragments/navbar :: navbar}">
+  <!-- Navbar-->
+  <header th:replace="~{admin/fragments/navbar :: navbar}">
 
-</header>
-<!-- Sidebar menu-->
-<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-<aside th:replace="~{admin/fragments/sidebar :: sidebar}">
-</aside>
+  </header>
+  <!-- Sidebar menu-->
+  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+  <aside th:replace="~{admin/fragments/sidebar :: sidebar}">
+  </aside>
 
-<main class="app-content">
-  <div class="app-title">
-    <ul class="app-breadcrumb breadcrumb">
-      <li class="breadcrumb-item">Danh sách sản phẩm</li>
-      <li class="breadcrumb-item"><a href="#">Sửa sản phẩm</a></li>
-    </ul>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="tile">
-        <h3 class="tile-title">Sửa sản phẩm</h3>
-        <div class="tile-body">
-          <div class="row element-button">
-            <div class="col-sm-2">
-              <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#exampleModalCenter"><i
-                      class="fas fa-folder-plus"></i> Thêm nhà cung cấp</a>
+  <main class="app-content">
+    <div class="app-title">
+      <ul class="app-breadcrumb breadcrumb">
+        <li class="breadcrumb-item">Danh sách sản phẩm</li>
+        <li class="breadcrumb-item"><a href="#">Sửa sản phẩm</a></li>
+      </ul>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tile">
+          <h3 class="tile-title">Sửa sản phẩm</h3>
+          <div class="tile-body">
+            <div class="row element-button">
+              <div class="col-sm-2">
+                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#exampleModalCenter"><i
+                    class="fas fa-folder-plus"></i> Thêm nhà cung cấp</a>
+              </div>
+              <div class="col-sm-2">
+                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i
+                    class="fas fa-folder-plus"></i> Thêm danh mục</a>
+              </div>
+              <div class="col-sm-2">
+                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#addtinhtrang"><i
+                    class="fas fa-folder-plus"></i> Thêm tình trạng</a>
+              </div>
             </div>
-            <div class="col-sm-2">
-              <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i
-                      class="fas fa-folder-plus"></i> Thêm danh mục</a>
-            </div>
-            <div class="col-sm-2">
-              <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#addtinhtrang"><i
-                      class="fas fa-folder-plus"></i> Thêm tình trạng</a>
-            </div>
+            <form id="myForm" class="row" th:action="@{/admin/products/edit}" method="post"
+              enctype="multipart/form-data" th:object="${product}">
+              <input type="hidden" th:field="*{id}" />
+              <div class="form-group col-md-3">
+                <label class="control-label">Tên sản phẩm</label>
+                <input class="form-control" th:field="*{name}" name="name" type="text">
+                <div th:if="${nameError}">
+                  <div class="errors mt-2">
+                    <span class="text-danger" th:text="${nameError}"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group  col-md-3">
+                <label class="control-label">Giá</label>
+                <input class="form-control" th:field="*{price}" name="price" type="number">
+                <div th:if="${priceError}">
+                  <div class="errors mt-2">
+                    <span class="text-danger" th:text="${priceError}"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group  col-md-3">
+                <label class="control-label">Số lượng</label>
+                <input class="form-control" th:field="*{quantity}" name="quantity" type="number">
+                <div th:if="${quantityError}">
+                  <div class="errors mt-2">
+                    <span class="text-danger" th:text="${quantityError}"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group  col-md-3">
+                <label class="control-label">Giảm giá</label>
+                <input class="form-control" th:field="*{discount}" name="discount" type="number">
+                <div th:if="${discountError}">
+                  <div class="errors mt-2">
+                    <span class="text-danger" th:text="${discountError}"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="category" class="control-label">Danh mục</label>
+                <select class="form-control" id="category" name="categoryId" required>
+                  <option th:field="*{categoryId}" th:each="category : ${categories}" th:value="${category.id}"
+                    th:text="${category.name}">
+                  </option>
+                </select>
+                <div th:if="${categoryIdError}">
+                  <div class="errors mt-2">
+                    <span class="text-danger" th:text="${categoryIdError}"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-md-3 ">
+                <label for="producer" class="control-label">Nhà cung cấp</label>
+                <select class="form-control" id="producer" name="producerId" required>
+                  <option th:field="*{producerId}" th:each="producer : ${producers}" th:value="${producer.id}"
+                    th:text="${producer.name}">
+                  </option>
+                </select>
+
+                <div th:if="${producerIdError}">
+                  <div class="errors mt-2">
+                    <span class="text-danger" th:text="${producerIdError}"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-md-12">
+                <label class="control-label">Ảnh sản phẩm</label>
+                <div id="myfileupload">
+                  <input type="file" id="uploadfile" name="image" />
+                </div>
+                <div id="boxchoice">
+                  <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
+                  <p style="clear:both"></p>
+                </div>
+              </div>
+              <div class="form-group col-md-12">
+                <label class="control-label">Mô tả sản phẩm</label>
+                <textarea class="form-control" th:field="*{description}" name="description" id="mota"></textarea>
+              </div>
+            </form>
           </div>
-          <form id="myForm" class="row" th:action="@{/admin/products/edit}" method="post" enctype="multipart/form-data" th:object="${product}">
-            <input type="hidden" th:field="*{id}"/>
-            <div class="form-group col-md-3">
-              <label class="control-label">Tên sản phẩm</label>
-              <input class="form-control" th:field="*{name}" name="name" type="text">
-              <div th:if="${nameError}">
-                <div class="errors mt-2">
-                  <span class="text-danger" th:text="${nameError}"></span>
-                </div>
-              </div>
-            </div>
-            <div class="form-group  col-md-3">
-              <label class="control-label">Giá</label>
-              <input class="form-control" th:field="*{price}" name="price" type="number">
-              <div th:if="${priceError}">
-                <div class="errors mt-2">
-                  <span class="text-danger" th:text="${priceError}"></span>
-                </div>
-              </div>
-            </div>
-            <div class="form-group  col-md-3">
-              <label class="control-label">Số lượng</label>
-              <input class="form-control" th:field="*{quantity}" name="quantity" type="number">
-              <div th:if="${quantityError}">
-                <div class="errors mt-2">
-                  <span class="text-danger" th:text="${quantityError}"></span>
-                </div>
-              </div>
-            </div>
-            <div class="form-group  col-md-3">
-              <label class="control-label">Giảm giá</label>
-              <input class="form-control" th:field="*{discount}" name="discount" type="number">
-              <div th:if="${discountError}">
-                <div class="errors mt-2">
-                  <span class="text-danger" th:text="${discountError}"></span>
-                </div>
-              </div>
-            </div>
-            <div class="form-group col-md-3">
-              <label for="category" class="control-label">Danh mục</label>
-              <select class="form-control" id="category" name="categoryId" required>
-                <option th:field="*{categoryId}" th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">
-                </option>
-              </select>
-              <div th:if="${categoryIdError}">
-                <div class="errors mt-2">
-                  <span class="text-danger" th:text="${categoryIdError}"></span>
-                </div>
-              </div>
-            </div>
-            <div class="form-group col-md-3 ">
-              <label for="producer" class="control-label">Nhà cung cấp</label>
-              <select class="form-control" id="producer" name="producerId" required>
-                <option th:field="*{producerId}" th:each="producer : ${producers}" th:value="${producer.id}" th:text="${producer.name}">
-                </option>
-              </select>
-
-              <div th:if="${producerIdError}">
-                <div class="errors mt-2">
-                  <span class="text-danger" th:text="${producerIdError}"></span>
-                </div>
-              </div>
-            </div>
-            <div class="form-group col-md-12">
-              <label class="control-label">Ảnh sản phẩm</label>
-              <div id="myfileupload">
-                <input type="file" id="uploadfile" name="image" />
-              </div>
-              <div id="boxchoice">
-                <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-                <p style="clear:both"></p>
-              </div>
-            </div>
-            <div class="form-group col-md-12">
-              <label class="control-label">Mô tả sản phẩm</label>
-              <textarea class="form-control" th:field="*{description}" name="description" id="mota"></textarea>
-            </div>
-          </form>
+          <button id="submitBtn" class="btn btn-save" type="button">Lưu lại</button>
+          <a class="btn btn-cancel" href="/admin/products">Hủy bỏ</a>
         </div>
-        <button id="submitBtn" class="btn btn-save" type="button">Lưu lại</button>
-        <a class="btn btn-cancel" href="/admin/products">Hủy bỏ</a>
       </div>
     </div>
-  </div>
-</main>
-<script>
-  const form = document.getElementById("myForm");
-  const submitBtn = document.getElementById("submitBtn");
+  </main>
+  <script>
+    const form = document.getElementById("myForm");
+    const submitBtn = document.getElementById("submitBtn");
 
-  submitBtn.addEventListener("click", function() {
-    form.submit();
-  });
-</script>
+    submitBtn.addEventListener("click", function () {
+      form.submit();
+    });
+  </script>
 </body>
 
 </html>

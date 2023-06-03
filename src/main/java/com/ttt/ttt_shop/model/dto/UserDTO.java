@@ -71,7 +71,7 @@ public class UserDTO {
         this.email = email;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 

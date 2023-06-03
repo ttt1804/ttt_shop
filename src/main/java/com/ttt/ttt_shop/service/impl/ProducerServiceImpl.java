@@ -5,6 +5,8 @@ import com.ttt.ttt_shop.model.entity.Producer;
 import com.ttt.ttt_shop.repository.ProducerRepository;
 import com.ttt.ttt_shop.service.ProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +19,11 @@ public class ProducerServiceImpl implements ProducerService {
     @Override
     public List<Producer> getAll() {
         return producerRepository.findAll();
+    }
+
+    @Override
+    public Page<Producer> getAll(Pageable pageable) {
+        return producerRepository.findAll(pageable);
     }
 
     @Override

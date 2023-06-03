@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="~{site/fragments/head :: head}">
+
+</head>
+
+<body>
+<!-- Topbar Start -->
+<div th:replace="~{site/fragments/topbar :: topbar}">
+</div>
+<!-- Topbar End -->
+
+<!-- Navbar Start -->
+<div th:replace="~{site/fragments/navbar :: navbar}">
+</div>
+<!-- Navbar End -->y
+
+
+<!-- Breadcrumb Start -->
+<!-- Wish list Start -->
+<div class="container-fluid">
+  <div class="row px-xl-5">
+    <div class="col-12">
+      <nav class="breadcrumb bg-light mb-30">
+        <a class="breadcrumb-item text-dark" href="#">Trang chủ</a>
+        <a class="breadcrumb-item text-dark" href="#">Mua sắm</a>
+        <span class="breadcrumb-item active">Yêu thích</span>
+      </nav>
+    </div>
+  </div>
+</div>
+<!-- Breadcrumb End -->
+<div class="container-fluid">
+  <div class="row px-xl-5">
+    <div class="col-lg-12 table-responsive mb-5">
+      <table class="table table-light table-borderless table-hover text-center mb-0">
+        <thead class="thead-dark">
+        <tr>
+          <th>Sản phẩm</th>
+          <th>Tên</th>
+          <th>Giá tiền</th>
+          <th>Chức năng</th>
+        </tr>
+        </thead>
+        <tbody class="align-middle">
+        <tr th:each="wishList : ${wishLists}" class="product-row" th:attr="data-url=@{/site/products/detail/{productId}(productId=${wishList.product.id})}">
+          <td class="align-middle"><img th:src="@{'/img/products/' + ${wishList.product.image}}" alt=""
+                                        style="width: 50px;"></td>
+          <td class="align-middle" th:text="${wishList.product.name}"></td>
+          <td class="align-middle productPrice" th:text="(${wishList.product.price} - (${wishList.product.price} * ${wishList.product.discount} / 100))"></td>
+          <td class="align-middle">
+            <button class="btn btn-sm btn-info" th:attr="onclick=|infoWishListItem('${wishList.product.id}')|">
+              <i class="fa fa-info"></i>
+            </button>
+            <button class="btn btn-sm btn-success" th:attr="onclick=|addToCart('${wishList.product.id}')|">
+              <i class="fa fa-shopping-cart"></i>
+            </button>
+            <button class="btn btn-sm btn-danger" th:attr="onclick=|deleteWishListItem('${wishList.id}')|">
+              <i class="fa fa-times"></i>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="text-center" th:unless="${wishLists.size() > 0}">
+        <h4>Bạn chưa thích sản phẩm nào!</h4>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Wish list End -->
+
+
+<!-- Footer Start -->
+<div th:replace="~{site/fragments/footer :: footer}">
+</div>
+<!-- Footer End -->
+
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/lib/easing/easing.min.js}"></script>
+<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+
+<!-- Contact Javascript File -->
+<script th:src="@{/mail/jqBootstrapValidation.min.js}"></script>
+<script th:src="@{/mail/contact.js}"></script>
+
+<!-- Template Javascript -->
+<script th:src="@{/js/main.js}"></script>
+<script>
+  var priceElements = document.getElementsByClassName('productPrice');
+
+  Array.from(priceElements).forEach(function (element) {
+    var price = parseFloat(element.textContent);
+    var formattedPrice = price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+    element.textContent = formattedPrice;
+  });
+
+  function infoWishListItem(productId) {
+    window.location.href = '/site/products/detail/' + productId;
+  }
+  function addToCart(productId) {
+    window.location.href = '/customer/cart/' + productId;
+  }
+  function deleteWishListItem(wishListId) {
+    window.location.href = '/customer/wish-list/delete/' + wishListId;
+  }
+
+</script>
+</body>
+
+</html>

@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:replace="~{site/fragments/head :: head}">
 
 </head>
 
 <body>
-<!-- Topbar Start -->
-<div th:replace="~{site/fragments/topbar :: topbar}">
-</div>
-<!-- Topbar End -->
+    <!-- Topbar Start -->
+    <div th:replace="~{site/fragments/topbar :: topbar}">
+    </div>
+    <!-- Topbar End -->
 
-<!-- Navbar Start -->
-<div th:replace="~{site/fragments/navbar :: navbar}">
-</div>
-<!-- Navbar End -->y
+    <!-- Navbar Start -->
+    <div th:replace="~{site/fragments/navbar :: navbar}">
+    </div>
+    <!-- Navbar End -->
 
     <!-- Insert content here-->
     <div class="row">
@@ -34,29 +34,17 @@
         <!-- Checkout Start -->
         <div class="container-fluid">
             <div class="row px-xl-5">
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <h5 class="section-title position-relative text-uppercase mb-3"><span
                             class="bg-secondary pr-3">Thông tin khách hàng</span></h5>
-                    <div class="bg-light p-30 mb-3">
-                        <form action="/customer/update-info" method="post"
-                            enctype="multipart/form-data">
+                    <div class="bg-light p-30 mb-5">
+                        <form action="/customer/update-info" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <label>Tài khoản</label>
-                                    <input class="form-control rounded border-success" th:value="${user.username}" type="text" readonly="true">
+                                    <input class="form-control rounded border-success" th:value="${user.username}"
+                                        type="text" readonly="true">
                                     <input type="number" hidden="" value="1" id="cusId" name="username">
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <div class="row d-flex justify-content-center">
-                                        <img src=""
-                                            class="border border-success" style="border-radius: 50%" width="100px"
-                                            height="100px" id="avatar">
-                                        <label for="avatarImg"><i class="fas fa-pen-nib text-success"></i></label>
-                                    </div>
-                                    <input type="text" hidden="" value="Screenshot 2022-12-18 at 15.03.18.png"
-                                        id="avatarUrl" name="avatarUrl">
-                                    <input type="file" hidden="" name="avatarImg" id="avatarImg"
-                                        accept=".png, .jpg, .jpeg" onchange="chooseFile(this)">
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label>Họ và tên</label>
@@ -71,8 +59,8 @@
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label>Điện thoại</label>
-                                    <input class="form-control rounded border-success" type="text" th:value="${customerDetail.phoneNumber}"
-                                        id="phone" name="phoneNumber">
+                                    <input class="form-control rounded border-success" type="text"
+                                        th:value="${customerDetail.phoneNumber}" id="phone" name="phoneNumber">
                                     <div th:if="${phoneNumberError}">
                                         <div class="errors">
                                             <span class="text-danger" th:text="${phoneNumberError}"></span>
@@ -83,7 +71,9 @@
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label>Ngày sinh</label>
-                                    <input class="form-control rounded border-success" type="date" th:value="${#dates.format(customerDetail.birthday, 'yyyy-MM-dd')}"  name="birthday">
+                                    <input class="form-control rounded border-success" type="date"
+                                        th:value="${#dates.format(customerDetail.birthday, 'yyyy-MM-dd')}"
+                                        name="birthday">
                                     <div th:if="${birthdayError}">
                                         <div class="errors">
                                             <span class="text-danger" th:text="${birthdayError}"></span>
@@ -93,7 +83,7 @@
                                 <div class="col-md-6 form-group">
                                     <label>Địa chỉ</label>
                                     <input class="form-control rounded border-success customerBirthday" type="text"
-                                           th:value="${customerDetail.address}" name="address">
+                                        th:value="${customerDetail.address}" name="address">
                                     <div th:if="${addressError}">
                                         <div class="errors">
                                             <span class="text-danger" th:text="${addressError}"></span>
@@ -104,17 +94,17 @@
                                 <div class="col-md-6 form-group">
                                     <label>Email</label>
                                     <input class="form-control rounded border-success" type="email" readonly=""
-                                           th:value="${user.email}">
+                                        th:value="${user.email}">
                                 </div>
-                                <div class="col-md-6 d-flex justify-content-center">
+                                <div class="col-md-12 d-flex justify-content-center">
                                     <div class="row">
                                         <div class="col-md-6 form-group d-flex justify-content-center">
-                                            <button type="submit"
-                                                class="btn btn-sm w-75 mt-3 rounded btn-success">Cập nhật thông tin</button>
+                                            <button type="submit" class="btn btn-sm w-75 mt-3 rounded btn-success">Cập
+                                                nhật thông tin</button>
                                         </div>
                                         <div class="col-md-6 form-group d-flex justify-content-center">
-                                            <a href=""
-                                                class="btn btn-sm w-75 mt-3 rounded btn-danger">Thay đổi mật khẩu</a>
+                                            <a href="" class="btn btn-sm w-75 mt-3 rounded btn-danger">Thay đổi mật
+                                                khẩu</a>
                                         </div>
                                     </div>
                                 </div>
@@ -135,7 +125,7 @@
 
 
     <!-- Back to Top -->
-    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    <a href="#" class="btn btn-info back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
     <!-- JavaScript Libraries -->

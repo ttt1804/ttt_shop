@@ -5,6 +5,8 @@ import com.ttt.ttt_shop.model.entity.Category;
 import com.ttt.ttt_shop.repository.CategoryRepository;
 import com.ttt.ttt_shop.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,6 +27,11 @@ public class CategoryServiceImpl implements CategoryService {
             categoryDTOs.add(categoryDTO);
         }
         return categoryDTOs;
+    }
+
+    @Override
+    public Page<Category> getAll(Pageable pageable) {
+        return categoryRepository.findAll(pageable);
     }
 
     @Override

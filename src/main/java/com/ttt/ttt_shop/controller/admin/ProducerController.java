@@ -5,6 +5,9 @@ import com.ttt.ttt_shop.model.dto.ProducerDTO;
 import com.ttt.ttt_shop.model.entity.Producer;
 import com.ttt.ttt_shop.service.ProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +15,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -21,9 +25,17 @@ public class ProducerController {
     private ProducerService producerService;
 
     @GetMapping()
-    public String getAll(Model model){
-        List<Producer> producers = producerService.getAll();
+    public String getAll(Model model,
+                         @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size){
+        List<Producer> producers =  new ArrayList<>();
+        Pageable paging = PageRequest.of(page -1, size);
+        Page<Producer> producerPages = producerService.getAll(paging);
+        producers = producerPages.getContent();
         model.addAttribute("producers", producers);
+        model.addAttribute("currentPage", producerPages.getNumber() + 1);
+        model.addAttribute("totalItems", producerPages.getTotalElements());
+        model.addAttribute("totalPages", producerPages.getTotalPages());
+        model.addAttribute("pageSize", size);
         return "admin/producers/producer-list";
     }
     @GetMapping("add")

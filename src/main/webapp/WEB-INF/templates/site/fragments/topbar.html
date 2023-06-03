@@ -1,28 +1,28 @@
 <div th:fragment="topbar" class="container-fluid">
   <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
     <div class="col-lg-4">
-      <a href="" class="text-decoration-none">
-        <span class="h1 text-uppercase text-primary bg-dark px-2">TTT</span>
-        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
+      <a href="/site" class="text-decoration-none">
+        <span class="h1 text-uppercase text-white bg-dark px-2">TTT</span>
+        <span class="h1 text-uppercase bg-secondary text-dark px-2 ml-n1">Shop</span>
       </a>
     </div>
     <div class="col-lg-4 col-6 text-left">
-      <form action="">
+      <form action="/site/search" >
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm">
-          <div class="input-group-append">
-              <span class="input-group-text bg-transparent text-primary">
-                <i class="fa fa-search"></i>
-              </span>
-          </div>
+          <input type="search" name="keyword" th:value="${keyword}" class="form-control" placeholder="Tìm kiếm sản phẩm">
+            <button type="submit" class="btn btn-secondary">
+              <i class="fa fa-search" style="margin-bottom: 0;"
+              ></i>
+            </button>
         </div>
       </form>
     </div>
     <div class="col-lg-4 col-6 text-right">
       <p class="m-0">Chăm sóc khách hàng</p>
       <h5 class="m-0">
-        <i class="fa fa-phone-alt text-primary mr-3">
-        </i>0358.950.060</h5>
+        <i class="fa fa-phone-alt text-dark mr-3">
+        </i>0358.950.060
+      </h5>
     </div>
   </div>
 </div>

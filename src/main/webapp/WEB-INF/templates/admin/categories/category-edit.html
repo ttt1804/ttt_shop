@@ -1,60 +1,62 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <!--head-->
+
 <head th:replace="~{admin/fragments/head :: head}">
 </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
 
-<!-- Navbar-->
-<header th:replace="~{admin/fragments/navbar :: navbar}">
+    <!-- Navbar-->
+    <header th:replace="~{admin/fragments/navbar :: navbar}">
 
-</header>
-<!-- Sidebar menu-->
-<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-<aside th:replace="~{admin/fragments/sidebar :: sidebar}">
-</aside>
+    </header>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside th:replace="~{admin/fragments/sidebar :: sidebar}">
+    </aside>
 
-<main class="app-content">
-    <div class="app-title">
-        <ul class="app-breadcrumb breadcrumb">
-            <li class="breadcrumb-item">Danh sách thể loại</li>
-            <li class="breadcrumb-item"><a href="#">Sửa thể loại</a></li>
-        </ul>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="tile">
-                <h3 class="tile-title">Sửa thể loại</h3>
-                <div class="tile-body">
-                    <form id="myForm" class="row" th:action="@{/admin/categories/edit}" method="post" enctype="multipart/form-data" th:object="${category}">
-                        <input type="hidden" th:field="*{id}"/>
-                        <div class="form-group col-md-3">
-                            <label class="control-label">Tên thể loại</label>
-                            <input class="form-control" th:field="*{name}" name="name" type="text">
-                            <div th:if="${nameError}">
-                                <div class="errors mt-2">
-                                    <span class="text-danger" th:text="${nameError}"></span>
+    <main class="app-content">
+        <div class="app-title">
+            <ul class="app-breadcrumb breadcrumb">
+                <li class="breadcrumb-item">Danh sách thể loại</li>
+                <li class="breadcrumb-item"><a href="#">Sửa thể loại</a></li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <h3 class="tile-title">Sửa thể loại</h3>
+                    <div class="tile-body">
+                        <form id="myForm" class="row" th:action="@{/admin/categories/edit}" method="post"
+                            enctype="multipart/form-data" th:object="${category}">
+                            <input type="hidden" th:field="*{id}" />
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Tên thể loại</label>
+                                <input class="form-control" th:field="*{name}" name="name" type="text">
+                                <div th:if="${nameError}">
+                                    <div class="errors mt-2">
+                                        <span class="text-danger" th:text="${nameError}"></span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
+                    <button id="submitBtn" class="btn btn-save" type="button">Lưu lại</button>
+                    <a class="btn btn-cancel" href="/admin/categories">Hủy bỏ</a>
                 </div>
-                <button id="submitBtn" class="btn btn-save" type="button">Lưu lại</button>
-                <a class="btn btn-cancel" href="/admin/categories">Hủy bỏ</a>
             </div>
         </div>
-    </div>
-</main>
-<script>
-    const form = document.getElementById("myForm");
-    const submitBtn = document.getElementById("submitBtn");
+    </main>
+    <script>
+        const form = document.getElementById("myForm");
+        const submitBtn = document.getElementById("submitBtn");
 
-    submitBtn.addEventListener("click", function() {
-        form.submit();
-    });
-</script>
+        submitBtn.addEventListener("click", function () {
+            form.submit();
+        });
+    </script>
 </body>
 
 </html>

@@ -74,4 +74,9 @@ public class CartServiceImpl implements CartService {
 
     }
 
+    @Override
+    public int getCartCountByUserId(Long userId) {
+        return  cartRepository.countByUserId(userId);
+    }
+
 }

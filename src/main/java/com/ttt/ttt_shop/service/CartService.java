@@ -10,4 +10,5 @@ public interface CartService {
     List<Cart> getByUserId(Long userId);
     void deleteById(Long userId);
     void changeQuantity(Long productId, String changeType);
+    int getCartCountByUserId(Long userId);
 }

@@ -1,136 +1,182 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:replace="~{site/fragments/head :: head}">
 
 </head>
 
 <body>
-<!-- Topbar Start -->
-<div th:replace="~{site/fragments/topbar :: topbar}">
-</div>
-<!-- Topbar End -->
-
-<!-- Navbar Start -->
-<div th:replace="~{site/fragments/navbar :: navbar}">
-</div>
-<!-- Navbar End -->
-
-
-<!-- Breadcrumb Start -->
-<div class="container-fluid">
-    <div class="row px-xl-5">
-        <div class="col-12">
-            <nav class="breadcrumb bg-light mb-30">
-                <a class="breadcrumb-item text-dark" href="#">Trang chủ</a>
-                <a class="breadcrumb-item text-dark" href="#">Mua sắm</a>
-                <span class="breadcrumb-item active">Giỏ hàng</span>
-            </nav>
-        </div>
+    <!-- Topbar Start -->
+    <div th:replace="~{site/fragments/topbar :: topbar}">
     </div>
-</div>
-<!-- Breadcrumb End -->
+    <!-- Topbar End -->
+
+    <!-- Navbar Start -->
+    <div th:replace="~{site/fragments/navbar :: navbar}">
+    </div>
+    <!-- Navbar End -->
 
 
-<!-- Cart Start -->
-<div class="container-fluid">
-    <div class="row px-xl-5">
-        <div class="col-lg-12">
-            <table class="table table-bordered table-hover">
-                <thead class="thead-dark">
-                <tr>
-                    <th>Ngày đặt</th>
-                    <th>Tổng tiền</th>
-                    <th class="product-column">Sản phẩm</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="order : ${orders}">
-                    <td class="align-middle orderDate" th:text="${order.orderDate}"></td>
-                    <td class="align-middle productPrice" th:text="${order.totalPrice}"></td>
-                    <td>
-                        <table class="table table-bordered table-hover">
-                            <thead>
-                            <tr class="table-primary">
-                                <th>Sản phẩm</th>
-                                <th>Tên</th>
-                                <th>Số lượng</th>
-                                <th>Giá</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="orderItem : ${order.orderItems}">
-                                <td><img th:src="@{'/img/products/' + ${orderItem.product.image}}" alt="" style="width: 50px;"></td>
-                                <td th:text="${orderItem.product.name}"></td>
-                                <td th:text="${orderItem.quantity}"></td>
-                                <td class="productPrice" th:text="${orderItem.price}"></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <div class="text-center" th:unless="${orders.size() > 0}">
-                <h4>Không có đơn hàng nào đã mua!</h4>
+    <!-- Breadcrumb Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" href="#">Trang chủ</a>
+                    <a class="breadcrumb-item text-dark" href="#">Mua sắm</a>
+                    <span class="breadcrumb-item active">Giỏ hàng</span>
+                </nav>
             </div>
         </div>
     </div>
-</div>
-<!-- Cart End -->
+    <!-- Breadcrumb End -->
 
 
-<!-- Footer Start -->
-<div th:replace="~{site/fragments/footer :: footer}">
-</div>
-<!-- Footer End -->
+    <!-- Cart Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-lg-12">
+                <table class="table table-bordered table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Ngày đặt</th>
+                            <th>Tổng tiền</th>
+                            <th class="product-column">Sản phẩm</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="order : ${orders}">
+                            <td class="align-middle orderDate" th:text="${order.orderDate}"></td>
+                            <td class="align-middle productPrice" th:text="${order.totalPrice}"></td>
+                            <td>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr class="">
+                                            <th>Sản phẩm</th>
+                                            <th>Tên</th>
+                                            <th>Số lượng</th>
+                                            <th>Giá</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="orderItem : ${order.orderItems}">
+                                            <td><img th:src="@{'/img/products/' + ${orderItem.product.image}}" alt=""
+                                                    style="width: 50px;"></td>
+                                            <td th:text="${orderItem.product.name}"></td>
+                                            <td th:text="${orderItem.quantity}"></td>
+                                            <td class="productPrice" th:text="${orderItem.price}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td class="align-middle" th:text="${order.status}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="col-12">
+                    <div th:unless="${orders.size() > 0}">
+                        <span>Không có đơn hàng nào!</span>
+                    </div>
+                    <nav aria-label="Pagination" th:if="${totalPages > 0}">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+                                <a class="page-link text-dark"
+                                   th:href="@{'/customer/purchased?' + ${keyword!=null && keyword!=''? 'keyword=' + keyword + '&' : ''} + 'page=' + ${1} + '&size=' + ${pageSize}}"
+                                   th:title="${'Trang đầu'}" rel="tooltip">
+                                    [[${'Đầu'}]]</a>
+                            </li>
+                            <li class="page-item font-weight-bold" th:classappend="${currentPage == 1} ? 'disabled'">
+                                <a class="page-link text-dark"
+                                   th:href="@{'/customer/purchased?' + ${keyword!=null && keyword!=''? 'keyword=' + keyword + '&' : ''} + 'page=' + ${currentPage - 1} + '&size=' + ${pageSize}}"
+                                   th:title="${'Trang trước'}" rel="tooltip">
+                                    [[${'Trước'}]]</a>
+                            </li>
+                            <li class="page-item disabled" th:if="${currentPage - 2 > 1}">
+                                <a class="page-link text-dark" href="#">...</a>
+                            </li>
+                            <li class="page-item" th:classappend="${page == currentPage} ? 'active'"
+                                th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
+                                <a class="page-link text-dark"
+                                   th:href="@{'/customer/purchased?' + ${keyword!=null && keyword!=''? 'keyword=' + keyword + '&' : ''} + 'page=' + ${page} + '&size=' + ${pageSize}}"
+                                   th:title="'Trang ' + ${page}" rel="tooltip">
+                                    [[${page}]]</a>
+                            </li>
+                            <li class="page-item disabled" th:if="${currentPage + 2 < totalPages}">
+                                <a class="page-link text-dark" href="#">...</a>
+                            </li>
+                            <li class="page-item font-weight-bold" th:classappend="${currentPage == totalPages} ? 'disabled'">
+                                <a class="page-link text-dark"
+                                   th:href="@{'/customer/purchased?' + ${keyword!=null && keyword!=''? 'keyword=' + keyword + '&' : ''} + 'page=' + ${currentPage + 1} + '&size=' + ${pageSize}}"
+                                   th:title="'Trang sau'" rel="tooltip">
+                                    [[${'Sau'}]]</a>
+                            </li>
+                            <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+                                <a class="page-link text-dark text-dark"
+                                   th:href="@{'/customer/purchased?' + ${keyword!=null && keyword!=''? 'keyword=' + keyword + '&' : ''} + 'page=' + ${totalPages} + '&size=' + ${pageSize}}"
+                                   th:title="'Trang cuối'" rel="tooltip">
+                                    [[${'Cuối'}]]</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Cart End -->
 
 
-<!-- Back to Top -->
-<a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    <!-- Footer Start -->
+    <div th:replace="~{site/fragments/footer :: footer}">
+    </div>
+    <!-- Footer End -->
 
 
-<!-- JavaScript Libraries -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script th:src="@{/lib/easing/easing.min.js}"></script>
-<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
-
-<!-- Contact Javascript File -->
-<script th:src="@{/mail/jqBootstrapValidation.min.js}"></script>
-<script th:src="@{/mail/contact.js}"></script>
-
-<!-- Template Javascript -->
-<script th:src="@{/js/main.js}"></script>
-<script>
-    var priceElements = document.getElementsByClassName('productPrice');
-
-    Array.from(priceElements).forEach(function(element) {
-        var price = parseFloat(element.textContent);
-        var formattedPrice = price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-        element.textContent = formattedPrice;
-    });
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-info back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-    var orderDateElements = document.getElementsByClassName("orderDate");
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/lib/easing/easing.min.js}"></script>
+    <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
 
-    for (var i = 0; i < orderDateElements.length; i++) {
-        var orderDateElement = orderDateElements[i];
-        var orderDateValue = orderDateElement.innerText;
-        var date = new Date(orderDateValue);
+    <!-- Contact Javascript File -->
+    <script th:src="@{/mail/jqBootstrapValidation.min.js}"></script>
+    <script th:src="@{/mail/contact.js}"></script>
 
-        var day = date.getDate();
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear();
+    <!-- Template Javascript -->
+    <script th:src="@{/js/main.js}"></script>
+    <script>
+        var priceElements = document.getElementsByClassName('productPrice');
 
-        var formattedDate = day + '/' + month + '/' + year;
+        Array.from(priceElements).forEach(function (element) {
+            var price = parseFloat(element.textContent);
+            var formattedPrice = price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+            element.textContent = formattedPrice;
+        });
 
-        orderDateElement.innerText = formattedDate;
-    }
+
+        var orderDateElements = document.getElementsByClassName("orderDate");
+
+        for (var i = 0; i < orderDateElements.length; i++) {
+            var orderDateElement = orderDateElements[i];
+            var orderDateValue = orderDateElement.innerText;
+            var date = new Date(orderDateValue);
+
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+
+            var formattedDate = day + '/' + month + '/' + year;
+
+            orderDateElement.innerText = formattedDate;
+        }
 
 
-</script>
+    </script>
 </body>
 
 </html>

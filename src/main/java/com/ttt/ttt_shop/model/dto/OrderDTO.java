@@ -4,6 +4,4 @@ public class OrderDTO {
     private Long id;
     private Long userId;
 
-
-
 }

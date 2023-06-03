@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
+  xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:replace="~{site/fragments/head :: head}">
 
 </head>
 
 <body>
-<!-- Topbar Start -->
-<div th:replace="~{site/fragments/topbar :: topbar}">
-</div>
-<!-- Topbar End -->
+  <!-- Topbar Start -->
+  <div th:replace="~{site/fragments/topbar :: topbar}">
+  </div>
+  <!-- Topbar End -->
 
-<!-- Navbar Start -->
-<div th:replace="~{site/fragments/navbar :: navbar}">
-</div>
-<!-- Navbar End -->
+  <!-- Navbar Start -->
+  <div th:replace="~{site/fragments/navbar :: navbar}">
+  </div>
+  <!-- Navbar End -->
 
 
   <!-- Carousel Start -->
@@ -70,7 +70,7 @@
           <div class="offer-text">
             <h6 class="text-white text-uppercase">Giảm giá 20%</h6>
             <h3 class="text-white mb-3">Giảm giá đặc biệt</h3>
-            <a href="" class="btn btn-primary">Mua ngay</a>
+            <a href="" class="btn btn-info">Mua ngay</a>
           </div>
         </div>
         <div class="product-offer mb-30" style="height: 200px;">
@@ -78,7 +78,7 @@
           <div class="offer-text">
             <h6 class="text-white text-uppercase">Giảm giá 20%</h6>
             <h3 class="text-white mb-3">Giảm giá đặc biệt</h3>
-            <a href="" class="btn btn-primary">Mua ngay</a>
+            <a href="" class="btn btn-info">Mua ngay</a>
           </div>
         </div>
       </div>
@@ -92,25 +92,25 @@
     <div class="row px-xl-5 pb-3">
       <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
         <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-          <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
+          <h1 class="fa fa-check text-info m-0 mr-3"></h1>
           <h5 class="font-weight-semi-bold m-0">Sản phẩm chất lượng</h5>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
         <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-          <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
+          <h1 class="fa fa-shipping-fast text-info m-0 mr-2"></h1>
           <h5 class="font-weight-semi-bold m-0">Miễn phí vận chuyển</h5>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
         <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-          <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
+          <h1 class="fas fa-exchange-alt text-info m-0 mr-3"></h1>
           <h5 class="font-weight-semi-bold m-0">Hoàn trả trong 14 ngày</h5>
         </div>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
         <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-          <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
+          <h1 class="fa fa-phone-volume text-info m-0 mr-3"></h1>
           <h5 class="font-weight-semi-bold m-0">Hỗ trợ 24/7</h5>
         </div>
       </div>
@@ -121,7 +121,8 @@
 
   <!-- Categories Start -->
   <div class="container-fluid pt-5">
-    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Thể loại</span></h2>
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Thể
+        loại</span></h2>
     <div class="row px-xl-5 pb-3">
       <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
         <a class="text-decoration-none" th:href="@{/site/products?keyword=phone}">
@@ -182,17 +183,15 @@
 
   <!-- Products Start -->
   <div class="container-fluid pt-5 pb-3">
-    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Điện thoại</span></h2>
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Điện
+        thoại</span></h2>
     <div class="row">
       <div class="col offset-5 mb-4">
-        <a class="btn btn-primary mr-1 rounded" href="">Apple</a><a
-              class="btn btn-primary mr-1 rounded" href="">Samsung</a><a
-              class="btn btn-primary mr-1 rounded" href="">Xiaomi</a><a
-              class="btn btn-primary mr-1 rounded" href="">Oppo</a><a
-              class="btn btn-primary mr-1 rounded" href="">Vivo</a><a
-              class="btn btn-primary mr-1 rounded" href="">Realme</a><a
-              class="btn btn-primary mr-1 rounded" href="">Nokia</a><a
-              class="btn btn-primary mr-1 rounded" href="">Asus</a>
+        <a class="btn btn-info mr-1 rounded" href="">Apple</a><a class="btn btn-info mr-1 rounded"
+          href="">Samsung</a><a class="btn btn-info mr-1 rounded" href="">Xiaomi</a><a
+          class="btn btn-info mr-1 rounded" href="">Oppo</a><a class="btn btn-info mr-1 rounded"
+          href="">Vivo</a><a class="btn btn-info mr-1 rounded" href="">Realme</a><a
+          class="btn btn-info mr-1 rounded" href="">Nokia</a><a class="btn btn-info mr-1 rounded" href="">Asus</a>
       </div>
     </div>
     <div class="row px-xl-5">
@@ -203,24 +202,28 @@
               <div class="product-img position-relative overflow-hidden">
                 <img class="img-fluid w-100" th:src="@{'/img/products/' + ${product.image}}" alt="">
                 <div class="product-action">
-                  <a class="btn btn-outline-dark btn-square" th:href="@{'/site/products/detail/' + ${product.id}}"><i class="fa fa-shopping-cart"></i></a>
-                  <a class="btn btn-outline-dark btn-square" th:href="@{'/site/products/detail/' + ${product.id}}"><i class="far fa-heart"></i></a>
-                  <a class="btn btn-outline-dark btn-square" th:href="@{'/site/products/detail/' + ${product.id}}"><i class="fa fa-sync-alt"></i></a>
-                  <a class="btn btn-outline-dark btn-square" th:href="@{'/site/products/detail/' + ${product.id}}"><i class="fa fa-search"></i></a>
+                  <a class="btn btn-outline-dark btn-square" th:href="@{'/customer/cart/' + ${product.id}}"><i
+                      class="fa fa-shopping-cart"></i></a>
+                  <a class="btn btn-outline-dark btn-square" th:href="@{'/customer/wish-list/' + ${product.id}}"><i
+                      class="far fa-heart"></i></a>
+                  <a class="btn btn-outline-dark btn-square" th:href="@{'/site/products/detail/' + ${product.id}}"><i
+                      class="fa fa-search"></i></a>
                 </div>
               </div>
               <div class="text-center py-4">
-                <a class="h6 text-decoration-none text-truncate d-block pl-3 pr-3" th:href="@{'/site/products/detail/' + ${product.id}}" th:text="${product.name}"></a>
+                <a class="h6 text-decoration-none text-truncate d-block pl-3 pr-3"
+                  th:href="@{'/site/products/detail/' + ${product.id}}" th:text="${product.name}"></a>
                 <div class="d-flex align-items-center justify-content-center mt-2">
-                  <h5 class="productPrice" th:text="(${product.price} - (${product.price} * ${product.discount} / 100))"></h5>
+                  <h5 class="productPrice"
+                    th:text="(${product.price} - (${product.price} * ${product.discount} / 100))"></h5>
                   <h6 class="text-muted ml-2"><del class="productPrice" th:text="${product.price}"></del></h6>
                 </div>
                 <div class="d-flex align-items-center justify-content-center mb-1">
-                  <small class="fa fa-star text-primary mr-1"></small>
-                  <small class="fa fa-star text-primary mr-1"></small>
-                  <small class="fa fa-star text-primary mr-1"></small>
-                  <small class="fa fa-star text-primary mr-1"></small>
-                  <small class="fa fa-star text-primary mr-1"></small>
+                  <small class="fa fa-star text-info mr-1"></small>
+                  <small class="fa fa-star text-info mr-1"></small>
+                  <small class="fa fa-star text-info mr-1"></small>
+                  <small class="fa fa-star text-info mr-1"></small>
+                  <small class="fa fa-star text-info mr-1"></small>
                   <small>(99)</small>
                 </div>
               </div>
@@ -228,23 +231,21 @@
           </div>
         </div>
       </div>
-  </div>
+    </div>
   </div>
   <!-- Products End -->
 
   <!-- Products Start -->
   <div class="container-fluid pt-5 pb-3">
-    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Laptop</span></h2>
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span
+        class="bg-secondary pr-3">Laptop</span></h2>
     <div class="row">
       <div class="col offset-5 mb-4">
-        <a class="btn btn-primary mr-1 rounded" href="">Apple</a><a
-              class="btn btn-primary mr-1 rounded" href="">Samsung</a><a
-              class="btn btn-primary mr-1 rounded" href="">Xiaomi</a><a
-              class="btn btn-primary mr-1 rounded" href="">Oppo</a><a
-              class="btn btn-primary mr-1 rounded" href="">Vivo</a><a
-              class="btn btn-primary mr-1 rounded" href="">Realme</a><a
-              class="btn btn-primary mr-1 rounded" href="">Nokia</a><a
-              class="btn btn-primary mr-1 rounded" href="">Asus</a>
+        <a class="btn btn-info mr-1 rounded" href="">Apple</a><a class="btn btn-info mr-1 rounded"
+          href="">Samsung</a><a class="btn btn-info mr-1 rounded" href="">Xiaomi</a><a
+          class="btn btn-info mr-1 rounded" href="">Oppo</a><a class="btn btn-info mr-1 rounded"
+          href="">Vivo</a><a class="btn btn-info mr-1 rounded" href="">Realme</a><a
+          class="btn btn-info mr-1 rounded" href="">Nokia</a><a class="btn btn-info mr-1 rounded" href="">Asus</a>
       </div>
     </div>
     <div class="row px-xl-5">
@@ -255,24 +256,29 @@
               <div class="product-img position-relative overflow-hidden">
                 <img class="img-fluid w-100" th:src="@{'/img/products/' + ${product.image}}" alt="">
                 <div class="product-action">
-                  <a class="btn btn-outline-dark btn-square" th:href="@{'/site/products/detail/' + ${product.id}}"><i class="fa fa-shopping-cart"></i></a>
-                  <a class="btn btn-outline-dark btn-square" th:href="@{'/site/products/detail/' + ${product.id}}"><i class="far fa-heart"></i></a>
-                  <a class="btn btn-outline-dark btn-square" th:href="@{'/site/products/detail/' + ${product.id}}"><i class="fa fa-sync-alt"></i></a>
-                  <a class="btn btn-outline-dark btn-square" th:href="@{'/site/products/detail/' + ${product.id}}"><i class="fa fa-search"></i></a>
+                  <a class="btn btn-outline-dark btn-square" th:href="@{'/customer/cart/' + ${product.id}}"><i
+                      class="fa fa-shopping-cart"></i></a>
+                  <a class="btn btn-outline-dark btn-square" th:href="@{'/customer/wish-list/' + ${product.id}}"><i
+                          class="far fa-heart"></i></a>
+
+                  <a class="btn btn-outline-dark btn-square" th:href="@{'/site/products/detail/' + ${product.id}}"><i
+                      class="fa fa-search"></i></a>
                 </div>
               </div>
               <div class="text-center py-4">
-                <a class="h6 text-decoration-none text-truncate d-block pl-3 pr-3" th:href="@{'/site/products/detail/' + ${product.id}}" th:text="${product.name}"></a>
+                <a class="h6 text-decoration-none text-truncate d-block pl-3 pr-3"
+                  th:href="@{'/site/products/detail/' + ${product.id}}" th:text="${product.name}"></a>
                 <div class="d-flex align-items-center justify-content-center mt-2">
-                  <h5 class="productPrice" th:text="(${product.price} - (${product.price} * ${product.discount} / 100))"></h5>
+                  <h5 class="productPrice"
+                    th:text="(${product.price} - (${product.price} * ${product.discount} / 100))"></h5>
                   <h6 class="text-muted ml-2"><del class="productPrice" th:text="${product.price}"></del></h6>
                 </div>
                 <div class="d-flex align-items-center justify-content-center mb-1">
-                  <small class="fa fa-star text-primary mr-1"></small>
-                  <small class="fa fa-star text-primary mr-1"></small>
-                  <small class="fa fa-star text-primary mr-1"></small>
-                  <small class="fa fa-star text-primary mr-1"></small>
-                  <small class="fa fa-star text-primary mr-1"></small>
+                  <small class="fa fa-star text-info mr-1"></small>
+                  <small class="fa fa-star text-info mr-1"></small>
+                  <small class="fa fa-star text-info mr-1"></small>
+                  <small class="fa fa-star text-info mr-1"></small>
+                  <small class="fa fa-star text-info mr-1"></small>
                   <small>(99)</small>
                 </div>
               </div>
@@ -286,17 +292,15 @@
 
   <!-- Products Start -->
   <div class="container-fluid pt-5 pb-3">
-    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Máy tính bảng</span></h2>
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Máy tính
+        bảng</span></h2>
     <div class="row">
       <div class="col offset-5 mb-4">
-        <a class="btn btn-primary mr-1 rounded" href="">Apple</a><a
-              class="btn btn-primary mr-1 rounded" href="">Samsung</a><a
-              class="btn btn-primary mr-1 rounded" href="">Xiaomi</a><a
-              class="btn btn-primary mr-1 rounded" href="">Oppo</a><a
-              class="btn btn-primary mr-1 rounded" href="">Vivo</a><a
-              class="btn btn-primary mr-1 rounded" href="">Realme</a><a
-              class="btn btn-primary mr-1 rounded" href="">Nokia</a><a
-              class="btn btn-primary mr-1 rounded" href="">Asus</a>
+        <a class="btn btn-info mr-1 rounded" href="">Apple</a><a class="btn btn-info mr-1 rounded"
+          href="">Samsung</a><a class="btn btn-info mr-1 rounded" href="">Xiaomi</a><a
+          class="btn btn-info mr-1 rounded" href="">Oppo</a><a class="btn btn-info mr-1 rounded"
+          href="">Vivo</a><a class="btn btn-info mr-1 rounded" href="">Realme</a><a
+          class="btn btn-info mr-1 rounded" href="">Nokia</a><a class="btn btn-info mr-1 rounded" href="">Asus</a>
       </div>
     </div>
     <div class="row px-xl-5">
@@ -307,24 +311,28 @@
               <div class="product-img position-relative overflow-hidden">
                 <img class="img-fluid w-100" th:src="@{'/img/products/' + ${product.image}}" alt="">
                 <div class="product-action">
-                  <a class="btn btn-outline-dark btn-square" th:href="@{'/site/products/detail/' + ${product.id}}"><i class="fa fa-shopping-cart"></i></a>
-                  <a class="btn btn-outline-dark btn-square" th:href="@{'/site/products/detail/' + ${product.id}}"><i class="far fa-heart"></i></a>
-                  <a class="btn btn-outline-dark btn-square" th:href="@{'/site/products/detail/' + ${product.id}}"><i class="fa fa-sync-alt"></i></a>
-                  <a class="btn btn-outline-dark btn-square" th:href="@{'/site/products/detail/' + ${product.id}}"><i class="fa fa-search"></i></a>
+                  <a class="btn btn-outline-dark btn-square" th:href="@{'/customer/cart/' + ${product.id}}"><i
+                      class="fa fa-shopping-cart"></i></a>
+                  <a class="btn btn-outline-dark btn-square" th:href="@{'/customer/wish-list/' + ${product.id}}"><i
+                          class="far fa-heart"></i></a>
+                  <a class="btn btn-outline-dark btn-square" th:href="@{'/site/products/detail/' + ${product.id}}"><i
+                      class="fa fa-search"></i></a>
                 </div>
               </div>
               <div class="text-center py-4">
-                <a class="h6 text-decoration-none text-truncate d-block pl-3 pr-3" th:href="@{'/site/products/detail/' + ${product.id}}" th:text="${product.name}"></a>
+                <a class="h6 text-decoration-none text-truncate d-block pl-3 pr-3"
+                  th:href="@{'/site/products/detail/' + ${product.id}}" th:text="${product.name}"></a>
                 <div class="d-flex align-items-center justify-content-center mt-2">
-                  <h5 class="productPrice" th:text="(${product.price} - (${product.price} * ${product.discount} / 100))"></h5>
+                  <h5 class="productPrice"
+                    th:text="(${product.price} - (${product.price} * ${product.discount} / 100))"></h5>
                   <h6 class="text-muted ml-2"><del class="productPrice" th:text="${product.price}"></del></h6>
                 </div>
                 <div class="d-flex align-items-center justify-content-center mb-1">
-                  <small class="fa fa-star text-primary mr-1"></small>
-                  <small class="fa fa-star text-primary mr-1"></small>
-                  <small class="fa fa-star text-primary mr-1"></small>
-                  <small class="fa fa-star text-primary mr-1"></small>
-                  <small class="fa fa-star text-primary mr-1"></small>
+                  <small class="fa fa-star text-info mr-1"></small>
+                  <small class="fa fa-star text-info mr-1"></small>
+                  <small class="fa fa-star text-info mr-1"></small>
+                  <small class="fa fa-star text-info mr-1"></small>
+                  <small class="fa fa-star text-info mr-1"></small>
                   <small>(99)</small>
                 </div>
               </div>
@@ -338,17 +346,15 @@
 
   <!-- Products Start -->
   <div class="container-fluid pt-5 pb-3">
-    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Đồng hồ</span></h2>
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Đồng
+        hồ</span></h2>
     <div class="row">
       <div class="col offset-5 mb-4">
-        <a class="btn btn-primary mr-1 rounded" href="">Apple</a><a
-              class="btn btn-primary mr-1 rounded" href="">Samsung</a><a
-              class="btn btn-primary mr-1 rounded" href="">Xiaomi</a><a
-              class="btn btn-primary mr-1 rounded" href="">Oppo</a><a
-              class="btn btn-primary mr-1 rounded" href="">Vivo</a><a
-              class="btn btn-primary mr-1 rounded" href="">Realme</a><a
-              class="btn btn-primary mr-1 rounded" href="">Nokia</a><a
-              class="btn btn-primary mr-1 rounded" href="">Asus</a>
+        <a class="btn btn-info mr-1 rounded" href="">Apple</a><a class="btn btn-info mr-1 rounded"
+          href="">Samsung</a><a class="btn btn-info mr-1 rounded" href="">Xiaomi</a><a
+          class="btn btn-info mr-1 rounded" href="">Oppo</a><a class="btn btn-info mr-1 rounded"
+          href="">Vivo</a><a class="btn btn-info mr-1 rounded" href="">Realme</a><a
+          class="btn btn-info mr-1 rounded" href="">Nokia</a><a class="btn btn-info mr-1 rounded" href="">Asus</a>
       </div>
     </div>
     <div class="row px-xl-5">
@@ -359,24 +365,28 @@
               <div class="product-img position-relative overflow-hidden">
                 <img class="img-fluid w-100" th:src="@{'/img/products/' + ${product.image}}" alt="">
                 <div class="product-action">
-                  <a class="btn btn-outline-dark btn-square" th:href="@{'/site/products/detail/' + ${product.id}}"><i class="fa fa-shopping-cart"></i></a>
-                  <a class="btn btn-outline-dark btn-square" th:href="@{'/site/products/detail/' + ${product.id}}"><i class="far fa-heart"></i></a>
-                  <a class="btn btn-outline-dark btn-square" th:href="@{'/site/products/detail/' + ${product.id}}"><i class="fa fa-sync-alt"></i></a>
-                  <a class="btn btn-outline-dark btn-square" th:href="@{'/site/products/detail/' + ${product.id}}"><i class="fa fa-search"></i></a>
+                  <a class="btn btn-outline-dark btn-square" th:href="@{'/customer/cart/' + ${product.id}}"><i
+                      class="fa fa-shopping-cart"></i></a>
+                  <a class="btn btn-outline-dark btn-square" th:href="@{'/customer/wish-list/' + ${product.id}}"><i
+                          class="far fa-heart"></i></a>
+                  <a class="btn btn-outline-dark btn-square" th:href="@{'/site/products/detail/' + ${product.id}}"><i
+                      class="fa fa-search"></i></a>
                 </div>
               </div>
               <div class="text-center py-4">
-                <a class="h6 text-decoration-none text-truncate d-block pl-3 pr-3" th:href="@{'/site/products/detail/' + ${product.id}}" th:text="${product.name}"></a>
+                <a class="h6 text-decoration-none text-truncate d-block pl-3 pr-3"
+                  th:href="@{'/site/products/detail/' + ${product.id}}" th:text="${product.name}"></a>
                 <div class="d-flex align-items-center justify-content-center mt-2">
-                  <h5 class="productPrice" th:text="(${product.price} - (${product.price} * ${product.discount} / 100))"></h5>
+                  <h5 class="productPrice"
+                    th:text="(${product.price} - (${product.price} * ${product.discount} / 100))"></h5>
                   <h6 class="text-muted ml-2"><del class="productPrice" th:text="${product.price}"></del></h6>
                 </div>
                 <div class="d-flex align-items-center justify-content-center mb-1">
-                  <small class="fa fa-star text-primary mr-1"></small>
-                  <small class="fa fa-star text-primary mr-1"></small>
-                  <small class="fa fa-star text-primary mr-1"></small>
-                  <small class="fa fa-star text-primary mr-1"></small>
-                  <small class="fa fa-star text-primary mr-1"></small>
+                  <small class="fa fa-star text-info mr-1"></small>
+                  <small class="fa fa-star text-info mr-1"></small>
+                  <small class="fa fa-star text-info mr-1"></small>
+                  <small class="fa fa-star text-info mr-1"></small>
+                  <small class="fa fa-star text-info mr-1"></small>
                   <small>(99)</small>
                 </div>
               </div>
@@ -396,7 +406,7 @@
 
 
   <!-- Back to Top -->
-  <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+  <a href="#" class="btn btn-info back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
   <!-- JavaScript Libraries -->
@@ -411,15 +421,15 @@
 
   <!-- Template Javascript -->
   <script th:src="@{/js/main.js}"></script>
-<script>
-  var priceElements = document.getElementsByClassName('productPrice');
+  <script>
+    var priceElements = document.getElementsByClassName('productPrice');
 
-  Array.from(priceElements).forEach(function(element) {
-    var price = parseFloat(element.textContent);
-    var formattedPrice = price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-    element.textContent = formattedPrice;
-  });
-</script>
+    Array.from(priceElements).forEach(function (element) {
+      var price = parseFloat(element.textContent);
+      var formattedPrice = price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+      element.textContent = formattedPrice;
+    });
+  </script>
 </body>
 
 </html>

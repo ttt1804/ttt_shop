@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<!--head-->
+
+<head th:replace="~{admin/fragments/head :: head}">
+</head>
+
+<body onload="time()" class="app sidebar-mini rtl">
+
+<!-- Navbar-->
+<header th:replace="~{admin/fragments/navbar :: navbar}">
+
+</header>
+<!-- Sidebar menu-->
+<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+<aside th:replace="~{admin/fragments/sidebar :: sidebar}">
+</aside>
+
+<main class="app-content">
+  <div class="app-title">
+    <ul class="app-breadcrumb breadcrumb">
+      <li class="breadcrumb-item">Danh sách đơn hàng</li>
+      <li class="breadcrumb-item"><a href="#">Sửa đơn hàng</a></li>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tile">
+        <h3 class="tile-title">Sửa đơn hàng</h3>
+        <div class="tile-body">
+          <form id="myForm" class="row" th:action="@{/admin/orders/edit}" method="post" enctype="multipart/form-data" th:object="${order}">
+            <input type="hidden" th:field="*{id}" />
+            <div class="form-group col-md-3">
+              <label class="control-label">Trạng thái</label>
+              <select class="form-control" name="status" required>
+                <option th:value="*{status}" th:text="*{status}" selected></option>
+                <option value="Cancel" th:if="${order.status != 'Cancel'}">Cancel</option>
+                <option value="Confirm" th:if="${order.status != 'Confirm'}">Confirm</option>
+                <option value="Shipping" th:if="${order.status != 'Shipping'}">Shipping</option>
+                <option value="Success" th:if="${order.status != 'Success'}">Success</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <button id="submitBtn" class="btn btn-save" type="button">Lưu lại</button>
+        <a class="btn btn-cancel" href="/admin/categories">Hủy bỏ</a>
+      </div>
+    </div>
+  </div>
+</main>
+<script>
+  const form = document.getElementById("myForm");
+  const submitBtn = document.getElementById("submitBtn");
+
+  submitBtn.addEventListener("click", function () {
+    form.submit();
+  });
+</script>
+</body>
+
+</html>

@@ -183,4 +183,16 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.count();
     }
 
+    @Override
+    public Boolean updateQuantity(Long productId, int quantity) {
+        Product product = productRepository.findById(productId).orElse(null);
+        if(product != null){
+            product.setQuantity(product.getQuantity() - quantity);
+            productRepository.save(product);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }

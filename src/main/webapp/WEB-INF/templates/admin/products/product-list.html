@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <!--head-->
+
 <head th:replace="~{admin/fragments/head :: head}">
 </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
 
-<!-- Navbar-->
-<header th:replace="~{admin/fragments/navbar :: navbar}">
+    <!-- Navbar-->
+    <header th:replace="~{admin/fragments/navbar :: navbar}">
 
-</header>
-<!-- Sidebar menu-->
-<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-<aside th:replace="~{admin/fragments/sidebar :: sidebar}">
-</aside>
+    </header>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside th:replace="~{admin/fragments/sidebar :: sidebar}">
+    </aside>
 
-<main class="app-content">
+    <main class="app-content">
         <div class="app-title">
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="breadcrumb-item active"><a href="#"><b>Danh sách sản phẩm</b></a></li>
@@ -30,8 +31,8 @@
                         <div class="row element-button">
                             <div class="col-sm-2">
 
-                                <a class="btn btn-add btn-sm"  th:href="@{/admin/products/add}"
-                                    title="Thêm"><i class="fas fa-plus"></i>
+                                <a class="btn btn-add btn-sm" th:href="@{/admin/products/add}" title="Thêm"><i
+                                        class="fas fa-plus"></i>
                                     Tạo mới sản phẩm</a>
                             </div>
                             <div class="col-sm-2">
@@ -39,8 +40,8 @@
                                     title="Sao chép"><i class="fas fa-copy"></i>Tải từ file</a>
                             </div>
                             <div class="col-sm-2">
-                                <a class="btn btn-excel btn-sm"
-                                    title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
+                                <a class="btn btn-excel btn-sm" title="In"><i class="fas fa-file-excel"></i> Xuất
+                                    Excel</a>
                             </div>
                         </div>
                         <div id="sampleTable_wrapper"
@@ -50,23 +51,27 @@
                                     <form th:action="@{/admin/products}" id="changePageSizeForm">
                                         <input type="hidden" name="pageSize" th:value="${pageSize}" />
                                         <div class="dataTables_length" id="sampleTable_length"><label>Hiện
-                                            <select id="pageSize" class="form-control form-control-sm" th:value="${pageSize}" onchange="changePageSize()">
-                                                <option th:each="s : ${ {5, 10, 15, 20} }" th:value="${s}" th:text="${s}" th:selected="${s == pageSize}"></option>
-                                        </select> danh mục</label>
+                                                <select id="pageSize" class="form-control form-control-sm"
+                                                    th:value="${pageSize}" onchange="changePageSize()">
+                                                    <option th:each="s : ${ {5, 10, 15, 20} }" th:value="${s}"
+                                                        th:text="${s}" th:selected="${s == pageSize}"></option>
+                                                </select> danh mục</label>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="col-sm-12 col-md-6">
                                     <div id="sampleTable_filter" class="dataTables_filter">
-                                            <form th:action="@{/admin/products}" id="searchForm">
-                                                <label>Tìm kiếm:
-                                                <input type="search" name="keyword" th:value="${keyword}" class="form-control form-control-sm" placeholder="nhập tên sản phẩm"
-                                                       aria-controls="sampleTable">
-                                                    <button type="submit" class="btn btn-secondary">
-                                                        <i class="fa fa-search" style="margin-bottom: 0;" aria-hidden="true"></i>
-                                                    </button>
-                                                </label>
-                                            </form>
+                                        <form th:action="@{/admin/products}" id="searchForm">
+                                            <label>Tìm kiếm:
+                                                <input type="search" name="keyword" th:value="${keyword}"
+                                                    class="form-control form-control-sm" placeholder="nhập tên sản phẩm"
+                                                    aria-controls="sampleTable">
+                                                <button type="submit" class="btn btn-secondary">
+                                                    <i class="fa fa-search" style="margin-bottom: 0;"
+                                                        aria-hidden="true"></i>
+                                                </button>
+                                            </label>
+                                        </form>
 
                                     </div>
                                 </div>
@@ -93,7 +98,7 @@
                                                 <td th:text="${product.name}"></td>
                                                 <td>
                                                     <img th:src="@{'/img/products/' + ${product.image}}" alt=""
-                                                         width="100px;">
+                                                        width="100px;">
                                                 </td>
                                                 <td class="productPrice" th:text="${product.price}"></td>
                                                 <td th:text="${product.quantity}"></td>
@@ -101,13 +106,14 @@
                                                 <td th:text="${product.description}"></td>
                                                 <td th:text="${product.category.name}"></td>
                                                 <td th:text="${product.producer.name}"></td>
-                                                <td><button th:attr="onclick=|confirmDelete('${product.id}')|" class="btn btn-primary btn-sm trash" type="button"
-                                                        title="Xóa" ><i
-                                                            class="fas fa-trash-alt"></i>
+                                                <td><button th:attr="onclick=|confirmDelete('${product.id}')|"
+                                                        class="btn btn-primary btn-sm trash" type="button"
+                                                        title="Xóa"><i class="fas fa-trash-alt"></i>
                                                     </button>
-                                                    <button th:attr="onclick=|confirmEdit('${product.id}')|" class="btn btn-primary btn-sm edit" type="button"
-                                                        title="Sửa" id="show-emp" data-toggle="modal"
-                                                        data-target="#ModalUP"><i class="fas fa-edit"></i></button>
+                                                    <button th:attr="onclick=|confirmEdit('${product.id}')|"
+                                                        class="btn btn-primary btn-sm edit" type="button" title="Sửa"
+                                                        id="show-emp" data-toggle="modal" data-target="#ModalUP"><i
+                                                            class="fas fa-edit"></i></button>
 
                                                 </td>
                                             </tr>
@@ -121,32 +127,41 @@
                             <nav aria-label="Pagination" th:if="${totalPages > 0}">
                                 <ul class="pagination justify-content-center">
                                     <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
-                                        <a th:replace="admin/fragments/paging :: paging(1, 'Đầu', 'First Page')"></a>
+                                        <a class="page-link"
+                                           th:href="@{'/admin/products?' + ${keyword!=null && keyword!=''? 'keyword=' + keyword + '&' : ''} + 'page=' + ${1} + '&size=' + ${pageSize}}"
+                                           th:title="${'Trang đầu'}" rel="tooltip">
+                                            [[${'Đầu'}]]</a>
                                     </li>
-                                    <li class="page-item font-weight-bold"
-                                        th:classappend="${currentPage == 1} ? 'disabled'">
-                                        <a
-                                            th:replace="admin/fragments/paging :: paging(${currentPage - 1}, 'Trước', 'Previous Page')"></a>
+                                    <li class="page-item font-weight-bold" th:classappend="${currentPage == 1} ? 'disabled'">
+                                        <a class="page-link"
+                                           th:href="@{'/admin/products?' + ${keyword!=null && keyword!=''? 'keyword=' + keyword + '&' : ''} + 'page=' + ${currentPage - 1} + '&size=' + ${pageSize}}"
+                                           th:title="${'Trang trước'}" rel="tooltip">
+                                            [[${'Trước'}]]</a>
                                     </li>
                                     <li class="page-item disabled" th:if="${currentPage - 2 > 1}">
                                         <a class="page-link" href="#">...</a>
                                     </li>
                                     <li class="page-item" th:classappend="${page == currentPage} ? 'active'"
                                         th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
-                                        <a
-                                            th:replace="admin/fragments/paging :: paging(${page}, ${page}, 'Page ' + ${page})"></a>
+                                        <a class="page-link"
+                                           th:href="@{'/admin/products?' + ${keyword!=null && keyword!=''? 'keyword=' + keyword + '&' : ''} + 'page=' + ${page} + '&size=' + ${pageSize}}"
+                                           th:title="'Trang ' + ${page}" rel="tooltip">
+                                            [[${page}]]</a>
                                     </li>
                                     <li class="page-item disabled" th:if="${currentPage + 2 < totalPages}">
                                         <a class="page-link" href="#">...</a>
                                     </li>
-                                    <li class="page-item font-weight-bold"
-                                        th:classappend="${currentPage == totalPages} ? 'disabled'">
-                                        <a
-                                            th:replace="admin/fragments/paging :: paging(${currentPage + 1},'Sau', 'Next Page')"></a>
+                                    <li class="page-item font-weight-bold" th:classappend="${currentPage == totalPages} ? 'disabled'">
+                                        <a class="page-link"
+                                           th:href="@{'/admin/products?' + ${keyword!=null && keyword!=''? 'keyword=' + keyword + '&' : ''} + 'page=' + ${currentPage + 1} + '&size=' + ${pageSize}}"
+                                           th:title="'Trang sau'" rel="tooltip">
+                                            [[${'Sau'}]]</a>
                                     </li>
                                     <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
-                                        <a
-                                            th:replace="admin/fragments/paging :: paging(${totalPages}, 'Cuối', 'Last Page')"></a>
+                                        <a class="page-link"
+                                           th:href="@{'/admin/products?' + ${keyword!=null && keyword!=''? 'keyword=' + keyword + '&' : ''} + 'page=' + ${totalPages} + '&size=' + ${pageSize}}"
+                                           th:title="'Trang cuối'" rel="tooltip">
+                                            [[${'Cuối'}]]</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -212,7 +227,7 @@
                     }
                 });
         }
-        function  confirmEdit(productId) {
+        function confirmEdit(productId) {
             window.location.href = '/admin/products/edit/' + productId;
         }
         function searchForm() {
@@ -227,7 +242,7 @@
 
         var priceElements = document.getElementsByClassName('productPrice');
 
-        Array.from(priceElements).forEach(function(element) {
+        Array.from(priceElements).forEach(function (element) {
             var price = parseFloat(element.textContent);
             var formattedPrice = price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
             element.textContent = formattedPrice;

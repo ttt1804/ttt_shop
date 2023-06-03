@@ -1,8 +1,12 @@
 package com.ttt.ttt_shop.controller.admin;
 
 import com.ttt.ttt_shop.model.dto.CategoryDTO;
+import com.ttt.ttt_shop.model.entity.Category;
 import com.ttt.ttt_shop.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +14,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -20,9 +25,18 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping()
-    public String getAll(Model model) {
-        List<CategoryDTO> categories = categoryService.getAll();
+    public String getAll(Model model,
+                         @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
+        List<Category> categories = new ArrayList<>();
+        Pageable paging = PageRequest.of(page - 1, size);
+        Page<Category> categoryPages;
+        categoryPages = categoryService.getAll(paging);
+        categories = categoryPages.getContent();
         model.addAttribute("categories", categories);
+        model.addAttribute("currentPage", categoryPages.getNumber() + 1);
+        model.addAttribute("totalItems", categoryPages.getTotalElements());
+        model.addAttribute("totalPages", categoryPages.getTotalPages());
+        model.addAttribute("pageSize", size);
         return "admin/categories/category-list";
     }
 

@@ -1,88 +1,97 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    xmlns:sec="http://wwww.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:replace="~{site/fragments/head :: head}">
 
 </head>
 
 <body>
-<!-- Topbar Start -->
-<div th:replace="~{site/fragments/topbar :: topbar}">
-</div>
-<!-- Topbar End -->
+    <!-- Topbar Start -->
+    <div th:replace="~{site/fragments/topbar :: topbar}">
+    </div>
+    <!-- Topbar End -->
 
-<!-- Navbar Start -->
-<div th:replace="~{site/fragments/navbar :: navbar}">
-</div>
-<!-- Navbar End -->
+    <!-- Navbar Start -->
+    <div th:replace="~{site/fragments/navbar :: navbar}">
+    </div>
+    <!-- Navbar End -->
 
-<!-- Insert content here-->
-<!-- Register start-->
-<div class="row">
-    <div class="container-fluid">
-        <div class="row px-xl-5">
-            <div class="col-12">
-                <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" th:href="@{/site}">Trang chủ</a>
-                    <span class="breadcrumb-item active">Đăng ký</span>
-                </nav>
+    <!-- Insert content here-->
+    <!-- Register start-->
+    <div class="row">
+        <div class="container-fluid">
+            <div class="row px-xl-5">
+                <div class="col-12">
+                    <nav class="breadcrumb bg-light mb-30">
+                        <a class="breadcrumb-item text-dark" th:href="@{/site}">Trang chủ</a>
+                        <span class="breadcrumb-item active">Đăng ký</span>
+                    </nav>
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="nav nav-tabs mb-4 col-6 offset-3">
-                <a class="nav-item nav-link text-dark active" data-toggle="tab" >Đăng ký</a>
+            <div class="row">
+                <div class="nav nav-tabs mb-4 col-6 offset-3">
+                    <a class="nav-item nav-link text-dark active" data-toggle="tab">Đăng ký</a>
+                </div>
             </div>
-        </div>
-        <div class="row justify-content-center">
+            <div class="row justify-content-center">
 
-        </div>
-        <div class="row justify-content-center">
+            </div>
+            <div class="row justify-content-center">
 
 
-        </div>
-        <div class="row">
-            <div class="tab-content col-md-6 offset-md-3">
-                <div class="tab-pane fade active show" id="tab-pane-1">
-                    <div class="row">
-                        <div class="col-6">
-                            <form id="myForm" method="post" action="/site/verify" th:object="${user}">
+            </div>
+            <div class="row">
+                <div class="tab-content col-md-6 offset-md-3">
+                    <div class="tab-pane fade active show" id="tab-pane-1">
+                        <div class="row">
+                            <div class="col-6">
+                                <form id="myForm" method="post" action="/site/verify" th:object="${user}">
+                                    <div class="card rounded">
+                                        <div class="card-body">
+                                            <p class="text-center text-truncate">Xác minh tài khoản</p>
+                                            <div class="form-group mb-0">
+                                                <th:block th:if="${success != null}">
+                                                    <label class="text-success" th:text="${success}"></label>
+                                                </th:block>
+                                                <th:block th:if="${error != null}">
+                                                    <label class="text-danger" th:text="${error}"></label>
+                                                </th:block>
+                                                <input type="text" class="form-control rounded"
+                                                    th:value="${user.username}" th:readonly="true"
+                                                    placeholder="Tài khoản" autofocus="" th:field="*{username}" /><br>
+                                            </div>
+                                            <div class="form-group mb-0">
+                                                <input type="text" class="form-control rounded"
+                                                    placeholder="Mã xác minh" autofocus=""
+                                                    name="verificationCode" /><br>
+                                            </div>
+                                            <div class="text-muted d-flex justify-content-center mt-3">
+                                                <button id="submitBtn" class="btn btn-success rounded w-75"
+                                                    type="submit">Xác minh</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <div class="col-6">
                                 <div class="card rounded">
                                     <div class="card-body">
-                                        <p class="text-center text-truncate">Xác minh tài khoản</p>
-                                        <div class="form-group mb-0">
-                                            <th:block th:if="${success != null}">
-                                                <label class="text-success" th:text="${success}"></label>
-                                            </th:block>
-                                            <th:block th:if="${error != null}">
-                                                <label class="text-danger" th:text="${error}"></label>
-                                            </th:block>
-                                            <input type="text" class="form-control rounded" th:value="${user.username}" th:readonly="true" placeholder="Tài khoản" autofocus="" th:field="*{username}" /><br>
+                                        <p class="text-center">Đăng nhập bằng</p>
+                                        <div class="form-group">
+                                            <a class="form-control btn btn-outline-success rounded"><i
+                                                    class="fab fa-facebook float-left mt-1"></i>Facebook</a>
                                         </div>
-                                        <div class="form-group mb-0">
-                                            <input type="text" class="form-control rounded" placeholder="Mã xác minh" autofocus="" name="verificationCode" /><br>
+                                        <div class="form-group pt-3">
+                                            <a href="" class="form-control btn btn-outline-info rounded"><i
+                                                    class="fab fa-google float-left mt-1"></i>Google</a>
                                         </div>
-                                        <div class="text-muted d-flex justify-content-center mt-3">
-                                            <button id="submitBtn" class="btn btn-success rounded w-75" type="submit">Xác minh</button>
+                                        <div class="form-group pt-3" style="padding-bottom: 48px">
+                                            <a class="form-control btn btn-outline-dark rounded"><i
+                                                    class="fab fa-apple float-left mt-1"></i>Apple</a>
                                         </div>
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div>
-                        <div class="col-6">
-                            <div class="card rounded">
-                                <div class="card-body">
-                                    <p class="text-center">Đăng nhập bằng</p>
-                                    <div class="form-group">
-                                        <a class="form-control btn btn-outline-success rounded"><i class="fab fa-facebook float-left mt-1"></i>Facebook</a>
-                                    </div>
-                                    <div class="form-group pt-3">
-                                        <a href="" class="form-control btn btn-outline-info rounded"><i class="fab fa-google float-left mt-1"></i>Google</a>
-                                    </div>
-                                    <div class="form-group pt-3" style="padding-bottom: 48px">
-                                        <a class="form-control btn btn-outline-dark rounded"><i class="fab fa-apple float-left mt-1"></i>Apple</a>
                                     </div>
                                 </div>
                             </div>
@@ -91,44 +100,43 @@
                 </div>
             </div>
         </div>
+
+
+        <!-- Login End -->
     </div>
+    <!-- Register End -->
 
 
-    <!-- Login End -->
-</div>
-<!-- Register End -->
+    <!-- Footer Start -->
+    <div th:replace="~{site/fragments/footer :: footer}">
+    </div>
+    <!-- Footer End -->
 
 
-<!-- Footer Start -->
-<div th:replace="~{site/fragments/footer :: footer}">
-</div>
-<!-- Footer End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-<!-- Back to Top -->
-<a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/lib/easing/easing.min.js}"></script>
+    <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
 
+    <!-- Contact Javascript File -->
+    <script th:src="@{/mail/jqBootstrapValidation.min.js}"></script>
+    <script th:src="@{/mail/contact.js}"></script>
 
-<!-- JavaScript Libraries -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script th:src="@{/lib/easing/easing.min.js}"></script>
-<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+    <!-- Template Javascript -->
+    <script th:src="@{/js/main.js}"></script>
+    <script>
+        const form = document.getElementById("myForm");
+        const submitBtn = document.getElementById("submitBtn");
 
-<!-- Contact Javascript File -->
-<script th:src="@{/mail/jqBootstrapValidation.min.js}"></script>
-<script th:src="@{/mail/contact.js}"></script>
-
-<!-- Template Javascript -->
-<script th:src="@{/js/main.js}"></script>
-<script>
-    const form = document.getElementById("myForm");
-    const submitBtn = document.getElementById("submitBtn");
-
-    submitBtn.addEventListener("click", function() {
-        form.submit();
-    });
-</script>
+        submitBtn.addEventListener("click", function () {
+            form.submit();
+        });
+    </script>
 </body>
 
 </html>

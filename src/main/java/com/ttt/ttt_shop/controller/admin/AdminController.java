@@ -3,7 +3,9 @@ package com.ttt.ttt_shop.controller.admin;
 import com.ttt.ttt_shop.model.dto.CustomerDetailDTO;
 import com.ttt.ttt_shop.model.entity.CustomerDetail;
 import com.ttt.ttt_shop.model.entity.User;
+import com.ttt.ttt_shop.repository.OrderRepository;
 import com.ttt.ttt_shop.security.CustomUserDetail;
+import com.ttt.ttt_shop.service.CartService;
 import com.ttt.ttt_shop.service.OrderService;
 import com.ttt.ttt_shop.service.ProductService;
 import com.ttt.ttt_shop.service.UserService;
@@ -12,6 +14,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 @Controller
 //http://localhost:8080/admin/home
@@ -22,6 +26,10 @@ public class AdminController {
     OrderService orderService;
     @Autowired
     UserService userService;
+    @Autowired
+    CartService cartService;
+    @Autowired
+    OrderRepository orderRepository;
     @GetMapping("/login")
     public String login() {
         return "admin/login";
@@ -32,6 +40,7 @@ public class AdminController {
         long totalProducts = productService.getTotalProducts();
         long totalOrders = orderService.getTotalOrders();
         long totalUsers = userService.getTotalCustomers();
+        model.addAttribute("orders", orderRepository.findTop10ByOrderByOrderDateAsc());
         model.addAttribute("totalProducts", totalProducts);
         model.addAttribute("totalOrders", totalOrders);
         model.addAttribute("totalUsers", totalUsers);

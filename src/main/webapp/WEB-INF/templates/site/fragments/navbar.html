@@ -1,17 +1,17 @@
 <div th:fragment="navbar" class="container-fluid bg-dark mb-30">
   <div class="row px-xl-5">
     <div class="col-lg-3 d-none d-lg-block">
-      <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse"
-         href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
+      <a class="btn d-flex align-items-center justify-content-between bg-info bg-gradient w-100" data-toggle="collapse"
+        href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
         <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Thể loại</h6>
         <i class="fa fa-angle-down text-dark"></i>
       </a>
       <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
-           id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
+        id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
         <div class="navbar-nav w-100">
           <div class="nav-item dropdown dropright">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Điện thoại <i
-                    class="fa fa-angle-right float-right mt-1"></i></a>
+                class="fa fa-angle-right float-right mt-1"></i></a>
             <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
               <a href="" class="dropdown-item">Apple</a>
               <a href="" class="dropdown-item">SamSung</a>
@@ -25,7 +25,7 @@
           </div>
           <div class="nav-item dropdown dropright">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Laptop <i
-                    class="fa fa-angle-right float-right mt-1"></i></a>
+                class="fa fa-angle-right float-right mt-1"></i></a>
             <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
               <a href="" class="dropdown-item">Mac</a>
               <a href="" class="dropdown-item">Hp</a>
@@ -37,7 +37,7 @@
           </div>
           <div class="nav-item dropdown dropright">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Máy tính bảng <i
-                    class="fa fa-angle-right float-right mt-1"></i></a>
+                class="fa fa-angle-right float-right mt-1"></i></a>
             <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
               <a href="" class="dropdown-item">Ipad</a>
               <a href="" class="dropdown-item">Samsung</a>
@@ -46,7 +46,7 @@
           </div>
           <div class="nav-item dropdown dropright">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Đồng hồ<i
-                    class="fa fa-angle-right float-right mt-1"></i></a>
+                class="fa fa-angle-right float-right mt-1"></i></a>
             <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
               <a href="" class="dropdown-item">Apple</a>
               <a href="" class="dropdown-item">SamSung</a>
@@ -67,27 +67,30 @@
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
           <div class="navbar-nav mr-auto py-0">
-            <a href="/site" class="nav-item nav-link active">Trang chủ</a>
+            <a href="/site" class="nav-item nav-link">Trang chủ</a>
             <a href="/site/products" class="nav-item nav-link">Shop</a>
             <a href="/customer" class="nav-item nav-link" th:if="${#request.userPrincipal != null}">Cá nhân</a>
-            <a href="/customer/purchased" class="nav-item nav-link" th:if="${#request.userPrincipal != null}">Đơn mua</a>
+            <a href="/customer/purchased" class="nav-item nav-link" th:if="${#request.userPrincipal != null}">Đơn
+              mua</a>
           </div>
           <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-            <a href="" class="btn px-0">
-              <i class="fas fa-heart text-primary"></i>
+            <a href="/customer/wish-list" class="btn px-0">
+              <i class="fas fa-heart text-white"></i>
               <span class="badge text-secondary border border-secondary rounded-circle"
-                    style="padding-bottom: 2px;">0</span>
+                    th:text="${#session != null && #session.getAttribute('wishListQuantity') != null ? #session.getAttribute('wishListQuantity') : 0}"
+                style="padding-bottom: 2px;"></span>
             </a>
             <a href="/customer/cart" class="btn px-0 ml-3">
-              <i class="fas fa-shopping-cart text-primary"></i>
+              <i class="fas fa-shopping-cart text-white"></i>
               <span class="badge text-secondary border border-secondary rounded-circle"
-                    style="padding-bottom: 2px;">0</span>
+                    th:text="${#session != null && #session.getAttribute('cartQuantity') != null ? #session.getAttribute('cartQuantity') : 0}"
+                    style="padding-bottom: 2px;"></span>
             </a>
             <a href="/login" class="btn px-0 ml-3" th:if="${#request.userPrincipal == null}">
-              <i class="fas fa-user text-primary"></i>
+              <i class="fas fa-user text-white"></i>
             </a>
             <a href="/logout" class="btn px-0 ml-3" th:if="${#request.userPrincipal != null}">
-              <i class="fas fa-sign-out-alt text-primary"></i>
+              <i class="fas fa-sign-out-alt text-white"></i>
             </a>
           </div>
         </div>
